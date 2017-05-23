@@ -35,9 +35,9 @@
 			// We only need to do this once, afterwards the old suggestions
 			// will re-appear on focus anyway.
 			this.element.one( 'focus', function ( event ) {
-				if ( self._useSuggester()
-					&& self.element.val() === ''
-					&& !self.options.menu.element.is( ':visible' )
+				if ( self._useSuggester() &&
+					self.element.val() === '' &&
+					!self.options.menu.element.is( ':visible' )
 				) {
 					self.options.minTermLength = 0;
 					self._cache = {}; // is done in the entityselector on eachchange too
@@ -71,9 +71,9 @@
 				context: this._getPropertyContext(),
 				format: 'json',
 				language: this.options.language,
-				'continue': this._cache.term === term && this._cache.nextSuggestionOffset
-					? this._cache.nextSuggestionOffset
-					: 0
+				'continue': this._cache.term === term &&
+					this._cache.nextSuggestionOffset ?
+					this._cache.nextSuggestionOffset : 0
 			};
 
 			if ( data.context === 'item' ) {
@@ -110,8 +110,8 @@
 				return null;
 			}
 
-			return $entityView.length > 0
-				? $entityView.data( 'entityview' ).option( 'value' )
+			return $entityView.length > 0 ?
+				$entityView.data( 'entityview' ).option( 'value' )
 				: null;
 		},
 
@@ -132,8 +132,8 @@
 				return null;
 			}
 
-			statement = $statementview.length > 0
-				? $statementview.data( 'statementview' ).option( 'value' )
+			statement = $statementview.length > 0 ?
+				$statementview.data( 'statementview' ).option( 'value' )
 				: null;
 
 			return statement ? statement.getClaim().getMainSnak().getPropertyId() : null;
@@ -192,8 +192,8 @@
 		 */
 		_isInNewStatementView: function () {
 			var $statementview = this.element.closest( ':wikibase-statementview' ),
-				value = $statementview.length > 0
-					? $statementview.data( 'statementview' ).option( 'value' )
+				value = $statementview.length > 0 ?
+					$statementview.data( 'statementview' ).option( 'value' )
 					: null;
 
 			return !value;

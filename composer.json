@@ -14,6 +14,8 @@
 		"wikibase/data-model-services": "~1.1|~2.0|~3.0"
 	},
 	"require-dev": {
+		"jakub-onderka/php-console-highlighter": "0.3.2",
+		"jakub-onderka/php-parallel-lint": ">=0.3 <0.10",
 		"phpunit/phpunit": "~4.8",
 		"satooshi/php-coveralls": "dev-master",
 		"wikibase/wikibase-codesniffer": "^0.1.0",
@@ -29,5 +31,15 @@
 			"PropertySuggesterHooks.php",
 			"maintenance/UpdateTable.php"
 		]
+	},
+	"scripts": {
+		"test": [
+			"parallel-lint . --exclude vendor",
+			"@cs"
+		],
+		"cs": [
+			"@phpcs"
+		],
+		"phpcs": "vendor/bin/phpcs -sp --standard=phpcs.xml --extensions=php --ignore=extensions/ValueView,vendor,.git ."
 	}
 }

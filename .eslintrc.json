@@ -1,0 +1,15 @@
+{
+	"extends": "wikimedia",
+	"env": {
+		"jquery": true
+	},
+	"globals": {
+		"mediaWiki": false,
+		"OO": false
+	},
+	"rules": {
+		"no-underscore-dangle": "off",
+		"no-unused-vars": "off",
+		"operator-linebreak": "off"
+	}
+}
