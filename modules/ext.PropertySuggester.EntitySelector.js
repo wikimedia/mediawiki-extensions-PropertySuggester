@@ -92,7 +92,9 @@
 		_useSuggester: function () {
 			var entity = this._getEntity();
 
-			return this.options.type === 'property' && entity && entity.getType() === 'item';
+			return this.options.type === 'property' &&
+				entity && entity.getType() === 'item' &&
+				this._getPropertyContext() !== null;
 		},
 
 		/**
@@ -154,14 +156,16 @@
 		 */
 		_getPropertyContext: function () {
 			if ( this._isInNewStatementView() ) {
-				return 'item';
+				if ( !this._isQualifier() && !this._isReference() ) {
+					return 'item';
+				}
 			} else if ( this._isQualifier() ) {
 				return 'qualifier';
 			} else if ( this._isReference() ) {
 				return 'reference';
-			} else {
-				return null;
 			}
+
+			return null;
 		},
 
 		/**
