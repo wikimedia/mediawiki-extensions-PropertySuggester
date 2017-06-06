@@ -34,7 +34,7 @@
 			// Search for suggestions once the field is initially focused.
 			// We only need to do this once, afterwards the old suggestions
 			// will re-appear on focus anyway.
-			this.element.one( 'focus', function ( event ) {
+			this.element.one( 'focus', function () {
 				if ( self._useSuggester() &&
 					self.element.val() === '' &&
 					!self.options.menu.element.is( ':visible' )
@@ -110,9 +110,11 @@
 				return null;
 			}
 
-			return $entityView.length > 0 ?
-				$entityView.data( 'entityview' ).option( 'value' )
-				: null;
+			if ( $entityView.length > 0 ) {
+				return $entityView.data( 'entityview' ).option( 'value' );
+			}
+
+			return null;
 		},
 
 		/**
@@ -132,11 +134,14 @@
 				return null;
 			}
 
-			statement = $statementview.length > 0 ?
-				$statementview.data( 'statementview' ).option( 'value' )
-				: null;
+			if ( $statementview.length > 0 ) {
+				statement = $statementview.data( 'statementview' ).option( 'value' );
+				if ( statement ) {
+					return statement.getClaim().getMainSnak().getPropertyId();
+				}
+			}
 
-			return statement ? statement.getClaim().getMainSnak().getPropertyId() : null;
+			return null;
 		},
 
 		/**
@@ -191,12 +196,13 @@
 		 * @return {boolean}
 		 */
 		_isInNewStatementView: function () {
-			var $statementview = this.element.closest( ':wikibase-statementview' ),
-				value = $statementview.length > 0 ?
-					$statementview.data( 'statementview' ).option( 'value' )
-					: null;
+			var $statementview = this.element.closest( ':wikibase-statementview' );
 
-			return !value;
+			if ( $statementview.length > 0 ) {
+				return !$statementview.data( 'statementview' ).option( 'value' );
+			}
+
+			return true;
 		}
 	} );
 

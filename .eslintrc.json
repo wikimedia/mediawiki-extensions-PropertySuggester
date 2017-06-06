@@ -8,8 +8,6 @@
 		"OO": false
 	},
 	"rules": {
-		"no-underscore-dangle": "off",
-		"no-unused-vars": "off",
-		"operator-linebreak": "off"
+		"no-underscore-dangle": "off"
 	}
 }
