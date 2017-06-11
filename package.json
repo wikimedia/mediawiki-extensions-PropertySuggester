@@ -1,20 +1,20 @@
 {
-  "name": "PropertySuggester",
-  "version": "0.0.0",
-  "scripts": {
-    "test": "grunt test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://gerrit.wikimedia.org/r/mediawiki/extensions/PropertySuggester"
-  },
-  "author": "The Wikidata team",
-  "license": "GPL-2.0+",
-  "devDependencies": {
-    "eslint-config-wikimedia": "0.4.0",
-    "grunt": "^1.0.1",
-    "grunt-banana-checker": "0.5.0",
-    "grunt-eslint": "19.0.0",
-    "grunt-jsonlint": "1.0.7"
-  }
+	"name": "PropertySuggester",
+	"version": "0.0.0",
+	"scripts": {
+		"test": "grunt test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://gerrit.wikimedia.org/r/mediawiki/extensions/PropertySuggester"
+	},
+	"author": "The Wikidata team",
+	"license": "GPL-2.0+",
+	"devDependencies": {
+		"eslint-config-wikimedia": "0.4.0",
+		"grunt": "^1.0.1",
+		"grunt-banana-checker": "0.5.0",
+		"grunt-eslint": "19.0.0",
+		"grunt-jsonlint": "1.0.7"
+	}
 }
