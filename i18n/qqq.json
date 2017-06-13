@@ -8,6 +8,7 @@
 	},
 	"propertysuggester-desc": "{{desc|name=PropertySuggester|url=https://www.mediawiki.org/wiki/Extension:PropertySuggester}}",
 	"apihelp-wbsgetsuggestions-description": "{{doc-apihelp-description|wbsgetsuggestions}}",
+	"apihelp-wbsgetsuggestions-summary": "{{doc-apihelp-summary|wbsgetsuggestions}}",
 	"apihelp-wbsgetsuggestions-example-1": "{{doc-apihelp-example|wbsgetsuggestions}}",
 	"apihelp-wbsgetsuggestions-example-2": "{{doc-apihelp-example|wbsgetsuggestions}}",
 	"apihelp-wbsgetsuggestions-example-3": "{{doc-apihelp-example|wbsgetsuggestions}}",
