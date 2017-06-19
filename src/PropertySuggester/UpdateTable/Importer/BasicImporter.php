@@ -21,7 +21,8 @@ class BasicImporter implements Importer {
 	 * @return bool
 	 */
 	public function importFromCsvFileToDb( ImportContext $importContext ) {
-		if ( ( $fileHandle = fopen( $importContext->getCsvFilePath(), "r" ) ) == false ) {
+		$fileHandle = fopen( $importContext->getCsvFilePath(), "r" );
+		if ( $fileHandle == false ) {
 			return false;
 		}
 
