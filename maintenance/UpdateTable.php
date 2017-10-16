@@ -15,7 +15,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * Maintenance script to load property pair occurrence probability table from given csv file
  *
  * @author BP2013N2
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  */
 class UpdateTable extends Maintenance {
 

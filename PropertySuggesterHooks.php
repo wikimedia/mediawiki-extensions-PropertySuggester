@@ -1,22 +1,29 @@
 <?php
 
+namespace PropertySuggester;
+
+use DatabaseUpdater;
+use OutputPage;
+use Skin;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\WikibaseRepo;
 
+/**
+ * @author BP2013N2
+ * @license GNU GPL v2+
+ */
 final class PropertySuggesterHooks {
 
 	/**
 	 * Handler for the BeforePageDisplay hook, injects special behaviour
 	 * for PropertySuggestions in the EntitySuggester (if page is in EntityNamespace)
 	 *
-	 *
 	 * @param OutputPage $out
 	 * @param Skin $skin
-	 * @return bool
 	 */
 	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
 		if ( $out->getRequest()->getCheck( 'nosuggestions' ) ) {
-			return true;
+			return;
 		}
 
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
@@ -31,24 +38,20 @@ final class PropertySuggesterHooks {
 		}
 
 		if ( $out->getTitle() === null || $out->getTitle()->getNamespace() !== $itemNamespace ) {
-			return true;
+			return;
 		}
 
 		$out->addModules( 'ext.PropertySuggester.EntitySelector' );
-		return true;
 	}
 
 	/**
 	 * @param DatabaseUpdater $updater
-	 * @return bool
 	 */
 	public static function onCreateSchema( DatabaseUpdater $updater ) {
 		$updater->addExtensionTable(
 			'wbs_propertypairs',
 			__DIR__ . '/sql/create_propertypairs.sql'
 		);
-
-		return true;
 	}
 
 }

@@ -40,8 +40,8 @@
 		"remoteExtPath": "PropertySuggester"
 	},
 	"Hooks": {
-		"BeforePageDisplay": "PropertySuggesterHooks::onBeforePageDisplay",
-		"LoadExtensionSchemaUpdates": "PropertySuggesterHooks::onCreateSchema"
+		"BeforePageDisplay": "PropertySuggester\\PropertySuggesterHooks::onBeforePageDisplay",
+		"LoadExtensionSchemaUpdates": "PropertySuggester\\PropertySuggesterHooks::onCreateSchema"
 	},
 	"config": {
 		"PropertySuggesterDeprecatedIds": [],

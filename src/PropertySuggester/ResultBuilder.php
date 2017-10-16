@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * ResultBuilder builds Json-compatible array structure from suggestions
  *
  * @author BP2013N2
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  */
 class ResultBuilder {
 

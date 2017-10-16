@@ -3,7 +3,6 @@
 namespace PropertySuggester;
 
 use MediaWikiTestCase;
-use PropertySuggesterHooks;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
@@ -12,7 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers PropertySuggesterHooks
+ * @covers \PropertySuggester\PropertySuggesterHooks
  *
  * @group PropertySuggester
  * @group Wikibase

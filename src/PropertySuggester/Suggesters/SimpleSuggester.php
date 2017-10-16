@@ -16,7 +16,8 @@ use Wikimedia\Rdbms\ResultWrapper;
  * a Suggester implementation that creates suggestion via MySQL
  * Needs the wbs_propertypairs table filled with pair probabilities.
  *
- * @licence GNU GPL v2+
+ * @author BP2013N2
+ * @license GNU GPL v2+
  */
 class SimpleSuggester implements SuggesterEngine {
 

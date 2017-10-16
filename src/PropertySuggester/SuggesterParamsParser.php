@@ -7,7 +7,8 @@ use InvalidArgumentException;
 /**
  * Parses the suggester parameters
  *
- * @licence GNU GPL v2+
+ * @author BP2013N2
+ * @license GNU GPL v2+
  */
 class SuggesterParamsParser {
 
@@ -43,7 +44,9 @@ class SuggesterParamsParser {
 		$result->properties = $params['properties'];
 
 		if ( !( $result->entity xor $result->properties ) ) {
-			throw new InvalidArgumentException( 'provide either entity-id parameter \'entity\' or a list of properties \'properties\'' );
+			throw new InvalidArgumentException(
+				"provide either entity-id parameter 'entity' or a list of properties 'properties'"
+			);
 		}
 		if ( !( is_null( $params['continue'] ) || is_numeric( $params['continue'] ) ) ) {
 			throw new InvalidArgumentException( 'continue must be int!' );

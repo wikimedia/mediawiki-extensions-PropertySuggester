@@ -8,7 +8,7 @@ use Wikimedia\Rdbms\LoadBalancer;
  * Context for importing data from a csv file to a db table using a Importer strategy
  *
  * @author BP2013N2
- * @licence GNU GPL v2+
+ * @license GNU GPL v2+
  */
 class ImportContext {
 
