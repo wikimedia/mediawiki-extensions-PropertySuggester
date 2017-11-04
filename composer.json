@@ -20,7 +20,8 @@
 		"phpunit/phpunit": "~4.8",
 		"satooshi/php-coveralls": "dev-master",
 		"wikibase/wikibase-codesniffer": "^0.2.0",
-		"wikimedia/testing-access-wrapper": "~1.0"
+		"wikimedia/testing-access-wrapper": "~1.0",
+		"mediawiki/minus-x": "0.2.0"
 	},
 	"autoload": {
 		"psr-4": {
@@ -33,10 +34,14 @@
 		]
 	},
 	"scripts": {
-		"fix": "phpcbf",
+		"fix": [
+			"phpcbf",
+			"minus-x fix ."
+		],
 		"test": [
 			"parallel-lint . --exclude vendor",
-			"phpcs -p -s"
+			"phpcs -p -s",
+			"minus-x check ."
 		]
 	}
 }
