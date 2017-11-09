@@ -23,16 +23,6 @@
 		"wikimedia/testing-access-wrapper": "~1.0",
 		"mediawiki/minus-x": "0.2.0"
 	},
-	"autoload": {
-		"psr-4": {
-			"PropertySuggester\\": "src/PropertySuggester/"
-		},
-		"files": [],
-		"classmap": [
-			"PropertySuggesterHooks.php",
-			"maintenance/UpdateTable.php"
-		]
-	},
 	"scripts": {
 		"fix": [
 			"phpcbf",

@@ -11,6 +11,21 @@
 	"descriptionmsg": "propertysuggester-desc",
 	"license-name": "GPL-2.0+",
 	"type": "wikibase",
+	"AutoloadClasses": {
+		"PropertySuggester\\PropertySuggesterHooks": "PropertySuggesterHooks.php",
+		"PropertySuggester\\GetSuggestions": "src/PropertySuggester/GetSuggestions.php",
+		"PropertySuggester\\ResultBuilder": "src/PropertySuggester/ResultBuilder.php",
+		"PropertySuggester\\SuggesterParamsParser": "src/PropertySuggester/SuggesterParamsParser.php",
+		"PropertySuggester\\SuggesterParams": "src/PropertySuggester/SuggesterParams.php",
+		"PropertySuggester\\SuggestionGenerator": "src/PropertySuggester/SuggestionGenerator.php",
+		"PropertySuggester\\Suggesters\\SimpleSuggester": "src/PropertySuggester/Suggesters/SimpleSuggester.php",
+		"PropertySuggester\\Suggesters\\SuggesterEngine": "src/PropertySuggester/Suggesters/SuggesterEngine.php",
+		"PropertySuggester\\Suggesters\\Suggestion": "src/PropertySuggester/Suggesters/Suggestion.php",
+		"PropertySuggester\\UpdateTable\\ImportContext": "src/PropertySuggester/UpdateTable/ImportContext.php",
+		"PropertySuggester\\UpdateTable\\Importer\\BasicImporter": "src/PropertySuggester/UpdateTable/Importer/BasicImporter.php",
+		"PropertySuggester\\UpdateTable\\Importer\\Importer": "src/PropertySuggester/UpdateTable/Importer/Importer.php",
+		"PropertySuggester\\Maintenance\\UpdateTable": "maintenance/UpdateTable.php"
+	},
 	"APIModules": {
 		"wbsgetsuggestions": "PropertySuggester\\GetSuggestions"
 	},
