@@ -15,7 +15,7 @@
 		"MediaWiki": ">= 1.31.0"
 	},
 	"AutoloadNamespaces": {
-		"PropertySuggester\\": "src/PropertySuggester/",
+		"PropertySuggester\\": "src/",
 		"PropertySuggester\\Maintenance\\": "maintenance/"
 	},
 	"APIModules": {
@@ -47,8 +47,8 @@
 		"remoteExtPath": "PropertySuggester"
 	},
 	"Hooks": {
-		"BeforePageDisplay": "PropertySuggester\\PropertySuggesterHooks::onBeforePageDisplay",
-		"LoadExtensionSchemaUpdates": "PropertySuggester\\PropertySuggesterHooks::onCreateSchema"
+		"BeforePageDisplay": "PropertySuggester\\Hooks::onBeforePageDisplay",
+		"LoadExtensionSchemaUpdates": "PropertySuggester\\Hooks::onCreateSchema"
 	},
 	"config": {
 		"PropertySuggesterDeprecatedIds": [],

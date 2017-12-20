@@ -11,12 +11,12 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \PropertySuggester\PropertySuggesterHooks
+ * @covers \PropertySuggester\Hooks
  *
  * @group PropertySuggester
  * @group Wikibase
  */
-class PropertySuggesterHooksTest extends MediaWikiTestCase {
+class HooksTest extends MediaWikiTestCase {
 
 	public function testOnBeforePageDisplay_resourceLoaderModuleAdded() {
 		$title = $this->getTitleForId( new ItemId( 'Q1' ) );
@@ -25,7 +25,7 @@ class PropertySuggesterHooksTest extends MediaWikiTestCase {
 		$output = $context->getOutput();
 		$skin = $context->getSkin();
 
-		PropertySuggesterHooks::onBeforePageDisplay( $output, $skin );
+		Hooks::onBeforePageDisplay( $output, $skin );
 
 		$this->assertContains( 'ext.PropertySuggester.EntitySelector', $output->getModules() );
 	}
@@ -38,7 +38,7 @@ class PropertySuggesterHooksTest extends MediaWikiTestCase {
 		$output = $context->getOutput();
 		$skin = $context->getSkin();
 
-		PropertySuggesterHooks::onBeforePageDisplay( $output, $skin );
+		Hooks::onBeforePageDisplay( $output, $skin );
 
 		$this->assertNotContains( 'ext.PropertySuggester.EntitySelector', $output->getModules() );
 	}

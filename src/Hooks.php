@@ -12,7 +12,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author BP2013N2
  * @license GNU GPL v2+
  */
-final class PropertySuggesterHooks {
+final class Hooks {
 
 	/**
 	 * Handler for the BeforePageDisplay hook, injects special behaviour
@@ -50,7 +50,7 @@ final class PropertySuggesterHooks {
 	public static function onCreateSchema( DatabaseUpdater $updater ) {
 		$updater->addExtensionTable(
 			'wbs_propertypairs',
-			__DIR__ . '/../../sql/create_propertypairs.sql'
+			__DIR__ . '/../sql/create_propertypairs.sql'
 		);
 	}
 
