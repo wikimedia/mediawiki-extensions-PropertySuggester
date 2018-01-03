@@ -4,7 +4,7 @@ namespace PropertySuggester\UpdateTable\Importer;
 
 use UnexpectedValueException;
 use PropertySuggester\UpdateTable\ImportContext;
-use Wikimedia\Rdbms\Database;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * A strategy which imports entries from a CSV file into a DB table. Used as fallback, when no
@@ -37,12 +37,12 @@ class BasicImporter implements Importer {
 	}
 
 	/**
-	 * @param $fileHandle
-	 * @param Database $db
+	 * @param resource $fileHandle
+	 * @param IDatabase $db
 	 * @param ImportContext $importContext
 	 * @throws UnexpectedValueException
 	 */
-	private function doImport( $fileHandle, Database $db, ImportContext $importContext ) {
+	private function doImport( $fileHandle, IDatabase $db, ImportContext $importContext ) {
 		$accumulator = [];
 		$batchSize = $importContext->getBatchSize();
 		$i = 0;
