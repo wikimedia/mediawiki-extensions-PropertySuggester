@@ -148,7 +148,7 @@ class GetSuggestions extends ApiBase {
 	 * @param int $resultSize
 	 * @param string $search
 	 * @param string $language
-	 * @return array
+	 * @return array[]
 	 */
 	private function querySearchApi( $resultSize, $search, $language ) {
 		$searchEntitiesParameters = new DerivativeRequest(

@@ -91,7 +91,7 @@ class ResultBuilder {
 	private function buildEntry( EntityId $id, array $clusteredTerms, Suggestion $suggestion ) {
 		$entry = [
 			'id' => $id->getSerialization(),
-			'url' => $this->entityTitleLookup->getTitleForId( $id )->getFullUrl(),
+			'url' => $this->entityTitleLookup->getTitleForId( $id )->getFullURL(),
 			'rating' => $suggestion->getProbability(),
 		];
 
