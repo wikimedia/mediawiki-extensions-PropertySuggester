@@ -31,7 +31,7 @@ class ImportContext {
 	private $targetTableName = "";
 
 	/**
-	 * @var LoadBalancer
+	 * @var LoadBalancer|null
 	 */
 	private $lb = null;
 
@@ -60,16 +60,13 @@ class ImportContext {
 	}
 
 	/**
-	 * @return LoadBalancer
+	 * @return LoadBalancer|null
 	 */
 	public function getLb() {
 		return $this->lb;
 	}
 
-	/**
-	 * @param LoadBalancer $lb
-	 */
-	public function setLb( $lb ) {
+	public function setLb( LoadBalancer $lb ) {
 		$this->lb = $lb;
 	}
 

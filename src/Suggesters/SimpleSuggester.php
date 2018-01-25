@@ -41,9 +41,6 @@ class SimpleSuggester implements SuggesterEngine {
 	 */
 	private $lb;
 
-	/**
-	 * @param LoadBalancer $lb
-	 */
 	public function __construct( LoadBalancer $lb ) {
 		$this->lb = $lb;
 	}

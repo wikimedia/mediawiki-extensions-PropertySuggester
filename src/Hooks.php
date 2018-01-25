@@ -18,8 +18,8 @@ final class Hooks {
 	 * Handler for the BeforePageDisplay hook, injects special behaviour
 	 * for PropertySuggestions in the EntitySuggester (if page is in EntityNamespace)
 	 *
-	 * @param OutputPage $out
-	 * @param Skin $skin
+	 * @param OutputPage &$out
+	 * @param Skin &$skin
 	 */
 	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
 		if ( $out->getRequest()->getCheck( 'nosuggestions' ) ) {
@@ -44,9 +44,6 @@ final class Hooks {
 		$out->addModules( 'ext.PropertySuggester.EntitySelector' );
 	}
 
-	/**
-	 * @param DatabaseUpdater $updater
-	 */
 	public static function onCreateSchema( DatabaseUpdater $updater ) {
 		$updater->addExtensionTable(
 			'wbs_propertypairs',
