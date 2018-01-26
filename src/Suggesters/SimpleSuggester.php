@@ -9,8 +9,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\LoadBalancer;
-use Wikimedia\Rdbms\ResultWrapper;
 
 /**
  * a Suggester implementation that creates suggestion via MySQL
@@ -208,10 +208,10 @@ class SimpleSuggester implements SuggesterEngine {
 	/**
 	 * Converts the rows of the SQL result to Suggestion objects
 	 *
-	 * @param ResultWrapper $res
+	 * @param IResultWrapper $res
 	 * @return Suggestion[]
 	 */
-	private function buildResult( ResultWrapper $res ) {
+	private function buildResult( IResultWrapper $res ) {
 		$resultArray = [];
 		foreach ( $res as $row ) {
 			$pid = PropertyId::newFromNumber( $row->pid );
