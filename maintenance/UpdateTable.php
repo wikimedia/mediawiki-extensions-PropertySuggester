@@ -25,6 +25,7 @@ class UpdateTable extends Maintenance {
 		$this->mDescription = "Read CSV Dump and refill probability table";
 		$this->addOption( 'file', 'CSV table to be loaded (relative path)', true, true );
 		$this->setBatchSize( 10000 );
+		$this->requireExtension( 'PropertySuggester' );
 	}
 
 	/**
