@@ -2,6 +2,7 @@
 
 namespace PropertySuggester\UpdateTable\Importer;
 
+use MediaWiki\MediaWikiServices;
 use UnexpectedValueException;
 use PropertySuggester\UpdateTable\ImportContext;
 use Wikimedia\Rdbms\IDatabase;
@@ -53,13 +54,14 @@ class BasicImporter implements Importer {
 				"provided csv-file does not match the expected format:\n" . join( ',', $expectedHeader )
 			);
 		}
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 
 		while ( true ) {
 			$data = fgetcsv( $fileHandle, 0, $importContext->getCsvDelimiter() );
 
 			if ( $data == false || ++$i % $batchSize == 0 ) {
 				$db->commit( __METHOD__, 'flush' );
-				wfGetLBFactory()->waitForReplication();
+				$lbFactory->waitForReplication();
 				$db->insert( $importContext->getTargetTableName(), $accumulator );
 				if ( ! $importContext->isQuiet() ) {
 					print "$i rows inserted\n";

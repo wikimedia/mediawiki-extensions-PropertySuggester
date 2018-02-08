@@ -7,6 +7,7 @@ use ApiMain;
 use ApiResult;
 use DerivativeRequest;
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use PropertySuggester\Suggesters\SimpleSuggester;
 use PropertySuggester\Suggesters\SuggesterEngine;
 use Wikibase\DataModel\Entity\Property;
@@ -62,13 +63,14 @@ class GetSuggestions extends ApiBase {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$store = $wikibaseRepo->getStore();
+		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
 
 		$this->termIndex = $store->getTermIndex();
 		$this->entityLookup = $store->getEntityLookup();
 		$this->entityTitleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$this->languageCodes = $wikibaseRepo->getTermsLanguages()->getLanguages();
 
-		$this->suggester = new SimpleSuggester( wfGetLB() );
+		$this->suggester = new SimpleSuggester( $lb );
 		$this->suggester->setDeprecatedPropertyIds( $wgPropertySuggesterDeprecatedIds );
 		$this->suggester->setClassifyingPropertyIds( $wgPropertySuggesterClassifyingPropertyIds );
 		$this->suggester->setInitialSuggestions( $wgPropertySuggesterInitialSuggestions );

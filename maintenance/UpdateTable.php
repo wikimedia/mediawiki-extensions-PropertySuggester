@@ -3,10 +3,12 @@
 namespace PropertySuggester\Maintenance;
 
 use Maintenance;
+use MediaWiki\MediaWikiServices;
 use PropertySuggester\UpdateTable\Importer\BasicImporter;
 use PropertySuggester\UpdateTable\ImportContext;
 use UnexpectedValueException;
 use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\LBFactory;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../..';
 require_once $basePath . '/maintenance/Maintenance.php';
@@ -45,10 +47,11 @@ class UpdateTable extends Maintenance {
 
 		$tableName = 'wbs_propertypairs';
 
-		wfGetLBFactory()->waitForReplication();
-		$lb = wfGetLB();
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$lbFactory->waitForReplication();
+		$lb = $lbFactory->getMainLB();
 
-		$this->clearTable( $lb, $tableName );
+		$this->clearTable( $lbFactory, $lb, $tableName );
 
 		$this->output( "loading new entries from file\n" );
 
@@ -88,10 +91,11 @@ class UpdateTable extends Maintenance {
 	}
 
 	/**
+	 * @param LBFactory $lbFactory
 	 * @param LoadBalancer $lb
 	 * @param string $tableName
 	 */
-	private function clearTable( LoadBalancer $lb, $tableName ) {
+	private function clearTable( LBFactory $lbFactory, LoadBalancer $lb, $tableName ) {
 		global $wgDBtype;
 
 		$db = $lb->getConnection( DB_MASTER );
@@ -104,7 +108,7 @@ class UpdateTable extends Maintenance {
 		} else {
 			do {
 				$db->commit( __METHOD__, 'flush' );
-				wfGetLBFactory()->waitForReplication();
+				$lbFactory->waitForReplication();
 				$this->output( "Deleting a batch\n" );
 				$table = $db->tableName( $tableName );
 				$db->query( "DELETE FROM $table LIMIT $this->mBatchSize" );
