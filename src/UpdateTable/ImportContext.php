@@ -2,7 +2,7 @@
 
 namespace PropertySuggester\UpdateTable;
 
-use Wikimedia\Rdbms\LoadBalancer;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Context for importing data from a csv file to a db table using a Importer strategy
@@ -31,9 +31,9 @@ class ImportContext {
 	private $targetTableName = "";
 
 	/**
-	 * @var LoadBalancer|null
+	 * @var ILBFactory|null
 	 */
-	private $lb = null;
+	private $lbFactory = null;
 
 	/**
 	 * @var int
@@ -60,14 +60,14 @@ class ImportContext {
 	}
 
 	/**
-	 * @return LoadBalancer|null
+	 * @return ILBFactory|null
 	 */
-	public function getLb() {
-		return $this->lb;
+	public function getLbFactory() {
+		return $this->lbFactory;
 	}
 
-	public function setLb( LoadBalancer $lb ) {
-		$this->lb = $lb;
+	public function setLbFactory( ILBFactory $lbFactory ) {
+		$this->lbFactory = $lbFactory;
 	}
 
 	/**

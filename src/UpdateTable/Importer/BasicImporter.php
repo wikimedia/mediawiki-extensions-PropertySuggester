@@ -2,10 +2,10 @@
 
 namespace PropertySuggester\UpdateTable\Importer;
 
-use MediaWiki\MediaWikiServices;
 use UnexpectedValueException;
 use PropertySuggester\UpdateTable\ImportContext;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * A strategy which imports entries from a CSV file into a DB table. Used as fallback, when no
@@ -27,9 +27,10 @@ class BasicImporter implements Importer {
 			return false;
 		}
 
-		$lb = $importContext->getLb();
+		$lbFactory = $importContext->getLbFactory();
+		$lb = $lbFactory->getMainLB();
 		$db = $lb->getConnection( DB_MASTER );
-		$this->doImport( $fileHandle, $db, $importContext );
+		$this->doImport( $fileHandle, $lbFactory, $db, $importContext );
 		$lb->reuseConnection( $db );
 
 		fclose( $fileHandle );
@@ -39,11 +40,12 @@ class BasicImporter implements Importer {
 
 	/**
 	 * @param resource $fileHandle
+	 * @param ILBFactory $lbFactory
 	 * @param IDatabase $db
 	 * @param ImportContext $importContext
 	 * @throws UnexpectedValueException
 	 */
-	private function doImport( $fileHandle, IDatabase $db, ImportContext $importContext ) {
+	private function doImport( $fileHandle, ILBFactory $lbFactory, IDatabase $db, ImportContext $importContext ) {
 		$accumulator = [];
 		$batchSize = $importContext->getBatchSize();
 		$i = 0;
@@ -54,7 +56,6 @@ class BasicImporter implements Importer {
 				"provided csv-file does not match the expected format:\n" . join( ',', $expectedHeader )
 			);
 		}
-		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 
 		while ( true ) {
 			$data = fgetcsv( $fileHandle, 0, $importContext->getCsvDelimiter() );

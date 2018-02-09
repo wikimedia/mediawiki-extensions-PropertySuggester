@@ -7,8 +7,7 @@ use MediaWiki\MediaWikiServices;
 use PropertySuggester\UpdateTable\Importer\BasicImporter;
 use PropertySuggester\UpdateTable\ImportContext;
 use UnexpectedValueException;
-use Wikimedia\Rdbms\LoadBalancer;
-use Wikimedia\Rdbms\LBFactory;
+use Wikimedia\Rdbms\ILBFactory;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../..';
 require_once $basePath . '/maintenance/Maintenance.php';
@@ -49,13 +48,12 @@ class UpdateTable extends Maintenance {
 
 		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$lbFactory->waitForReplication();
-		$lb = $lbFactory->getMainLB();
 
-		$this->clearTable( $lbFactory, $lb, $tableName );
+		$this->clearTable( $lbFactory, $tableName );
 
 		$this->output( "loading new entries from file\n" );
 
-		$importContext = $this->createImportContext( $lb, $tableName, $fullPath, $this->isQuiet() );
+		$importContext = $this->createImportContext( $lbFactory, $tableName, $fullPath, $this->isQuiet() );
 		$importStrategy = new BasicImporter();
 
 		try {
@@ -72,15 +70,15 @@ class UpdateTable extends Maintenance {
 	}
 
 	/**
-	 * @param LoadBalancer $lb
+	 * @param ILBFactory $lbFactory
 	 * @param string $tableName
 	 * @param string $wholePath
 	 * @param bool $quiet
 	 * @return ImportContext
 	 */
-	private function createImportContext( LoadBalancer $lb, $tableName, $wholePath, $quiet ) {
+	private function createImportContext( ILBFactory $lbFactory, $tableName, $wholePath, $quiet ) {
 		$importContext = new ImportContext();
-		$importContext->setLb( $lb );
+		$importContext->setLbFactory( $lbFactory );
 		$importContext->setTargetTableName( $tableName );
 		$importContext->setCsvFilePath( $wholePath );
 		$importContext->setCsvDelimiter( ',' );
@@ -91,13 +89,13 @@ class UpdateTable extends Maintenance {
 	}
 
 	/**
-	 * @param LBFactory $lbFactory
-	 * @param LoadBalancer $lb
+	 * @param ILBFactory $lbFactory
 	 * @param string $tableName
 	 */
-	private function clearTable( LBFactory $lbFactory, LoadBalancer $lb, $tableName ) {
+	private function clearTable( ILBFactory $lbFactory, $tableName ) {
 		global $wgDBtype;
 
+		$lb = $lbFactory->getMainLB();
 		$db = $lb->getConnection( DB_MASTER );
 		if ( !$db->tableExists( $tableName ) ) {
 			$this->error( "$tableName table does not exist.\nExecuting core/maintenance/update.php may help.\n", true );

@@ -9,8 +9,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
-use Wikimedia\Rdbms\LoadBalancer;
 
 /**
  * a Suggester implementation that creates suggestion via MySQL
@@ -37,11 +37,11 @@ class SimpleSuggester implements SuggesterEngine {
 	private $initialSuggestions = [];
 
 	/**
-	 * @var LoadBalancer
+	 * @var ILoadBalancer
 	 */
 	private $lb;
 
-	public function __construct( LoadBalancer $lb ) {
+	public function __construct( ILoadBalancer $lb ) {
 		$this->lb = $lb;
 	}
 
