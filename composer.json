@@ -17,7 +17,7 @@
 	"require-dev": {
 		"jakub-onderka/php-console-highlighter": "0.3.2",
 		"jakub-onderka/php-parallel-lint": "0.9.2",
-		"satooshi/php-coveralls": "dev-master",
+		"satooshi/php-coveralls": "^2.0",
 		"wikibase/wikibase-codesniffer": "^0.2.0",
 		"wikimedia/testing-access-wrapper": "~1.0",
 		"mediawiki/minus-x": "0.2.0"
