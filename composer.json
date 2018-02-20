@@ -20,7 +20,7 @@
 		"satooshi/php-coveralls": "dev-master",
 		"wikibase/wikibase-codesniffer": "^0.2.0",
 		"wikimedia/testing-access-wrapper": "~1.0",
-		"mediawiki/minus-x": "0.2.0"
+		"mediawiki/minus-x": "0.3.0"
 	},
 	"scripts": {
 		"fix": [
