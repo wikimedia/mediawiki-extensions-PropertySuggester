@@ -199,7 +199,6 @@ class GetSuggestions extends ApiBase {
 				ApiBase::PARAM_MAX => ApiBase::LIMIT_SML1,
 				ApiBase::PARAM_MAX2 => ApiBase::LIMIT_SML2,
 				ApiBase::PARAM_MIN => 0,
-				ApiBase::PARAM_RANGE_ENFORCE => true,
 			],
 			'continue' => null,
 			'language' => [
