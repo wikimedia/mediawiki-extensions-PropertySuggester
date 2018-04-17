@@ -53,7 +53,7 @@ class BasicImporter implements Importer {
 		$expectedHeader = [ 'pid1', 'qid1', 'pid2', 'count', 'probability', 'context' ];
 		if ( $header != $expectedHeader ) {
 			throw new UnexpectedValueException(
-				"provided csv-file does not match the expected format:\n" . join( ',', $expectedHeader )
+				"provided csv-file does not match the expected format:\n" . implode( ',', $expectedHeader )
 			);
 		}
 
