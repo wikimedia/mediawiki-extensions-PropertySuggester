@@ -13,7 +13,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  * ResultBuilder builds Json-compatible array structure from suggestions
  *
  * @author BP2013N2
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  */
 class ResultBuilder {
 
@@ -67,7 +67,7 @@ class ResultBuilder {
 			$id = $suggestion->getPropertyId();
 			$ids[] = $id;
 		}
-		//See SearchEntities
+		// See SearchEntities
 		$terms = $this->termIndex->getTermsOfEntities(
 			$ids,
 			null,
@@ -168,7 +168,7 @@ class ResultBuilder {
 	 * @param int $resultSize
 	 * @return array[] representing Json
 	 */
-	public function mergeWithTraditionalSearchResults( array &$entries, array $searchResults, $resultSize ) {
+	public function mergeWithTraditionalSearchResults( array $entries, array $searchResults, $resultSize ) {
 		// Avoid duplicates
 		$existingKeys = [];
 		foreach ( $entries as $entry ) {

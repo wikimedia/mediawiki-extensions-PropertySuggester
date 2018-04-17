@@ -81,7 +81,8 @@ class UpdateTableTest extends MediaWikiTestCase {
 				[],
 				$rows
 			);
-		} else { // assertSelect is too slow to compare 1100 rows... just check the size
+		} else {
+			// assertSelect is too slow to compare 1100 rows... just check the size
 			$this->assertSelect(
 				'wbs_propertypairs',
 				[ 'count' => 'count(*)' ],

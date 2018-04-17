@@ -20,7 +20,7 @@ use Wikibase\TermIndex;
  * API module to get property suggestions.
  *
  * @author BP2013N2
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  */
 class GetSuggestions extends ApiBase {
 
@@ -54,6 +54,11 @@ class GetSuggestions extends ApiBase {
 	 */
 	private $paramsParser;
 
+	/**
+	 * @param ApiMain $main
+	 * @param string $name
+	 * @param string $prefix
+	 */
 	public function __construct( ApiMain $main, $name, $prefix = '' ) {
 		parent::__construct( $main, $name, $prefix );
 		global $wgPropertySuggesterDeprecatedIds;
@@ -182,7 +187,7 @@ class GetSuggestions extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams()
+	 * @inheritDoc
 	 */
 	public function getAllowedParams() {
 		return [
@@ -217,7 +222,7 @@ class GetSuggestions extends ApiBase {
 	}
 
 	/**
-	 * @see ApiBase::getExamplesMessages()
+	 * @inheritDoc
 	 */
 	public function getExamplesMessages() {
 		return [

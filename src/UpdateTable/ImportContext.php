@@ -8,7 +8,7 @@ use Wikimedia\Rdbms\ILBFactory;
  * Context for importing data from a csv file to a db table using a Importer strategy
  *
  * @author BP2013N2
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  */
 class ImportContext {
 
@@ -113,14 +113,14 @@ class ImportContext {
 	}
 
 	/**
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isQuiet() {
 		return $this->quiet;
 	}
 
 	/**
-	 * @param boolean $quiet
+	 * @param bool $quiet
 	 */
 	public function setQuiet( $quiet ) {
 		$this->quiet = $quiet;

@@ -26,7 +26,7 @@ class ResultBuilderTest extends MediaWikiTestCase {
 
 		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );
 		$termIndex = $this->getMock( TermIndex::class );
-		$result = new ApiResult( false ); // $maxSize, no limit
+		$result = new ApiResult( false );
 
 		$this->resultBuilder = new ResultBuilder( $result, $termIndex, $entityTitleLookup, '' );
 	}

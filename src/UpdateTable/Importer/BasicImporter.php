@@ -12,7 +12,7 @@ use Wikimedia\Rdbms\ILBFactory;
  * special import commands are supported by the DBMS.
  *
  * @author BP2013N2
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  */
 class BasicImporter implements Importer {
 
@@ -49,7 +49,7 @@ class BasicImporter implements Importer {
 		$accumulator = [];
 		$batchSize = $importContext->getBatchSize();
 		$i = 0;
-		$header = fgetcsv( $fileHandle, 0, $importContext->getCsvDelimiter() ); //this is to get the csv-header
+		$header = fgetcsv( $fileHandle, 0, $importContext->getCsvDelimiter() );
 		$expectedHeader = [ 'pid1', 'qid1', 'pid2', 'count', 'probability', 'context' ];
 		if ( $header != $expectedHeader ) {
 			throw new UnexpectedValueException(

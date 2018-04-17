@@ -10,7 +10,7 @@ use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @author BP2013N2
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  */
 final class Hooks {
 

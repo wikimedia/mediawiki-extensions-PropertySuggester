@@ -17,7 +17,7 @@ use Wikimedia\Rdbms\IResultWrapper;
  * Needs the wbs_propertypairs table filled with pair probabilities.
  *
  * @author BP2013N2
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  */
 class SimpleSuggester implements SuggesterEngine {
 
@@ -140,7 +140,7 @@ class SimpleSuggester implements SuggesterEngine {
 	 * @return Suggestion[]
 	 */
 	public function suggestByPropertyIds( array $propertyIds, $limit, $minProbability, $context ) {
-		$numericIds = array_map( function( PropertyId $propertyId ) {
+		$numericIds = array_map( function ( PropertyId $propertyId ) {
 			return $propertyId->getNumericId();
 		}, $propertyIds );
 

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * Suggestion returned by a SuggesterEngine
  *
  * @author BP2013N2
- * @license GNU GPL v2+
+ * @license GPL-2.0-or-later
  */
 class Suggestion {
 
