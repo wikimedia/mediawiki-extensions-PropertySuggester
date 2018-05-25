@@ -93,19 +93,17 @@ class SuggestionGenerator {
 			return array_slice( $suggestions, 0, $resultSize );
 		}
 
-		$ids = array_values(
-			$this->entityTermSearchHelper->getRankedSearchResults(
-				$search,
-				$language,
-				'property',
-				$resultSize,
-				true
-			)
+		$searchResults = $this->entityTermSearchHelper->getRankedSearchResults(
+			$search,
+			$language,
+			'property',
+			$resultSize,
+			true
 		);
 
 		$id_set = [];
-		foreach ( $ids as $id ) {
-			$id_set[$id->getEntityId()->getNumericId()] = true;
+		foreach ( $searchResults as $searchResult ) {
+			$id_set[$searchResult->getEntityId()->getNumericId()] = true;
 		}
 
 		$matching_suggestions = [];
@@ -113,7 +111,7 @@ class SuggestionGenerator {
 		foreach ( $suggestions as $suggestion ) {
 			if ( array_key_exists( $suggestion->getPropertyId()->getNumericId(), $id_set ) ) {
 				$matching_suggestions[] = $suggestion;
-				if ( ++$count == $resultSize ) {
+				if ( ++$count === $resultSize ) {
 					break;
 				}
 			}

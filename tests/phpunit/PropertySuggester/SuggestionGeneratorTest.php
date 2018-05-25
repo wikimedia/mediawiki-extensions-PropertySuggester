@@ -7,13 +7,14 @@ use MediaWikiTestCase;
 use PHPUnit_Framework_MockObject_MockObject;
 use PropertySuggester\Suggesters\SuggesterEngine;
 use PropertySuggester\Suggesters\Suggestion;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\Term;
 use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\Interactors\TermSearchResult;
 
 /**
  * @covers PropertySuggester\SuggestionGenerator
@@ -77,7 +78,7 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 		$this->entitySearchHelper->expects( $this->any() )
 			->method( 'getRankedSearchResults' )
 			->will( $this->returnValue(
-				$this->getTermIndexEntryArrayWithIds( [ $p7, $p10, $p15, $p12 ] )
+				$this->getTermSearchResultArrayWithIds( [ $p7, $p10, $p15, $p12 ] )
 			) );
 
 		$result = $this->suggestionGenerator->filterSuggestions( $suggestions, 'foo', 'en', $resultSize );
@@ -88,19 +89,20 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 	/**
 	 * @param PropertyId[] $ids
 	 *
-	 * @return TermIndexEntry[]
+	 * @return TermSearchResult[]
 	 */
-	private function getTermIndexEntryArrayWithIds( $ids ) {
-		$termIndexEntries = [];
+	private function getTermSearchResultArrayWithIds( $ids ) {
+		$termSearchResults = [];
 		foreach ( $ids as $i => $id ) {
-			$termIndexEntries[] = new TermIndexEntry( [
-				'entityId' => $id,
-				'termLanguage' => 'en',
-				'termText' => "kitten$i",
-				'termType' => TermIndexEntry::TYPE_LABEL
-			] );
+			$termSearchResults[] = new TermSearchResult(
+				new Term( "kitten$i", 'en' ),
+				'label',
+				$id,
+				new Term( "kitten$i", 'en' ),
+				null
+			);
 		}
-		return $termIndexEntries;
+		return $termSearchResults;
 	}
 
 	public function testFilterSuggestionsWithoutSearch() {
