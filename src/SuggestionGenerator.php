@@ -7,12 +7,9 @@ use PropertySuggester\Suggesters\SuggesterEngine;
 use PropertySuggester\Suggesters\Suggestion;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\TermIndex;
-use Wikibase\TermIndexEntry;
+use Wikibase\Repo\Api\EntitySearchHelper;
 
 /**
  * API module helper to generate property suggestions.
@@ -28,9 +25,9 @@ class SuggestionGenerator {
 	private $entityLookup;
 
 	/**
-	 * @var TermIndex
+	 * @var EntitySearchHelper
 	 */
-	private $termIndex;
+	private $entityTermSearchHelper;
 
 	/**
 	 * @var SuggesterEngine
@@ -39,12 +36,12 @@ class SuggestionGenerator {
 
 	public function __construct(
 		EntityLookup $entityLookup,
-		TermIndex $termIndex,
+		EntitySearchHelper $entityTermSearchHelper,
 		SuggesterEngine $suggester
 	) {
 		$this->entityLookup = $entityLookup;
+		$this->entityTermSearchHelper = $entityTermSearchHelper;
 		$this->suggester = $suggester;
-		$this->termIndex = $termIndex;
 	}
 
 	/**
@@ -95,11 +92,20 @@ class SuggestionGenerator {
 		if ( !$search ) {
 			return array_slice( $suggestions, 0, $resultSize );
 		}
-		$ids = $this->getMatchingIDs( $search, $language );
+
+		$ids = array_values(
+			$this->entityTermSearchHelper->getRankedSearchResults(
+				$search,
+				$language,
+				'property',
+				$resultSize,
+				true
+			)
+		);
 
 		$id_set = [];
 		foreach ( $ids as $id ) {
-			$id_set[$id->getNumericId()] = true;
+			$id_set[$id->getEntityId()->getNumericId()] = true;
 		}
 
 		$matching_suggestions = [];
@@ -113,38 +119,6 @@ class SuggestionGenerator {
 			}
 		}
 		return $matching_suggestions;
-	}
-
-	/**
-	 * @param string $search
-	 * @param string $language
-	 * @return PropertyId[]
-	 */
-	private function getMatchingIDs( $search, $language ) {
-		$termIndexEntries = $this->termIndex->getTopMatchingTerms(
-			[
-				new TermIndexSearchCriteria( [
-					'termLanguage' => $language,
-					'termText' => $search
-				] )
-			],
-			[
-				TermIndexEntry::TYPE_LABEL,
-				TermIndexEntry::TYPE_ALIAS,
-			],
-			Property::ENTITY_TYPE,
-			[
-				'caseSensitive' => false,
-				'prefixSearch' => true,
-			]
-		);
-
-		$ids = [];
-		foreach ( $termIndexEntries as $entry ) {
-			$ids[] = $entry->getEntityId();
-		}
-
-		return $ids;
 	}
 
 }

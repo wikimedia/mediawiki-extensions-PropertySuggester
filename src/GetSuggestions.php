@@ -13,6 +13,8 @@ use PropertySuggester\Suggesters\SuggesterEngine;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Api\EntitySearchHelper;
+use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\TermIndex;
 
@@ -55,6 +57,11 @@ class GetSuggestions extends ApiBase {
 	private $paramsParser;
 
 	/**
+	 * @var EntitySearchHelper
+	 */
+	private $entitySearchHelper;
+
+	/**
 	 * @param ApiMain $main
 	 * @param string $name
 	 * @param string $prefix
@@ -71,6 +78,10 @@ class GetSuggestions extends ApiBase {
 		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
 
 		$this->termIndex = $store->getTermIndex();
+		$this->entitySearchHelper = new TypeDispatchingEntitySearchHelper(
+			$wikibaseRepo->getEntitySearchHelperCallbacks(),
+			$main->getRequest()
+		);
 		$this->entityLookup = $store->getEntityLookup();
 		$this->entityTitleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$this->languageCodes = $wikibaseRepo->getTermsLanguages()->getLanguages();
@@ -92,7 +103,7 @@ class GetSuggestions extends ApiBase {
 
 		$suggestionGenerator = new SuggestionGenerator(
 			$this->entityLookup,
-			$this->termIndex,
+			$this->entitySearchHelper,
 			$this->suggester
 		);
 

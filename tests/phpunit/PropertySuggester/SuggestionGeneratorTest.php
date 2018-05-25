@@ -12,7 +12,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\TermIndex;
+use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\TermIndexEntry;
 
 /**
@@ -40,20 +40,20 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 	private $lookup;
 
 	/**
-	 * @var TermIndex|PHPUnit_Framework_MockObject_MockObject
+	 * @var EntitySearchHelper|PHPUnit_Framework_MockObject_MockObject
 	 */
-	private $termIndex;
+	private $entitySearchHelper;
 
 	public function setUp() {
 		parent::setUp();
 
 		$this->lookup = $this->getMock( EntityLookup::class );
-		$this->termIndex = $this->getMock( TermIndex::class );
+		$this->entitySearchHelper = $this->getMock( EntitySearchHelper::class );
 		$this->suggester = $this->getMock( SuggesterEngine::class );
 
 		$this->suggestionGenerator = new SuggestionGenerator(
 			$this->lookup,
-			$this->termIndex,
+			$this->entitySearchHelper,
 			$this->suggester
 		);
 	}
@@ -74,8 +74,8 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 
 		$resultSize = 2;
 
-		$this->termIndex->expects( $this->any() )
-			->method( 'getTopMatchingTerms' )
+		$this->entitySearchHelper->expects( $this->any() )
+			->method( 'getRankedSearchResults' )
 			->will( $this->returnValue(
 				$this->getTermIndexEntryArrayWithIds( [ $p7, $p10, $p15, $p12 ] )
 			) );
