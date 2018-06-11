@@ -12,5 +12,4 @@
 	</rule>
 
 	<file>.</file>
-	<exclude-pattern>evilMediaWikiBootstrap\.php</exclude-pattern>
 </ruleset>
