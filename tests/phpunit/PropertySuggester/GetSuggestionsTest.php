@@ -10,8 +10,8 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Tests\Api\WikibaseApiTestCase;
 
 /**
- * @covers PropertySuggester\GetSuggestions
- * @covers PropertySuggester\ResultBuilder
+ * @covers \PropertySuggester\GetSuggestions
+ * @covers \PropertySuggester\ResultBuilder
  *
  * @group PropertySuggester
  * @group API

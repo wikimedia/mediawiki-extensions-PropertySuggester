@@ -8,7 +8,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\TermIndex;
 
 /**
- * @covers PropertySuggester\ResultBuilder
+ * @covers \PropertySuggester\ResultBuilder
  *
  * @group PropertySuggester
  * @group API

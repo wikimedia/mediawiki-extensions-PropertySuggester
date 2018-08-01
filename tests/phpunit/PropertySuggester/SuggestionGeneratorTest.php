@@ -17,7 +17,7 @@ use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Lib\Interactors\TermSearchResult;
 
 /**
- * @covers PropertySuggester\SuggestionGenerator
+ * @covers \PropertySuggester\SuggestionGenerator
  *
  * @group PropertySuggester
  * @group API

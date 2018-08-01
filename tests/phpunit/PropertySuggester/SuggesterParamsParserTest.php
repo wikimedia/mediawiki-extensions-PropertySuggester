@@ -6,8 +6,8 @@ use MediaWikiTestCase;
 use InvalidArgumentException;
 
 /**
- * @covers PropertySuggester\SuggesterParams
- * @covers PropertySuggester\SuggesterParamsParser
+ * @covers \PropertySuggester\SuggesterParams
+ * @covers \PropertySuggester\SuggesterParamsParser
  *
  * @group PropertySuggester
  * @group API

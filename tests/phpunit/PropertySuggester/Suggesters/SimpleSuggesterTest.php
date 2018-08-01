@@ -11,9 +11,9 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikimedia\Rdbms\LoadBalancerSingle;
 
 /**
- * @covers PropertySuggester\Suggesters\SimpleSuggester
- * @covers PropertySuggester\Suggesters\SuggesterEngine
- * @covers PropertySuggester\Suggesters\Suggestion
+ * @covers \PropertySuggester\Suggesters\SimpleSuggester
+ * @covers \PropertySuggester\Suggesters\SuggesterEngine
+ * @covers \PropertySuggester\Suggesters\Suggestion
  *
  * @group PropertySuggester
  * @group API
