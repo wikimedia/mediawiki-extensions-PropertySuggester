@@ -4,4 +4,4 @@ cd ../wiki/extensions/PropertySuggester
 
 ls build/logs
 
-php vendor/bin/coveralls -v
+php vendor/bin/php-coveralls -v
