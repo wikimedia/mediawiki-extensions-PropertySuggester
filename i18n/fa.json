@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mahdy Saffar"
+			"Mahdy Saffar",
+			"Ladsgroup"
 		]
 	},
+	"apihelp-wbsgetsuggestions-example-1": "گرفتن پیشنهادها برای موجودیت Q4",
+	"apihelp-wbsgetsuggestions-param-language": "زبان نتیجه.",
+	"apihelp-wbsgetsuggestions-param-limit": "حداکثر تعداد نتایج",
 	"apihelp-wbsgetsuggestions-param-search": "این متن را جستجو کن."
 }
