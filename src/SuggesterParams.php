@@ -58,4 +58,9 @@ class SuggesterParams {
 	 */
 	public $resultSize;
 
+	/**
+	 * @var string
+	 */
+	public $include;
+
 }

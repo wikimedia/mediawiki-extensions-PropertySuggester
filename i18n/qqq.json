@@ -17,6 +17,7 @@
 	"apihelp-wbsgetsuggestions-param-context": "{{doc-apihelp-param|wbsgetsuggestions|context}}",
 	"apihelp-wbsgetsuggestions-param-continue": "{{doc-apihelp-param|wbsgetsuggestions|continue}}",
 	"apihelp-wbsgetsuggestions-param-entity": "{{doc-apihelp-param|wbsgetsuggestions|entity}}",
+	"apihelp-wbsgetsuggestions-param-include": "{{doc-apihelp-param|wbsgetsuggestions|include}}",
 	"apihelp-wbsgetsuggestions-param-language": "{{doc-apihelp-param|wbsgetsuggestions|language}}",
 	"apihelp-wbsgetsuggestions-param-limit": "{{doc-apihelp-param|wbsgetsuggestions|limit}}",
 	"apihelp-wbsgetsuggestions-param-properties": "{{doc-apihelp-param|wbsgetsuggestions|properties}}",

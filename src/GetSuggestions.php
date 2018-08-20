@@ -107,13 +107,18 @@ class GetSuggestions extends ApiBase {
 			$this->suggester
 		);
 
+		$suggest = SuggesterEngine::SUGGEST_NEW;
+		if ( $params->include === 'all' ) {
+			$suggest = SuggesterEngine::SUGGEST_ALL;
+		}
 		if ( $params->entity !== null ) {
 			try {
 				$suggestions = $suggestionGenerator->generateSuggestionsByItem(
 					$params->entity,
 					$params->suggesterLimit,
 					$params->minProbability,
-					$params->context
+					$params->context,
+					$suggest
 				);
 			} catch ( InvalidArgumentException $ex ) {
 				$this->dieWithException( $ex );
@@ -123,7 +128,8 @@ class GetSuggestions extends ApiBase {
 				$params->properties,
 				$params->suggesterLimit,
 				$params->minProbability,
-				$params->context
+				$params->context,
+				$suggest
 			);
 		}
 
@@ -224,6 +230,10 @@ class GetSuggestions extends ApiBase {
 			'context' => [
 				ApiBase::PARAM_TYPE => [ 'item', 'qualifier', 'reference' ],
 				ApiBase::PARAM_DFLT => 'item',
+			],
+			'include' => [
+				ApiBase::PARAM_TYPE => [ '', 'all' ],
+				ApiBase::PARAM_DFLT => '',
 			],
 			'search' => [
 				ApiBase::PARAM_TYPE => 'string',

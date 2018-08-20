@@ -30,6 +30,7 @@ class SuggesterParamsParserTest extends MediaWikiTestCase {
 		'language' => 'en',
 		'search' => '',
 		'context' => 'item',
+		'include' => '',
 	];
 
 	public function setUp() {
@@ -54,6 +55,7 @@ class SuggesterParamsParserTest extends MediaWikiTestCase {
 		$this->assertEquals( $this->defaultMinProbability, $params->minProbability );
 		$this->assertEquals( '', $params->search );
 		$this->assertEquals( 'item', $params->context );
+		$this->assertSame( '', $params->include );
 	}
 
 	public function testSuggesterWithSearchParameters() {
@@ -70,6 +72,7 @@ class SuggesterParamsParserTest extends MediaWikiTestCase {
 		$this->assertEquals( 0, $params->minProbability );
 		$this->assertEquals( 'asd', $params->search );
 		$this->assertEquals( 'item', $params->context );
+		$this->assertSame( '', $params->include );
 	}
 
 	/**
