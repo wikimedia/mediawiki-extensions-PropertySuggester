@@ -44,6 +44,7 @@ class BasicImporter implements Importer {
 	 * @param IDatabase $db
 	 * @param ImportContext $importContext
 	 * @throws UnexpectedValueException
+	 * @suppress SecurityCheck-SQLInjection ImportContext::getTargetTableName is marked as unsafe
 	 */
 	private function doImport( $fileHandle, ILBFactory $lbFactory, IDatabase $db, ImportContext $importContext ) {
 		$accumulator = [];
