@@ -27,7 +27,7 @@ class HooksTest extends MediaWikiTestCase {
 
 		Hooks::onBeforePageDisplay( $output, $skin );
 
-		$this->assertContains( 'ext.PropertySuggester.EntitySelector', $output->getModules() );
+		$this->assertContains( 'propertySuggester.suggestions', $output->getModules() );
 	}
 
 	/**
@@ -40,7 +40,7 @@ class HooksTest extends MediaWikiTestCase {
 
 		Hooks::onBeforePageDisplay( $output, $skin );
 
-		$this->assertNotContains( 'ext.PropertySuggester.EntitySelector', $output->getModules() );
+		$this->assertNotContains( 'propertySuggester.suggestions', $output->getModules() );
 	}
 
 	public function onBeforePageDisplay_resourceLoaderModuleNotAddedProvider() {
