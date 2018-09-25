@@ -81,6 +81,12 @@ class SuggesterParamsParser {
 			$result->minProbability = $this->defaultMinProbability;
 		}
 
+		if ( $params['include'] === 'all' ) {
+			$result->include = 'all';
+		} else {
+			$result->include = '';
+		}
+
 		return $result;
 	}
 

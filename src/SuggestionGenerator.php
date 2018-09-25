@@ -49,10 +49,11 @@ class SuggestionGenerator {
 	 * @param int $limit
 	 * @param float $minProbability
 	 * @param string $context
+	 * @param string $include One of the SuggesterEngine::SUGGEST_* constants
 	 * @throws InvalidArgumentException
 	 * @return Suggestion[]
 	 */
-	public function generateSuggestionsByItem( $itemIdString, $limit, $minProbability, $context ) {
+	public function generateSuggestionsByItem( $itemIdString, $limit, $minProbability, $context, $include ) {
 		$itemId = new ItemId( $itemIdString );
 		/** @var Item $item */
 		$item = $this->entityLookup->getEntity( $itemId );
@@ -61,7 +62,7 @@ class SuggestionGenerator {
 			throw new InvalidArgumentException( 'Item ' . $itemIdString . ' could not be found' );
 		}
 
-		return $this->suggester->suggestByItem( $item, $limit, $minProbability, $context );
+		return $this->suggester->suggestByItem( $item, $limit, $minProbability, $context, $include );
 	}
 
 	/**
@@ -69,15 +70,29 @@ class SuggestionGenerator {
 	 * @param int $limit
 	 * @param float $minProbability
 	 * @param string $context
+	 * @param string $include One of the SuggesterEngine::SUGGEST_* constants
 	 * @return Suggestion[]
 	 */
-	public function generateSuggestionsByPropertyList( array $propertyIdList, $limit, $minProbability, $context ) {
+	public function generateSuggestionsByPropertyList(
+		array $propertyIdList,
+		$limit,
+		$minProbability,
+		$context,
+		$include
+	) {
 		$propertyIds = [];
 		foreach ( $propertyIdList as $stringId ) {
 			$propertyIds[] = new PropertyId( $stringId );
 		}
 
-		$suggestions = $this->suggester->suggestByPropertyIds( $propertyIds, $limit, $minProbability, $context );
+		$suggestions = $this->suggester->suggestByPropertyIds(
+			$propertyIds,
+			$limit,
+			$minProbability,
+			$context,
+			$include
+		);
+
 		return $suggestions;
 	}
 

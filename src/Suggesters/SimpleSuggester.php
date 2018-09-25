@@ -77,21 +77,36 @@ class SimpleSuggester implements SuggesterEngine {
 	 * @param int $limit
 	 * @param float $minProbability
 	 * @param string $context
+	 * @param string $include
 	 * @throws InvalidArgumentException
 	 * @return Suggestion[]
 	 */
-	private function getSuggestions( array $propertyIds, array $idTuples, $limit, $minProbability, $context ) {
+	private function getSuggestions(
+		array $propertyIds,
+		array $idTuples,
+		$limit,
+		$minProbability,
+		$context,
+		$include
+	) {
 		if ( !is_int( $limit ) ) {
 			throw new InvalidArgumentException( '$limit must be int!' );
 		}
 		if ( !is_float( $minProbability ) ) {
 			throw new InvalidArgumentException( '$minProbability must be float!' );
 		}
+		if ( !in_array( $include, [ self::SUGGEST_ALL, self::SUGGEST_NEW ] ) ) {
+			throw new InvalidArgumentException( '$include must be one of the SUGGEST_* constants!' );
+		}
 		if ( !$propertyIds ) {
 			return $this->initialSuggestions;
 		}
 
-		$excludedIds = array_merge( $propertyIds, $this->deprecatedPropertyIds );
+		$excludedIds = [];
+		if ( $include === self::SUGGEST_NEW ) {
+			$excludedIds = array_merge( $propertyIds, $this->deprecatedPropertyIds );
+		}
+
 		$count = count( $propertyIds );
 
 		$dbr = $this->lb->getConnection( DB_REPLICA );
@@ -112,11 +127,13 @@ class SimpleSuggester implements SuggesterEngine {
 				'pid' => 'pid2',
 				'prob' => "sum(probability)/$count",
 			],
-			[
-				$condition,
-				'pid2 NOT IN (' . $dbr->makeList( $excludedIds ) . ')',
-				'context' => $context,
-			],
+			array_merge(
+				[
+					$condition,
+					'context' => $context,
+				],
+				$excludedIds ? [ 'pid2 NOT IN (' . $dbr->makeList( $excludedIds ) . ')' ] : []
+			),
 			__METHOD__,
 			[
 				'GROUP BY' => 'pid2',
@@ -137,14 +154,15 @@ class SimpleSuggester implements SuggesterEngine {
 	 * @param int $limit
 	 * @param float $minProbability
 	 * @param string $context
+	 * @param string $include One of the self::SUGGEST_* constants
 	 * @return Suggestion[]
 	 */
-	public function suggestByPropertyIds( array $propertyIds, $limit, $minProbability, $context ) {
+	public function suggestByPropertyIds( array $propertyIds, $limit, $minProbability, $context, $include ) {
 		$numericIds = array_map( function ( PropertyId $propertyId ) {
 			return $propertyId->getNumericId();
 		}, $propertyIds );
 
-		return $this->getSuggestions( $numericIds, [], $limit, $minProbability, $context );
+		return $this->getSuggestions( $numericIds, [], $limit, $minProbability, $context, $include );
 	}
 
 	/**
@@ -154,10 +172,11 @@ class SimpleSuggester implements SuggesterEngine {
 	 * @param int $limit
 	 * @param float $minProbability
 	 * @param string $context
+	 * @param string $include One of the self::SUGGEST_* constants
 	 * @throws LogicException
 	 * @return Suggestion[]
 	 */
-	public function suggestByItem( Item $item, $limit, $minProbability, $context ) {
+	public function suggestByItem( Item $item, $limit, $minProbability, $context, $include ) {
 		$ids = [];
 		$idTuples = [];
 
@@ -193,7 +212,7 @@ class SimpleSuggester implements SuggesterEngine {
 			}
 		}
 
-		return $this->getSuggestions( $ids, $idTuples, $limit, $minProbability, $context );
+		return $this->getSuggestions( $ids, $idTuples, $limit, $minProbability, $context, $include );
 	}
 
 	/**

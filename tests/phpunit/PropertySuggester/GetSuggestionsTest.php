@@ -127,6 +127,35 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 		$this->assertCount( 0, $result['search'] );
 	}
 
+	public function provideExecutionWithInclude() {
+		return [
+			'include all' => [ 1, 'all' ],
+			'include default' => [ 0, '' ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideExecutionWithInclude
+	 */
+	public function testExecutionWithInclude( $expectedResultCount, $include ) {
+		$p56 = self::$idMap['%P56%'];
+		$p72 = self::$idMap['%P72%'];
+
+		$params = [
+			'action' => 'wbsgetsuggestions',
+			'properties' => $p56 . '|' . $p72,
+			'continue' => 0,
+			'context' => 'item',
+			'include' => $include
+		];
+		$res = $this->doApiRequest( $params );
+		$result = $res[0];
+
+		$this->assertEquals( 1, $result['success'] );
+		$this->assertEquals( '', $result['searchinfo']['search'] );
+		$this->assertCount( $expectedResultCount, $result['search'] );
+	}
+
 	public function testExecutionWithInvalidContext() {
 		$p56 = self::$idMap['%P56%'];
 		$params = [

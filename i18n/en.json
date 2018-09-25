@@ -16,6 +16,7 @@
 	"apihelp-wbsgetsuggestions-param-context": "Either item, reference or qualifier.",
 	"apihelp-wbsgetsuggestions-param-continue": "Offset where to continue a search.",
 	"apihelp-wbsgetsuggestions-param-entity": "Suggest properties for the given entity, based on existing list of properties that the entity has.",
+	"apihelp-wbsgetsuggestions-param-include": "Which suggestions to include: Per default only properties that might be added (non-deprecated, not yet present) will be suggested.",
 	"apihelp-wbsgetsuggestions-param-language": "Language for result.",
 	"apihelp-wbsgetsuggestions-param-limit": "Maximum number of results.",
 	"apihelp-wbsgetsuggestions-param-properties": "Suggest additional properties for the given list of properties.",
