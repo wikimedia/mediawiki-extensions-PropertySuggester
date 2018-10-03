@@ -15,6 +15,7 @@
 	"apihelp-wbsgetsuggestions-param-context": "項、參考文獻，或是限定符其中之一。",
 	"apihelp-wbsgetsuggestions-param-continue": "持續搜尋的偏移。",
 	"apihelp-wbsgetsuggestions-param-entity": "基於項目俱有的所存在屬性清單，來對提供的項目指定屬性。",
+	"apihelp-wbsgetsuggestions-param-include": "應包括的建議：預設下僅有可能添加的屬性（非棄用、尚未提供）會被建議。",
 	"apihelp-wbsgetsuggestions-param-language": "用於結果的語言。",
 	"apihelp-wbsgetsuggestions-param-limit": "結果數量上限。",
 	"apihelp-wbsgetsuggestions-param-properties": "為提供的屬性清單建議額外屬性。",

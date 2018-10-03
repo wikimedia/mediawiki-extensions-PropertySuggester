@@ -16,6 +16,7 @@
 	"apihelp-wbsgetsuggestions-param-context": "פריט, הפניה או בדיקת כשירות.",
 	"apihelp-wbsgetsuggestions-param-continue": "היסט להמשך חיפוש.",
 	"apihelp-wbsgetsuggestions-param-entity": "הצעת מאפיינים עבור ישות נתונה, בהתבסס על רשימה קיימת של המאפיינים שיש לישות.",
+	"apihelp-wbsgetsuggestions-param-include": "אילו הצעות לכלול: ברירת המחדל היא לכלול רק מאפיינים שיכולים להתווסף (לא מיושנים, ועדיין לא נוכחים) יוצעו.",
 	"apihelp-wbsgetsuggestions-param-language": "השפה של התוצאה.",
 	"apihelp-wbsgetsuggestions-param-limit": "מספר התוצאות המרבי.",
 	"apihelp-wbsgetsuggestions-param-properties": "לציין מאפיינים נוספים עבור רשימת המאפיינים הנתונה.",

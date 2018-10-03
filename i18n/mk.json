@@ -15,6 +15,7 @@
 	"apihelp-wbsgetsuggestions-param-context": "Предмет, навод или определница.",
 	"apihelp-wbsgetsuggestions-param-continue": "Од каде да се продолжи со пребарувањето",
 	"apihelp-wbsgetsuggestions-param-entity": "Предложи својства за дадена единица, на основа на постоечки список на својства што ги има единицата.",
+	"apihelp-wbsgetsuggestions-param-include": "Кои предлози да се вклучат. По основно ќе се предлагаат само својства што можат да се додадат (незастарени, но сè уште неприсутни).",
 	"apihelp-wbsgetsuggestions-param-language": "Јазик за исходот.",
 	"apihelp-wbsgetsuggestions-param-limit": "Највеќе ставки во исходот.",
 	"apihelp-wbsgetsuggestions-param-properties": "Предложи дополнителни својства за дадениот список на својства.",

@@ -3,7 +3,8 @@
 		"authors": [
 			"Alexandr Efremov",
 			"Okras",
-			"Facenapalm"
+			"Facenapalm",
+			"Vlad5250"
 		]
 	},
 	"propertysuggester-desc": "Выводит предложения свойств при добавлении утверждений Викибазы.",
@@ -17,6 +18,7 @@
 	"apihelp-wbsgetsuggestions-param-context": "Элемент, ссылка на источник, или уточнения.",
 	"apihelp-wbsgetsuggestions-param-continue": "Смещение, с которого продолжить поиск.",
 	"apihelp-wbsgetsuggestions-param-entity": "Предложить свойства для заданной сущности на основе имеющегося списка свойств, которые имеет эта сущность.",
+	"apihelp-wbsgetsuggestions-param-include": "Какие предложения необходимо включить. По умолчанию будут предложены только свойства, которые могут быть добавлены (неустаревшие, но всё ещё неприсутствующие).",
 	"apihelp-wbsgetsuggestions-param-language": "Язык результата.",
 	"apihelp-wbsgetsuggestions-param-limit": "Максимальное количество результатов.",
 	"apihelp-wbsgetsuggestions-param-properties": "Предложить дополнительные свойства для заданного списка свойств.",

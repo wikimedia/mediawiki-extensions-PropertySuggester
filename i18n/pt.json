@@ -16,6 +16,7 @@
 	"apihelp-wbsgetsuggestions-param-context": "Objeto, referência ou qualificador.",
 	"apihelp-wbsgetsuggestions-param-continue": "Posição a partir da qual continuar uma pesquisa.",
 	"apihelp-wbsgetsuggestions-param-entity": "Sugerir propriedades para a entidade fornecida, com base na lista de propriedades existentes da entidade.",
+	"apihelp-wbsgetsuggestions-param-include": "Que sugestões incluir: por padrão, só serão sugeridas as propriedades que podem ser adicionadas (as não descontinuadas e ainda não presentes).",
 	"apihelp-wbsgetsuggestions-param-language": "Língua do resultado.",
 	"apihelp-wbsgetsuggestions-param-limit": "Número máximo de resultados.",
 	"apihelp-wbsgetsuggestions-param-properties": "Sugerir propriedades adicionais para a lista de propriedades fornecida.",
