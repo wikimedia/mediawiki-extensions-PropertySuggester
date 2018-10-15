@@ -29,7 +29,7 @@ Here is a minimal example of a `composer.json` file:
 ### Setup
 
 This extension adds a new table "wbs_propertypairs" that contains the information that is needed to generate
-suggestions. You can use [PropertySuggester-Python](https://github.com/Wikidata-lib/PropertySuggester-Python) to
+suggestions. You can use [property-suggester-scripts](https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/property-suggester-scripts/) to
 generate this data from a wikidata dump.
 
 * run ```composer dump-autoload``` in the extension folder (if installed without composer)
