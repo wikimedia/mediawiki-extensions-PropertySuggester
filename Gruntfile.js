@@ -6,6 +6,11 @@ module.exports = function ( grunt ) {
 
 	grunt.initConfig( {
 		eslint: {
+			options: {
+				globals: [
+					'propertySuggester'
+				]
+			},
 			all: [
 				'*.js',
 				'**/*.js',

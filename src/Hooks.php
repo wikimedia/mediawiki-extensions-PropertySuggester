@@ -41,7 +41,7 @@ final class Hooks {
 			return;
 		}
 
-		$out->addModules( 'ext.PropertySuggester.EntitySelector' );
+		$out->addModules( 'propertySuggester.suggestions' );
 	}
 
 	public static function onCreateSchema( DatabaseUpdater $updater ) {

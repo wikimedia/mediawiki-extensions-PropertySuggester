@@ -30,9 +30,10 @@
 		"PropertySuggesterAlias": "PropertySuggester.alias.php"
 	},
 	"ResourceModules": {
-		"ext.PropertySuggester.EntitySelector": {
+		"propertySuggester.suggestions": {
 			"scripts": [
-				"modules/ext.PropertySuggester.EntitySelector.js"
+				"modules/PropertySuggester.js",
+				"modules/hook.js"
 			],
 			"dependencies": [
 				"jquery.wikibase.entityselector",
