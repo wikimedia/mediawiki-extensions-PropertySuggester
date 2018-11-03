@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Eduardo Addad de Oliveira",
-			"Trigonometria87"
+			"Trigonometria87",
+			"TheEduGobi"
 		]
 	},
 	"propertysuggester-desc": "Sugere propriedades ao adicionar instruções do Wikibase.",
@@ -17,7 +18,7 @@
 	"apihelp-wbsgetsuggestions-param-continue": "Deslocamento de onde continuar uma pesquisa.",
 	"apihelp-wbsgetsuggestions-param-entity": "Sugerir propriedades para a entidade dada, baseado na lista existente de propriedades que a entidade tem.",
 	"apihelp-wbsgetsuggestions-param-include": "Quais sugestões incluir: Por padrão, apenas as propriedades que podem ser adicionadas (não-reprovadas, ainda não presentes) serão sugeridas.",
-	"apihelp-wbsgetsuggestions-param-language": "Linguagem para o resultado.",
+	"apihelp-wbsgetsuggestions-param-language": "Idioma do resultado.",
 	"apihelp-wbsgetsuggestions-param-limit": "Número máximo de resultados.",
 	"apihelp-wbsgetsuggestions-param-properties": "Sugira propriedades adicionais para a determinada lista de propriedades.",
 	"apihelp-wbsgetsuggestions-param-search": "Pesquisar este texto.",
