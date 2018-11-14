@@ -45,6 +45,9 @@ generate this data from a wikidata dump.
 
 ## Release notes
 
+### 3.2.1 (2018-11-14)
+* Added compatibility with Wikibase DataModel 9.x
+
 ### 3.2.0 (2017-04-24)
 * Converted extension to use MediaWiki extension registration.
 
