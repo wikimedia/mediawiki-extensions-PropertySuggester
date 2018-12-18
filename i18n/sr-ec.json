@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Obsuser"
+			"Obsuser",
+			"BadDog"
 		]
 	},
-	"propertysuggester-desc": "Сугестија својстава при додавању ставки Викибазе.",
+	"propertysuggester-desc": "Предлаже својстава при додавању Wikibase изјава.",
 	"apihelp-wbsgetsuggestions-description": "API модул за добијање сугестија за додатна својства за додавање на ентитет Викибазе. API модул је примарно намењен за употребу справице за прављење сугестија када корисници уређују ентитете на Википодацима.",
 	"apihelp-wbsgetsuggestions-example-1": "Тражи сугестије за ентитет Q4",
 	"apihelp-wbsgetsuggestions-example-2": "Тражи сугестије за ентитет Q4 од ранга 10 до 15",
