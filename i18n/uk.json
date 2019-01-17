@@ -16,6 +16,7 @@
 	"apihelp-wbsgetsuggestions-param-context": "Елемент, посилання на джерело, або уточнення.",
 	"apihelp-wbsgetsuggestions-param-continue": "Зміщення, з якого продовжити пошук.",
 	"apihelp-wbsgetsuggestions-param-entity": "Запропонувати властивості для заданої сутності на основі наявного списку властивостей, які має ця сутність.",
+	"apihelp-wbsgetsuggestions-param-include": "Які пропозиції включати: стандартно пропонуватимуться лише ті властивості, які можна додати (не застарілі й такі, що їх ще ніхто не додав).",
 	"apihelp-wbsgetsuggestions-param-language": "Мова результату.",
 	"apihelp-wbsgetsuggestions-param-limit": "Максимальна кількість результатів.",
 	"apihelp-wbsgetsuggestions-param-properties": "Запропонувати додаткові властивості для заданого списку властивостей.",
