@@ -65,7 +65,7 @@ class BasicImporter implements Importer {
 				$db->commit( __METHOD__, 'flush' );
 				$lbFactory->waitForReplication();
 				$db->insert( $importContext->getTargetTableName(), $accumulator );
-				if ( ! $importContext->isQuiet() ) {
+				if ( !$importContext->isQuiet() ) {
 					print "$i rows inserted\n";
 				}
 				$accumulator = [];
