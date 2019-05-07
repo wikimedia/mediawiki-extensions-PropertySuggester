@@ -1,6 +1,6 @@
 window.propertySuggester = window.propertySuggester || {};
 
-window.propertySuggester.PropertySuggester = ( function ( $ ) {
+window.propertySuggester.PropertySuggester = ( function () {
 	'use strict';
 
 	function SELF( $element ) {
@@ -174,4 +174,4 @@ window.propertySuggester.PropertySuggester = ( function ( $ ) {
 	};
 
 	return SELF;
-}( jQuery ) );
+}() );

@@ -1,4 +1,4 @@
-( function ( mw, ps ) {
+( function ( ps ) {
 	'use strict';
 
 	mw.hook( 'wikibase.entityselector.search' ).add( function ( data, addPromise ) {
@@ -14,4 +14,4 @@
 
 	} );
 
-}( mediaWiki, propertySuggester ) );
+}( propertySuggester ) );
