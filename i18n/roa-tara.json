@@ -4,5 +4,21 @@
 			"Joetaras"
 		]
 	},
-	"apihelp-wbsgetsuggestions-example-1": "Pigghie le suggerimende pe l'entità Q4"
+	"propertysuggester-desc": "Suggerisce probbietà quanne aggiunge de le dichiaraziune de Uicchibase.",
+	"apihelp-wbsgetsuggestions-description": "Module API pe pigghià suggereminde de probbietà de cchiù da agigungere jndr'à l'endità Uicchibase. 'U module API jè prengepàlmende 'ndese da ausà da 'u uigget d'u suggeritore quanne le utinde stonne e cangiane le edità Uicchibase.",
+	"apihelp-wbsgetsuggestions-summary": "Module API pe pigghià suggereminde de probbietà de cchiù da agigungere jndr'à l'endità Uicchibase. 'U module API jè prengepàlmende 'ndese da ausà da 'u uigget d'u suggeritore quanne le utinde stonne e cangiane le edità Uicchibase.",
+	"apihelp-wbsgetsuggestions-example-1": "Pigghie le suggerimende pe l'entità Q4",
+	"apihelp-wbsgetsuggestions-example-2": "Pigghie le suggereminde pe l'endità Q4 da 'a posizione 10 a 15",
+	"apihelp-wbsgetsuggestions-example-3": "Pigghie le suggereminde pa probbietà combinate cu P21 e P31",
+	"apihelp-wbsgetsuggestions-example-4": "Pigghie le suggereminde pe le qualificature ca onne state ausate cu P21",
+	"apihelp-wbsgetsuggestions-example-5": "Pigghie le suggereminde pe le refereminde ca onne state ausate cu P21",
+	"apihelp-wbsgetsuggestions-param-context": "Tutte e doje le vôsce, referimende o qualificatore.",
+	"apihelp-wbsgetsuggestions-param-continue": "Inizie da addò vuè ccu condinue a cercà.",
+	"apihelp-wbsgetsuggestions-param-entity": "Suggerisce probbietà pe l'endità scacchiate, basate sus a l'elenghe esistende de probbietà ca l'endità tène.",
+	"apihelp-wbsgetsuggestions-param-include": "Cè suggereminde a 'ngludere: Sulamende le probbietà ca avessera essere aggiunde (none deprecate, sulamende ce presende) avènene suggerite.",
+	"apihelp-wbsgetsuggestions-param-language": "Lènghe pu resultate.",
+	"apihelp-wbsgetsuggestions-param-limit": "Numere massime de resultate.",
+	"apihelp-wbsgetsuggestions-param-properties": "Suggerisce otre probbietà pe l'elenghe de le probbietà indicate.",
+	"apihelp-wbsgetsuggestions-param-search": "Cirche stu teste.",
+	"apihelp-wbsgetsuggestions-param-size": "Mitte 'u numere de suggereminde da turnà."
 }
