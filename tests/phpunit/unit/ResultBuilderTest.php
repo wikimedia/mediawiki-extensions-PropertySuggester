@@ -3,7 +3,7 @@
 namespace PropertySuggester;
 
 use ApiResult;
-use MediaWikiTestCase;
+use MediaWikiUnitTestCase;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\TermIndex;
 
@@ -14,7 +14,7 @@ use Wikibase\TermIndex;
  * @group API
  * @group medium
  */
-class ResultBuilderTest extends MediaWikiTestCase {
+class ResultBuilderTest extends MediaWikiUnitTestCase {
 
 	/**
 	 * @var ResultBuilder

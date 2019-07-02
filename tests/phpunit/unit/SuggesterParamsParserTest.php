@@ -2,7 +2,7 @@
 
 namespace PropertySuggester;
 
-use MediaWikiTestCase;
+use MediaWikiUnitTestCase;
 use InvalidArgumentException;
 
 /**
@@ -13,7 +13,7 @@ use InvalidArgumentException;
  * @group API
  * @group medium
  */
-class SuggesterParamsParserTest extends MediaWikiTestCase {
+class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 
 	/**
 	 * @var SuggesterParamsParser
