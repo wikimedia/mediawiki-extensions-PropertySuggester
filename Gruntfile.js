@@ -1,5 +1,11 @@
 /* eslint-env node, es6 */
 module.exports = function ( grunt ) {
+	var conf = grunt.file.readJSON( 'extension.json' ),
+		bananaConfig = conf.MessagesDirs;
+	bananaConfig.options = {
+		disallowDuplicateTranslations: false,
+		disallowUnusedTranslations: false
+	};
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
 	grunt.loadNpmTasks( 'grunt-eslint' );
 
@@ -15,15 +21,7 @@ module.exports = function ( grunt ) {
 				'!{vendor,node_modules}/**'
 			]
 		},
-		banana: {
-			options: {
-				disallowDuplicateTranslations: false,
-				disallowUnusedTranslations: false
-			},
-			all: [
-				'i18n/'
-			]
-		}
+		banana: bananaConfig
 	} );
 
 	grunt.registerTask( 'test', [ 'eslint', 'banana' ] );
