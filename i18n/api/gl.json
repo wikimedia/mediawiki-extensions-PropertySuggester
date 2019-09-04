@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Elisardojm",
-			"Navhy"
+			"Navhy",
+			"Iváns"
 		]
 	},
 	"apihelp-wbsgetsuggestions-description": "Módulo API para obter suxestións de propiedades adicionais para engadir a unha entidade de Wikibase. O módulo API está destinado principalmente para o seu uso polo widget de suxestións cando os usuarios están modificando entidades de Wikibase.",
