@@ -61,6 +61,7 @@ class SuggestionGenerator {
 		if ( $item === null ) {
 			throw new InvalidArgumentException( 'Item ' . $itemIdString . ' could not be found' );
 		}
+		'@phan-var Item $item';
 
 		return $this->suggester->suggestByItem( $item, $limit, $minProbability, $context, $include );
 	}
@@ -118,6 +119,8 @@ class SuggestionGenerator {
 
 		$id_set = [];
 		foreach ( $searchResults as $searchResult ) {
+			// @phan-suppress-next-next-line PhanUndeclaredMethod getEntityId() returns PropertyId as
+			// requested above and that implements getNumericId()
 			$id_set[$searchResult->getEntityId()->getNumericId()] = true;
 		}
 
