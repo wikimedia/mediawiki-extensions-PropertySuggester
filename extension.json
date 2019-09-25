@@ -37,10 +37,7 @@
 				"modules/hook.js"
 			],
 			"dependencies": [
-				"jquery.wikibase.entityselector",
-				"jquery.wikibase.entityview",
-				"jquery.wikibase.referenceview",
-				"jquery.wikibase.statementview"
+				"wikibase.view.ViewFactory"
 			]
 		}
 	},
