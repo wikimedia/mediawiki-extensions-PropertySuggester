@@ -4,7 +4,7 @@ namespace PropertySuggester;
 
 use InvalidArgumentException;
 use MediaWikiTestCase;
-use PHPUnit_Framework_MockObject_MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use PropertySuggester\Suggesters\SuggesterEngine;
 use PropertySuggester\Suggesters\Suggestion;
 use Wikibase\DataModel\Entity\Item;
@@ -31,17 +31,17 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 	private $suggestionGenerator;
 
 	/**
-	 * @var SuggesterEngine|PHPUnit_Framework_MockObject_MockObject
+	 * @var SuggesterEngine|MockObject
 	 */
 	private $suggester;
 
 	/**
-	 * @var EntityLookup|PHPUnit_Framework_MockObject_MockObject
+	 * @var EntityLookup|MockObject
 	 */
 	private $lookup;
 
 	/**
-	 * @var EntitySearchHelper|PHPUnit_Framework_MockObject_MockObject
+	 * @var EntitySearchHelper|MockObject
 	 */
 	private $entitySearchHelper;
 
