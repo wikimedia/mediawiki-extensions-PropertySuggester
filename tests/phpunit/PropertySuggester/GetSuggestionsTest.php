@@ -164,7 +164,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 			'context' => 'delete all the things!'
 		];
 
-		$this->setExpectedException( ApiUsageException::class );
+		$this->expectException( ApiUsageException::class );
 		$this->doApiRequest( $params );
 	}
 
