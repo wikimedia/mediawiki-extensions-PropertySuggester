@@ -45,7 +45,7 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 	 */
 	private $entitySearchHelper;
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		$this->lookup = $this->getMock( EntityLookup::class );
@@ -168,9 +168,6 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 		$this->assertEquals( $result3, [ 'foo' ] );
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testGenerateSuggestionsWithNonExistentItem() {
 		$itemId = new ItemId( 'Q41' );
 
@@ -179,6 +176,7 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 			->with( $this->equalTo( $itemId ) )
 			->will( $this->returnValue( null ) );
 
+		$this->expectException( InvalidArgumentException::class );
 		$this->suggestionGenerator->generateSuggestionsByItem(
 			'Q41',
 			100,

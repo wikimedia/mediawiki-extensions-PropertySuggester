@@ -21,7 +21,7 @@ class ResultBuilderTest extends MediaWikiUnitTestCase {
 	 */
 	private $resultBuilder;
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		$entityTitleLookup = $this->getMock( EntityTitleLookup::class );

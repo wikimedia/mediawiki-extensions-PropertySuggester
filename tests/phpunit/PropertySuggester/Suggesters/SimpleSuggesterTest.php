@@ -50,7 +50,7 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 		$this->db->insert( 'wbs_propertypairs', $rows );
 	}
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		$this->tablesUsed[] = 'wbs_propertypairs';
@@ -145,17 +145,13 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 		);
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testInvalidLimit() {
+		$this->expectException( InvalidArgumentException::class );
 		$this->suggester->suggestByPropertyIds( [], '10', 0.01, 'item', SuggesterEngine::SUGGEST_NEW );
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testInvalidMinProbability() {
+		$this->expectException( InvalidArgumentException::class );
 		$this->suggester->suggestByPropertyIds( [], 10, '0.01', 'item', SuggesterEngine::SUGGEST_NEW );
 	}
 

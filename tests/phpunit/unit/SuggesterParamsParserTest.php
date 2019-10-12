@@ -33,7 +33,7 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 		'include' => '',
 	];
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 		$this->paramsParser = new SuggesterParamsParser(
 			$this->defaultSuggesterResultSize,
@@ -75,28 +75,22 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 		$this->assertSame( '', $params->include );
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testSuggestionWithoutEntityOrProperties() {
+		$this->expectException( InvalidArgumentException::class );
 		$this->paramsParser->parseAndValidate(
 			[ 'entity' => null, 'properties' => null ]
 		);
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testSuggestionWithEntityAndProperties() {
+		$this->expectException( InvalidArgumentException::class );
 		$this->paramsParser->parseAndValidate(
 			[ 'entity' => 'Q1', 'properties' => [ 'P31' ] ]
 		);
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testSuggestionWithNonNumericContinue() {
+		$this->expectException( InvalidArgumentException::class );
 		$this->paramsParser->parseAndValidate(
 			[ 'entity' => 'Q1', 'properties' => null, 'continue' => 'drop' ]
 		);
