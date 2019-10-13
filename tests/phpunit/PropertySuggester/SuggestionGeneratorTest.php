@@ -48,9 +48,9 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 	public function setUp() : void {
 		parent::setUp();
 
-		$this->lookup = $this->getMock( EntityLookup::class );
-		$this->entitySearchHelper = $this->getMock( EntitySearchHelper::class );
-		$this->suggester = $this->getMock( SuggesterEngine::class );
+		$this->lookup = $this->createMock( EntityLookup::class );
+		$this->entitySearchHelper = $this->createMock( EntitySearchHelper::class );
+		$this->suggester = $this->createMock( SuggesterEngine::class );
 
 		$this->suggestionGenerator = new SuggestionGenerator(
 			$this->lookup,
