@@ -14,6 +14,7 @@
 	"apihelp-wbsgetsuggestions-param-context": "Enten element, referanse eller kvalifikator.",
 	"apihelp-wbsgetsuggestions-param-continue": "Offset for hvor søket skal fortsettes.",
 	"apihelp-wbsgetsuggestions-param-entity": "Foreslå egenskaper for den gitte entiteten basert på en liste over eksisterende egenskaper entiteten har.",
+	"apihelp-wbsgetsuggestions-param-include": "Hvilke forslag som skal inkluderes: Som standard foreslås bare egenskaper som kan bli lagt til (ikke foreldede, og ikke til stede ennå).",
 	"apihelp-wbsgetsuggestions-param-language": "Språk for resultatet.",
 	"apihelp-wbsgetsuggestions-param-limit": "Maksimalt antall resultater.",
 	"apihelp-wbsgetsuggestions-param-properties": "Foreslå ekstra egenskaper for den gitte listen egenskaper.",
