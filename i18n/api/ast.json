@@ -14,6 +14,7 @@
 	"apihelp-wbsgetsuggestions-param-context": "O bien l'elementu, o la referencia o'l calificador.",
 	"apihelp-wbsgetsuggestions-param-continue": "Allancia dende onde siguir una busca.",
 	"apihelp-wbsgetsuggestions-param-entity": "Suxerir propiedaes para la entidá dada, basáu na llista esistiente de propiedaes que tien la entidá.",
+	"apihelp-wbsgetsuggestions-param-include": "Qué suxerencies incluir: De mou predetermináu namái les propiedaes que puen añadise (non-anticuaes, non entá presentes) van suxerise.",
 	"apihelp-wbsgetsuggestions-param-language": "Idioma de la resultancia.",
 	"apihelp-wbsgetsuggestions-param-limit": "Númberu máximu de resultaos.",
 	"apihelp-wbsgetsuggestions-param-properties": "Suxerir otres propiedaes pa la llista de propiedaes dada.",
