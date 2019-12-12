@@ -34,14 +34,14 @@ class UpdateTable extends Maintenance {
 	 */
 	public function execute() {
 		if ( substr( $this->getOption( 'file' ), 0, 2 ) === "--" ) {
-			$this->error( "The --file option requires a file as an argument.\n", true );
+			$this->fatalError( "The --file option requires a file as an argument.\n" );
 		}
 		$path = $this->getOption( 'file' );
 		$fullPath = realpath( $path );
 		$fullPath = str_replace( '\\', '/', $fullPath );
 
 		if ( !file_exists( $fullPath ) ) {
-			$this->error( "Cant find $path \n", true );
+			$this->fatalError( "Cant find $path \n" );
 		}
 
 		$tableName = 'wbs_propertypairs';
@@ -59,12 +59,11 @@ class UpdateTable extends Maintenance {
 		try {
 			$success = $importStrategy->importFromCsvFileToDb( $importContext );
 		} catch ( UnexpectedValueException $e ) {
-			$this->error( "Import failed: " . $e->getMessage() );
-			exit;
+			$this->fatalError( "Import failed: " . $e->getMessage() );
 		}
 
 		if ( !$success ) {
-			$this->error( "Failed to run import to db" );
+			$this->fatalError( "Failed to run import to db" );
 		}
 		$this->output( "... Done loading\n" );
 	}
@@ -98,7 +97,7 @@ class UpdateTable extends Maintenance {
 		$lb = $lbFactory->getMainLB();
 		$db = $lb->getMaintenanceConnectionRef( DB_MASTER );
 		if ( !$db->tableExists( $tableName ) ) {
-			$this->error( "$tableName table does not exist.\nExecuting core/maintenance/update.php may help.\n", true );
+			$this->fatalError( "$tableName table does not exist.\nExecuting core/maintenance/update.php may help.\n" );
 		}
 		$this->output( "Removing old entries\n" );
 		if ( $wgDBtype === 'sqlite' ) {
