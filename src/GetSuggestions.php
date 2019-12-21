@@ -134,6 +134,7 @@ class GetSuggestions extends ApiBase {
 		}
 
 		$suggestions = $suggestionGenerator->filterSuggestions(
+			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable T240141
 			$suggestions,
 			$params->search,
 			$params->language,
