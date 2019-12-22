@@ -99,7 +99,11 @@ class GetSuggestions extends ApiBase {
 	 */
 	public function execute() {
 		$extracted = $this->extractRequestParams();
-		$params = $this->paramsParser->parseAndValidate( $extracted );
+		try {
+			$params = $this->paramsParser->parseAndValidate( $extracted );
+		} catch ( InvalidArgumentException $ex ) {
+			$this->dieWithException( $ex );
+		}
 
 		$suggestionGenerator = new SuggestionGenerator(
 			$this->entityLookup,

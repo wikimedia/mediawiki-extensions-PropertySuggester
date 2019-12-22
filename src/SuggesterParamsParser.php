@@ -45,11 +45,11 @@ class SuggesterParamsParser {
 
 		if ( !( $result->entity xor $result->properties ) ) {
 			throw new InvalidArgumentException(
-				"provide either entity-id parameter 'entity' or a list of properties 'properties'"
+				"Provide either entity-id parameter 'entity' or a list of properties 'properties'"
 			);
 		}
 		if ( !( is_null( $params['continue'] ) || is_numeric( $params['continue'] ) ) ) {
-			throw new InvalidArgumentException( 'continue must be int!' );
+			throw new InvalidArgumentException( 'Continue must be int!' );
 		}
 
 		// The entityselector doesn't allow a search for '' so '*' gets mapped to ''
