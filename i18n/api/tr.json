@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"BaRaN6161 TURK"
+		]
+	},
+	"apihelp-wbsgetsuggestions-description": "Bir Wikibase varlığına eklenecek ek özellik önerileri almak için API modülü. API modülü, kullanıcılar Wikibase varlıklarını düzenlerken öncelikli olarak widget tarafından kullanılmak üzere tasarlanmıştır.",
+	"apihelp-wbsgetsuggestions-summary": "Bir Wikibase varlığına eklenecek ek özellik önerileri almak için API modülü. API modülü, kullanıcılar Wikibase varlıklarını düzenlerken öncelikli olarak widget tarafından kullanılmak üzere tasarlanmıştır.",
+	"apihelp-wbsgetsuggestions-example-1": "Q4 varlığı için öneriler alın",
+	"apihelp-wbsgetsuggestions-example-2": "10-15 seviyeden Q4 varlığı için öneriler alın",
+	"apihelp-wbsgetsuggestions-example-3": "P21 ve P31 mülk kombinasyonu için öneriler alın",
+	"apihelp-wbsgetsuggestions-example-4": "P21 ile kullanılan niteleyiciler için öneriler alın",
+	"apihelp-wbsgetsuggestions-example-5": "P21 ile kullanılan referanslar için öneriler alın",
+	"apihelp-wbsgetsuggestions-param-context": "Öğe, referans veya niteleyici.",
+	"apihelp-wbsgetsuggestions-param-continue": "Aramaya nerede devam edileceğini öteleyin.",
+	"apihelp-wbsgetsuggestions-param-entity": "Varlığın sahip olduğu mevcut özellikler listesine dayanarak belirli bir varlık için özellikler önerin.",
+	"apihelp-wbsgetsuggestions-param-include": "Hangi önerilerin dahil edileceği: Varsayılan olarak yalnızca eklenebilecek özellikler (kullanımdan kaldırılmış, henüz mevcut değil) önerilecektir.",
+	"apihelp-wbsgetsuggestions-param-language": "Sonuç dili.",
+	"apihelp-wbsgetsuggestions-param-limit": "Maksimum sonuç sayısı.",
+	"apihelp-wbsgetsuggestions-param-properties": "Belirli özellikler listesi için ek özellikler önerin.",
+	"apihelp-wbsgetsuggestions-param-search": "Bu metni arayın.",
+	"apihelp-wbsgetsuggestions-param-size": "Döndürülecek öneri sayısını belirtin."
+}
