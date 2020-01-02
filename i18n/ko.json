@@ -1,10 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ykhwong"
+			"Ykhwong",
+			"Kwj2772"
 		]
 	},
-	"apihelp-wbsgetsuggestions-param-language": "결과를 위한 언어입니다.",
-	"apihelp-wbsgetsuggestions-param-limit": "최대 결과 수입니다.",
-	"apihelp-wbsgetsuggestions-param-search": "이 텍스트를 찾습니다."
+	"propertysuggester-desc": "위키베이스 서술을 추가할 때 속성을 제안합니다."
 }
