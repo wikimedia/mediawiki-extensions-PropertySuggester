@@ -10,6 +10,7 @@
 		"OO": false
 	},
 	"rules": {
-		"no-underscore-dangle": "off"
+		"no-underscore-dangle": "off",
+		"no-jquery/variable-pattern": "off"
 	}
 }
