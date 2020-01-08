@@ -11,7 +11,7 @@
 	"license": "GPL-2.0-or-later",
 	"require": {
 		"wikibase/data-model": "^9.0.1",
-		"wikibase/data-model-services": "~1.1|~2.0|~3.0"
+		"wikibase/data-model-services": "~2.0|~3.0|~4.0"
 	},
 	"require-dev": {
 		"jakub-onderka/php-console-highlighter": "0.3.2",
