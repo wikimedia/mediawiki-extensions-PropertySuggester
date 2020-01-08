@@ -12,11 +12,11 @@ use PropertySuggester\Suggesters\SimpleSuggester;
 use PropertySuggester\Suggesters\SuggesterEngine;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\TermIndex;
 
 /**
  * API module to get property suggestions.
@@ -47,9 +47,9 @@ class GetSuggestions extends ApiBase {
 	private $suggester;
 
 	/**
-	 * @var TermIndex
+	 * @var TermBuffer
 	 */
-	private $termIndex;
+	private $termBuffer;
 
 	/**
 	 * @var SuggesterParamsParser
@@ -77,7 +77,7 @@ class GetSuggestions extends ApiBase {
 		$store = $wikibaseRepo->getStore();
 		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
 
-		$this->termIndex = $store->getTermIndex();
+		$this->termBuffer = $wikibaseRepo->getTermBuffer();
 		$this->entitySearchHelper = new TypeDispatchingEntitySearchHelper(
 			$wikibaseRepo->getEntitySearchHelperCallbacks(),
 			$main->getRequest()
@@ -148,7 +148,7 @@ class GetSuggestions extends ApiBase {
 		// Build result array
 		$resultBuilder = new ResultBuilder(
 			$this->getResult(),
-			$this->termIndex,
+			$this->termBuffer,
 			$this->entityTitleLookup,
 			$params->search
 		);

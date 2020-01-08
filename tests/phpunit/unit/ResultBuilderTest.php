@@ -4,8 +4,8 @@ namespace PropertySuggester;
 
 use ApiResult;
 use MediaWikiUnitTestCase;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\TermIndex;
 
 /**
  * @covers \PropertySuggester\ResultBuilder
@@ -25,10 +25,10 @@ class ResultBuilderTest extends MediaWikiUnitTestCase {
 		parent::setUp();
 
 		$entityTitleLookup = $this->getMockBuilder( EntityTitleLookup::class )->getMock();
-		$termIndex = $this->getMockBuilder( TermIndex::class )->getMock();
+		$termBuffer = $this->createMock( TermBuffer::class );
 		$result = new ApiResult( false );
 
-		$this->resultBuilder = new ResultBuilder( $result, $termIndex, $entityTitleLookup, '' );
+		$this->resultBuilder = new ResultBuilder( $result, $termBuffer, $entityTitleLookup, '' );
 	}
 
 	public function testMergeWithTraditionalSearchResults() {

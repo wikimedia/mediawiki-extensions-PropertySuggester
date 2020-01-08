@@ -4,9 +4,7 @@ namespace PropertySuggester;
 
 use ApiResult;
 use PropertySuggester\Suggesters\Suggestion;
-use Wikibase\TermIndexEntry;
-use Wikibase\TermIndex;
-use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
@@ -23,9 +21,9 @@ class ResultBuilder {
 	private $entityTitleLookup;
 
 	/**
-	 * @var TermIndex
+	 * @var TermBuffer
 	 */
-	private $termIndex;
+	private $termBuffer;
 
 	/**
 	 * @var ApiResult
@@ -39,18 +37,18 @@ class ResultBuilder {
 
 	/**
 	 * @param ApiResult $result
-	 * @param TermIndex $termIndex
+	 * @param TermBuffer $termBuffer
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param string $search
 	 */
 	public function __construct(
 		ApiResult $result,
-		TermIndex $termIndex,
+		TermBuffer $termBuffer,
 		EntityTitleLookup $entityTitleLookup,
 		$search
 	) {
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->termIndex = $termIndex;
+		$this->termBuffer = $termBuffer;
 		$this->result = $result;
 		$this->searchPattern = '/^' . preg_quote( $search, '/' ) . '/i';
 	}
@@ -61,59 +59,49 @@ class ResultBuilder {
 	 * @return array[]
 	 */
 	public function createResultArray( array $suggestions, $language ) {
-		$entries = [];
 		$ids = [];
 		foreach ( $suggestions as $suggestion ) {
-			$id = $suggestion->getPropertyId();
-			$ids[] = $id;
+			$ids[] = $suggestion->getPropertyId();
 		}
-		// See SearchEntities
-		$terms = $this->termIndex->getTermsOfEntities(
+
+		$this->termBuffer->prefetchTerms(
 			$ids,
-			null,
+			[ 'label', 'description', 'alias' ],
 			[ $language ]
 		);
-		$clusteredTerms = $this->clusterTerms( $terms );
 
-		foreach ( $suggestions as $suggestion ) {
-			$id = $suggestion->getPropertyId();
-			$entries[] = $this->buildEntry( $id, $clusteredTerms, $suggestion );
-		}
-		return $entries;
+		return array_map( function ( Suggestion $suggestion ) use ( $language ) {
+			return $this->buildEntry( $suggestion, $language );
+		}, $suggestions );
 	}
 
 	/**
-	 * @param EntityId $id
-	 * @param array[] $clusteredTerms
 	 * @param Suggestion $suggestion
+	 * @param string $language
+	 *
 	 * @return array
 	 */
-	private function buildEntry( EntityId $id, array $clusteredTerms, Suggestion $suggestion ) {
+	private function buildEntry( Suggestion $suggestion, $language ) {
+		$id = $suggestion->getPropertyId();
 		$entry = [
 			'id' => $id->getSerialization(),
 			'url' => $this->entityTitleLookup->getTitleForId( $id )->getFullURL(),
 			'rating' => $suggestion->getProbability(),
 		];
 
-		/** @var TermIndexEntry[] $matchingTerms */
-		if ( isset( $clusteredTerms[$id->getSerialization()] ) ) {
-			$matchingTerms = $clusteredTerms[$id->getSerialization()];
-		} else {
-			$matchingTerms = [];
+		$label = $this->termBuffer->getPrefetchedTerm( $id, 'label', $language );
+		if ( is_string( $label ) ) {
+			$entry['label'] = $label;
 		}
 
-		foreach ( $matchingTerms as $term ) {
-			switch ( $term->getTermType() ) {
-				case TermIndexEntry::TYPE_LABEL:
-					$entry['label'] = $term->getText();
-					break;
-				case TermIndexEntry::TYPE_DESCRIPTION:
-					$entry['description'] = $term->getText();
-					break;
-				case TermIndexEntry::TYPE_ALIAS:
-					$this->checkAndSetAlias( $entry, $term );
-					break;
-			}
+		$description = $this->termBuffer->getPrefetchedTerm( $id, 'description', $language );
+		if ( is_string( $description ) ) {
+			$entry['description'] = $description;
+		}
+
+		$alias = $this->termBuffer->getPrefetchedTerm( $id, 'alias', $language );
+		if ( is_string( $alias ) ) {
+			$this->checkAndSetAlias( $entry, $alias );
 		}
 
 		if ( !isset( $entry['label'] ) ) {
@@ -127,38 +115,16 @@ class ResultBuilder {
 	}
 
 	/**
-	 * @param TermIndexEntry[] $terms
-	 * @return TermIndexEntry[][]
-	 */
-	private function clusterTerms( array $terms ) {
-		$clusteredTerms = [];
-
-		foreach ( $terms as $term ) {
-			$id = $term->getEntityId()->getSerialization();
-			if ( !isset( $clusteredTerms[$id] ) ) {
-				$clusteredTerms[$id] = [];
-			}
-			$clusteredTerms[$id][] = $term;
-		}
-		return $clusteredTerms;
-	}
-
-	/**
 	 * @param array $entry
-	 * @param TermIndexEntry $term
+	 * @param $alias
 	 */
-	private function checkAndSetAlias( array &$entry, TermIndexEntry $term ) {
-		// Do not add more than one matching alias to the "aliases" field.
-		if ( !empty( $entry['aliases'] ) ) {
-			return;
-		}
-
-		if ( preg_match( $this->searchPattern, $term->getText() ) ) {
+	private function checkAndSetAlias( array &$entry, $alias ) {
+		if ( preg_match( $this->searchPattern, $alias ) ) {
 			if ( !isset( $entry['aliases'] ) ) {
 				$entry['aliases'] = [];
 				ApiResult::setIndexedTagName( $entry['aliases'], 'alias' );
 			}
-			$entry['aliases'][] = $term->getText();
+			$entry['aliases'][] = $alias;
 		}
 	}
 
