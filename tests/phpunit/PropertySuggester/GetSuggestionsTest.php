@@ -6,8 +6,8 @@ use ApiMain;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Tests\Api\WikibaseApiTestCase;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \PropertySuggester\GetSuggestions
@@ -103,7 +103,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 		$result = $res[0];
 
 		$this->assertEquals( 1, $result['success'] );
-		$this->assertEquals( '', $result['searchinfo']['search'] );
+		$this->assertSame( '', $result['searchinfo']['search'] );
 		$this->assertCount( 1, $result['search'] );
 		$suggestions = $result['search'][0];
 		$this->assertEquals( $p72, $suggestions['id'] );
@@ -152,7 +152,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 		$result = $res[0];
 
 		$this->assertEquals( 1, $result['success'] );
-		$this->assertEquals( '', $result['searchinfo']['search'] );
+		$this->assertSame( '', $result['searchinfo']['search'] );
 		$this->assertCount( $expectedResultCount, $result['search'] );
 	}
 

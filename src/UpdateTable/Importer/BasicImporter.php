@@ -2,8 +2,8 @@
 
 namespace PropertySuggester\UpdateTable\Importer;
 
-use UnexpectedValueException;
 use PropertySuggester\UpdateTable\ImportContext;
+use UnexpectedValueException;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILBFactory;
 

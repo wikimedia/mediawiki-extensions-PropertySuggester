@@ -13,8 +13,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Repo\Api\EntitySearchHelper;
 
 /**
  * @covers \PropertySuggester\SuggestionGenerator

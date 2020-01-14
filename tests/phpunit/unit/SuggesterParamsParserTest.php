@@ -2,8 +2,8 @@
 
 namespace PropertySuggester;
 
-use MediaWikiUnitTestCase;
 use InvalidArgumentException;
+use MediaWikiUnitTestCase;
 
 /**
  * @covers \PropertySuggester\SuggesterParams
@@ -47,13 +47,13 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 		);
 
 		$this->assertEquals( 'Q1', $params->entity );
-		$this->assertEquals( null, $params->properties );
+		$this->assertNull( $params->properties );
 		$this->assertEquals( 'en', $params->language );
 		$this->assertEquals( 10, $params->continue );
 		$this->assertEquals( 5, $params->limit );
 		$this->assertEquals( 5 + 10, $params->suggesterLimit );
 		$this->assertEquals( $this->defaultMinProbability, $params->minProbability );
-		$this->assertEquals( '', $params->search );
+		$this->assertSame( '', $params->search );
 		$this->assertEquals( 'item', $params->context );
 		$this->assertSame( '', $params->include );
 	}
@@ -63,13 +63,13 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 			array_merge( $this->defaultParams, [ 'properties' => [ 'P31' ], 'search' => 'asd' ] )
 		);
 
-		$this->assertEquals( null, $params->entity );
+		$this->assertNull( $params->entity );
 		$this->assertEquals( [ 'P31' ], $params->properties );
 		$this->assertEquals( 'en', $params->language );
 		$this->assertEquals( 10, $params->continue );
 		$this->assertEquals( 5, $params->limit );
 		$this->assertEquals( $this->defaultSuggesterResultSize, $params->suggesterLimit );
-		$this->assertEquals( 0, $params->minProbability );
+		$this->assertSame( 0.0, $params->minProbability );
 		$this->assertEquals( 'asd', $params->search );
 		$this->assertEquals( 'item', $params->context );
 		$this->assertSame( '', $params->include );
