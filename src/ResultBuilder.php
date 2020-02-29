@@ -115,8 +115,8 @@ class ResultBuilder {
 	}
 
 	/**
-	 * @param array $entry
-	 * @param $alias
+	 * @param array &$entry
+	 * @param string $alias
 	 */
 	private function checkAndSetAlias( array &$entry, $alias ) {
 		if ( preg_match( $this->searchPattern, $alias ) ) {
