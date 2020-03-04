@@ -6,11 +6,6 @@
 		<exclude name="PSR12.Properties.ConstantVisibility.NotFound" />
 	</rule>
 
-	<rule ref="Generic.Files.LineLength">
-		<properties>
-			<property name="lineLimit" value="112" />
-		</properties>
-	</rule>
-
 	<file>.</file>
+	<arg name="encoding" value="UTF-8" />
 </ruleset>

@@ -46,7 +46,12 @@ class BasicImporter implements Importer {
 	 * @throws UnexpectedValueException
 	 * @suppress SecurityCheck-SQLInjection ImportContext::getTargetTableName is marked as unsafe
 	 */
-	private function doImport( $fileHandle, ILBFactory $lbFactory, IDatabase $db, ImportContext $importContext ) {
+	private function doImport(
+		$fileHandle,
+		ILBFactory $lbFactory,
+		IDatabase $db,
+		ImportContext $importContext
+	) {
 		$accumulator = [];
 		$batchSize = $importContext->getBatchSize();
 		$i = 0;
@@ -54,7 +59,8 @@ class BasicImporter implements Importer {
 		$expectedHeader = [ 'pid1', 'qid1', 'pid2', 'count', 'probability', 'context' ];
 		if ( $header != $expectedHeader ) {
 			throw new UnexpectedValueException(
-				"provided csv-file does not match the expected format:\n" . implode( ',', $expectedHeader )
+				"provided csv-file does not match the expected format:\n" .
+					implode( ',', $expectedHeader )
 			);
 		}
 

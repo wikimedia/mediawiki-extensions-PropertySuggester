@@ -157,12 +157,25 @@ class SimpleSuggester implements SuggesterEngine {
 	 * @param string $include One of the self::SUGGEST_* constants
 	 * @return Suggestion[]
 	 */
-	public function suggestByPropertyIds( array $propertyIds, $limit, $minProbability, $context, $include ) {
+	public function suggestByPropertyIds(
+		array $propertyIds,
+		$limit,
+		$minProbability,
+		$context,
+		$include
+	) {
 		$numericIds = array_map( function ( PropertyId $propertyId ) {
 			return $propertyId->getNumericId();
 		}, $propertyIds );
 
-		return $this->getSuggestions( $numericIds, [], $limit, $minProbability, $context, $include );
+		return $this->getSuggestions(
+			$numericIds,
+			[],
+			$limit,
+			$minProbability,
+			$context,
+			$include
+		);
 	}
 
 	/**
@@ -212,7 +225,14 @@ class SimpleSuggester implements SuggesterEngine {
 			}
 		}
 
-		return $this->getSuggestions( $ids, $idTuples, $limit, $minProbability, $context, $include );
+		return $this->getSuggestions(
+			$ids,
+			$idTuples,
+			$limit,
+			$minProbability,
+			$context,
+			$include
+		);
 	}
 
 	/**
