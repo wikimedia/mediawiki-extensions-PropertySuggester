@@ -33,7 +33,7 @@ class ResultBuilderTest extends MediaWikiUnitTestCase {
 		parent::setUp();
 
 		$this->termBuffer = $this->createMock( TermBuffer::class );
-		$this->titleLookup = $this->getMockForAbstractClass( EntityTitleLookup::class );
+		$this->titleLookup = $this->createMock( EntityTitleLookup::class );
 		$this->titleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->willReturn( $this->createMock( Title::class ) );
