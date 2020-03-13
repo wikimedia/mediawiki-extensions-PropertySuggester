@@ -68,9 +68,9 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 		$res = $this->suggester->suggestByPropertyIds( $ids, 100, 0.0, 'item', SuggesterEngine::SUGGEST_NEW );
 
 		$this->assertEquals( new PropertyId( 'p2' ), $res[0]->getPropertyId() );
-		$this->assertEquals( 0.1, $res[0]->getProbability(), '', 0.0001 );
+		$this->assertEqualsWithDelta( 0.1, $res[0]->getProbability(), 0.0001 );
 		$this->assertEquals( new PropertyId( 'p3' ), $res[1]->getPropertyId() );
-		$this->assertEquals( 0.05, $res[1]->getProbability(), '', 0.0001 );
+		$this->assertEqualsWithDelta( 0.05, $res[1]->getProbability(), 0.0001 );
 	}
 
 	public function testSuggestByPropertyIdsAll() {
@@ -79,11 +79,11 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 		$res = $this->suggester->suggestByPropertyIds( $ids, 100, 0.0, 'item', SuggesterEngine::SUGGEST_ALL );
 
 		$this->assertEquals( new PropertyId( 'P1' ), $res[0]->getPropertyId() );
-		$this->assertEquals( 0.25, $res[0]->getProbability(), '', 0.0001 );
+		$this->assertEqualsWithDelta( 0.25, $res[0]->getProbability(), 0.0001 );
 		$this->assertEquals( new PropertyId( 'P2' ), $res[1]->getPropertyId() );
-		$this->assertEquals( 0.05, $res[1]->getProbability(), '', 0.0001 );
+		$this->assertEqualsWithDelta( 0.05, $res[1]->getProbability(), 0.0001 );
 		$this->assertEquals( new PropertyId( 'P3' ), $res[2]->getPropertyId() );
-		$this->assertEquals( 0.025, $res[2]->getProbability(), '', 0.0001 );
+		$this->assertEqualsWithDelta( 0.025, $res[2]->getProbability(), 0.0001 );
 	}
 
 	public function testSuggestByItem() {
