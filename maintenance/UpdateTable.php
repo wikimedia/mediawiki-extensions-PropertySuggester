@@ -9,7 +9,9 @@ use PropertySuggester\UpdateTable\Importer\BasicImporter;
 use UnexpectedValueException;
 use Wikimedia\Rdbms\ILBFactory;
 
-$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../..';
+$basePath = getenv( 'MW_INSTALL_PATH' ) !== false
+	? getenv( 'MW_INSTALL_PATH' )
+	: __DIR__ . '/../../..';
 require_once $basePath . '/maintenance/Maintenance.php';
 
 /**
@@ -53,7 +55,12 @@ class UpdateTable extends Maintenance {
 
 		$this->output( "loading new entries from file\n" );
 
-		$importContext = $this->createImportContext( $lbFactory, $tableName, $fullPath, $this->isQuiet() );
+		$importContext = $this->createImportContext(
+			$lbFactory,
+			$tableName,
+			$fullPath,
+			$this->isQuiet()
+		);
 		$importStrategy = new BasicImporter();
 
 		try {
@@ -97,7 +104,8 @@ class UpdateTable extends Maintenance {
 		$lb = $lbFactory->getMainLB();
 		$db = $lb->getMaintenanceConnectionRef( DB_MASTER );
 		if ( !$db->tableExists( $tableName ) ) {
-			$this->fatalError( "$tableName table does not exist.\nExecuting core/maintenance/update.php may help.\n" );
+			$this->fatalError( "$tableName table does not exist.\n" .
+				"Executing core/maintenance/update.php may help.\n" );
 		}
 		$this->output( "Removing old entries\n" );
 		if ( $wgDBtype === 'sqlite' ) {

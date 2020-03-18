@@ -33,7 +33,13 @@ interface SuggesterEngine {
 	 * @param string $include One of the self::SUGGEST_* constants
 	 * @return Suggestion[]
 	 */
-	public function suggestByPropertyIds( array $propertyIds, $limit, $minProbability, $context, $include );
+	public function suggestByPropertyIds(
+		array $propertyIds,
+		$limit,
+		$minProbability,
+		$context,
+		$include
+	);
 
 	/**
 	 * Returns suggested attributes

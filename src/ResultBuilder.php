@@ -134,7 +134,11 @@ class ResultBuilder {
 	 * @param int $resultSize
 	 * @return array[] representing Json
 	 */
-	public function mergeWithTraditionalSearchResults( array $entries, array $searchResults, $resultSize ) {
+	public function mergeWithTraditionalSearchResults(
+		array $entries,
+		array $searchResults,
+		$resultSize
+	) {
 		// Avoid duplicates
 		$existingKeys = [];
 		foreach ( $entries as $entry ) {

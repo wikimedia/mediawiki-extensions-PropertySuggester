@@ -53,7 +53,13 @@ class SuggestionGenerator {
 	 * @throws InvalidArgumentException
 	 * @return Suggestion[]
 	 */
-	public function generateSuggestionsByItem( $itemIdString, $limit, $minProbability, $context, $include ) {
+	public function generateSuggestionsByItem(
+		$itemIdString,
+		$limit,
+		$minProbability,
+		$context,
+		$include
+	) {
 		$itemId = new ItemId( $itemIdString );
 		/** @var Item $item */
 		$item = $this->entityLookup->getEntity( $itemId );
@@ -63,7 +69,13 @@ class SuggestionGenerator {
 		}
 		'@phan-var Item $item';
 
-		return $this->suggester->suggestByItem( $item, $limit, $minProbability, $context, $include );
+		return $this->suggester->suggestByItem(
+			$item,
+			$limit,
+			$minProbability,
+			$context,
+			$include
+		);
 	}
 
 	/**
@@ -119,8 +131,8 @@ class SuggestionGenerator {
 
 		$id_set = [];
 		foreach ( $searchResults as $searchResult ) {
-			// @phan-suppress-next-next-line PhanUndeclaredMethod getEntityId() returns PropertyId as
-			// requested above and that implements getNumericId()
+			// @phan-suppress-next-next-line PhanUndeclaredMethod getEntityId() returns PropertyId
+			// as requested above and that implements getNumericId()
 			$id_set[$searchResult->getEntityId()->getNumericId()] = true;
 		}
 

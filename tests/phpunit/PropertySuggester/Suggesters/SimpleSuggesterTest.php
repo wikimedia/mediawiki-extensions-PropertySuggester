@@ -65,7 +65,13 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 	public function testSuggestByPropertyIds() {
 		$ids = [ new PropertyId( 'p1' ) ];
 
-		$res = $this->suggester->suggestByPropertyIds( $ids, 100, 0.0, 'item', SuggesterEngine::SUGGEST_NEW );
+		$res = $this->suggester->suggestByPropertyIds(
+			$ids,
+			100,
+			0.0,
+			'item',
+			SuggesterEngine::SUGGEST_NEW
+		);
 
 		$this->assertEquals( new PropertyId( 'p2' ), $res[0]->getPropertyId() );
 		$this->assertEqualsWithDelta( 0.1, $res[0]->getProbability(), 0.0001 );
@@ -76,7 +82,13 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 	public function testSuggestByPropertyIdsAll() {
 		$ids = [ new PropertyId( 'P1' ), new PropertyId( 'P3' ) ];
 
-		$res = $this->suggester->suggestByPropertyIds( $ids, 100, 0.0, 'item', SuggesterEngine::SUGGEST_ALL );
+		$res = $this->suggester->suggestByPropertyIds(
+			$ids,
+			100,
+			0.0,
+			'item',
+			SuggesterEngine::SUGGEST_ALL
+		);
 
 		$this->assertEquals( new PropertyId( 'P1' ), $res[0]->getPropertyId() );
 		$this->assertEqualsWithDelta( 0.25, $res[0]->getProbability(), 0.0001 );
@@ -92,7 +104,13 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 		$guid = 'claim0';
 		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
 
-		$res = $this->suggester->suggestByItem( $item, 100, 0.0, 'item', SuggesterEngine::SUGGEST_NEW );
+		$res = $this->suggester->suggestByItem(
+			$item,
+			100,
+			0.0,
+			'item',
+			SuggesterEngine::SUGGEST_NEW
+		);
 
 		$this->assertEquals( new PropertyId( 'p2' ), $res[0]->getPropertyId() );
 		$this->assertEquals( new PropertyId( 'p3' ), $res[1]->getPropertyId() );
@@ -109,7 +127,13 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 		$suggester = clone $this->suggester;
 		$suggester->setDeprecatedPropertyIds( [ 2 ] );
 
-		$res = $suggester->suggestByItem( $item, 100, 0.0, 'item', SuggesterEngine::SUGGEST_ALL );
+		$res = $suggester->suggestByItem(
+			$item,
+			100,
+			0.0,
+			'item',
+			SuggesterEngine::SUGGEST_ALL
+		);
 
 		$this->assertEquals( new PropertyId( 'P1' ), $res[0]->getPropertyId() );
 		$this->assertEquals( new PropertyId( 'P2' ), $res[1]->getPropertyId() );
@@ -121,7 +145,13 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 
 		$this->suggester->setDeprecatedPropertyIds( [ 2 ] );
 
-		$res = $this->suggester->suggestByPropertyIds( $ids, 100, 0.0, 'item', SuggesterEngine::SUGGEST_NEW );
+		$res = $this->suggester->suggestByPropertyIds(
+			$ids,
+			100,
+			0.0,
+			'item',
+			SuggesterEngine::SUGGEST_NEW
+		);
 
 		$resultIds = array_map( function ( Suggestion $r ) {
 			return $r->getPropertyId()->getNumericId();
@@ -132,7 +162,13 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 
 	public function testEmptyResult() {
 		$this->assertEmpty(
-			$this->suggester->suggestByPropertyIds( [], 10, 0.01, 'item', SuggesterEngine::SUGGEST_NEW )
+			$this->suggester->suggestByPropertyIds(
+				[],
+				10,
+				0.01,
+				'item',
+				SuggesterEngine::SUGGEST_NEW
+			)
 		);
 	}
 
@@ -140,18 +176,36 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 		$this->suggester->setInitialSuggestions( [ 42 ] );
 		$this->assertEquals(
 			[ new Suggestion( new PropertyId( 'P42' ), 1.0 ) ],
-			$this->suggester->suggestByPropertyIds( [], 10, 0.01, 'item', SuggesterEngine::SUGGEST_NEW )
+			$this->suggester->suggestByPropertyIds(
+				[],
+				10,
+				0.01,
+				'item',
+				SuggesterEngine::SUGGEST_NEW
+			)
 		);
 	}
 
 	public function testInvalidLimit() {
 		$this->expectException( InvalidArgumentException::class );
-		$this->suggester->suggestByPropertyIds( [], '10', 0.01, 'item', SuggesterEngine::SUGGEST_NEW );
+		$this->suggester->suggestByPropertyIds(
+			[],
+			'10',
+			0.01,
+			'item',
+			SuggesterEngine::SUGGEST_NEW
+		);
 	}
 
 	public function testInvalidMinProbability() {
 		$this->expectException( InvalidArgumentException::class );
-		$this->suggester->suggestByPropertyIds( [], 10, '0.01', 'item', SuggesterEngine::SUGGEST_NEW );
+		$this->suggester->suggestByPropertyIds(
+			[],
+			10,
+			'0.01',
+			'item',
+			SuggesterEngine::SUGGEST_NEW
+		);
 	}
 
 }

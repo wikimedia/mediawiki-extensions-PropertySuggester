@@ -157,8 +157,16 @@ class GetSuggestions extends ApiBase {
 
 		// merge with search result if possible and necessary
 		if ( count( $entries ) < $params->resultSize && $params->search !== '' ) {
-			$searchResult = $this->querySearchApi( $params->resultSize, $params->search, $params->language );
-			$entries = $resultBuilder->mergeWithTraditionalSearchResults( $entries, $searchResult, $params->resultSize );
+			$searchResult = $this->querySearchApi(
+				$params->resultSize,
+				$params->search,
+				$params->language
+			);
+			$entries = $resultBuilder->mergeWithTraditionalSearchResults(
+				$entries,
+				$searchResult,
+				$params->resultSize
+			);
 		}
 
 		// Define Result
