@@ -2,8 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"AlvaroMolina",
-			"Macofe",
-			"Dgstranz"
+			"Dgstranz",
+			"Macofe"
 		]
 	},
 	"propertysuggester-desc": "Sugiere propiedades cuando se añaden declaraciones de Wikibase."

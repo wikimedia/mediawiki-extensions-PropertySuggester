@@ -2,9 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"Gomoko",
+			"Thibaut120094",
 			"Verdy p",
-			"Wladek92",
-			"Thibaut120094"
+			"Wladek92"
 		]
 	},
 	"apihelp-wbsgetsuggestions-description": "Module de l’API pour obtenir des suggestions de propriétés supplémentaires à ajouter à une entité de Wikibase. Le module de l’API est tout d’abord conçu pour une utilisation par le widget de suggestion quand les utilisateurs modifient les entités de Wikibase.",

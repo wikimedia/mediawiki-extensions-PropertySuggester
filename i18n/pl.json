@@ -2,8 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Chrumps",
-			"XnIcRaM",
-			"Lebiega"
+			"Lebiega",
+			"XnIcRaM"
 		]
 	},
 	"propertysuggester-desc": "Proponuje właściwości podczas dodawania deklaracji Wikibase."
