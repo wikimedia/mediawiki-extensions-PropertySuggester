@@ -16,12 +16,12 @@ interface SuggesterEngine {
 	/**
 	 * Suggest only properties that might be added (non-deprecated, not yet present)
 	 */
-	const SUGGEST_NEW = 'new';
+	public const SUGGEST_NEW = 'new';
 
 	/**
 	 * Suggest everything, even already present or deprecated values.
 	 */
-	const SUGGEST_ALL = 'all';
+	public const SUGGEST_ALL = 'all';
 
 	/**
 	 * Returns suggested attributes
