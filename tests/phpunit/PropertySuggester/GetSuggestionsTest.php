@@ -86,7 +86,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 			[ 'pid1', 'pid2' ],
 			[ 'pid1' => $ip56, 'pid2' => $ip72 ]
 		);
-		$this->assertEquals( 1, $res->numRows() );
+		$this->assertSame( 1, $res->numRows() );
 	}
 
 	public function testExecution() {
@@ -102,7 +102,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 		$res = $this->doApiRequest( $params );
 		$result = $res[0];
 
-		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 1, $result['success'] );
 		$this->assertSame( '', $result['searchinfo']['search'] );
 		$this->assertCount( 1, $result['search'] );
 		$suggestions = $result['search'][0];
@@ -122,7 +122,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 		$res = $this->doApiRequest( $params );
 		$result = $res[0];
 
-		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 1, $result['success'] );
 		$this->assertEquals( 'IdontExist', $result['searchinfo']['search'] );
 		$this->assertCount( 0, $result['search'] );
 	}
@@ -151,7 +151,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 		$res = $this->doApiRequest( $params );
 		$result = $res[0];
 
-		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 1, $result['success'] );
 		$this->assertSame( '', $result['searchinfo']['search'] );
 		$this->assertCount( $expectedResultCount, $result['search'] );
 	}
