@@ -5,6 +5,9 @@ namespace PropertySuggester;
 use ApiMain;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\Tests\Api\WikibaseApiTestCase;
 use Wikibase\Repo\WikibaseRepo;
@@ -46,6 +49,21 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 	public function addDBData() {
 		if ( !self::$hasSetup ) {
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+			$item = new Item( new ItemId( "Q1" ) );
+			$item->setLabel( "en", "asdf" );
+
+			$item2 = new Item( new ItemId( "Q2" ) );
+			$item2->setLabel( "de", "asdf" );
+
+			$item3 = new Item( new ItemId( "Q3" ) );
+			$item3->setLabel( "sv", "asdf" );
+
+			$redirect = new EntityRedirect( $item->getId(), $item2->getId() );
+			$store->saveRedirect( $redirect, "RedirectNewItem1->Item2", $GLOBALS['wgUser'], EDIT_NEW, false );
+
+			$redirect2 = new EntityRedirect( $item2->getId(), $item3->getId() );
+			$store->saveRedirect( $redirect2, "RedirectNewItem1->Item2", $GLOBALS['wgUser'], EDIT_NEW, false );
 
 			$prop = Property::newFromType( 'string' );
 			$store->saveEntity( $prop, 'EditEntityTestP56', $GLOBALS['wgUser'], EDIT_NEW );
@@ -166,6 +184,18 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 
 		$this->expectException( ApiUsageException::class );
 		$this->doApiRequest( $params );
+	}
+
+	public function testExecutionWithRedirect() {
+		$expectedMessage = 'The given entity ID refers to a redirect, which is not supported in this context.';
+		$params = [
+			'action' => 'wbsgetsuggestions',
+			'entity' => 'Q1',
+		];
+
+		$this->expectException( ApiUsageException::class );
+		$this->expectExceptionMessage( $expectedMessage );
+		$res = $this->doApiRequest( $params );
 	}
 
 	public function testGetAllowedParams() {

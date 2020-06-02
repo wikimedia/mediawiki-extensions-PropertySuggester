@@ -1,6 +1,7 @@
 composer.phar
 composer.lock
 .eslintcache
+.idea/
 
 vendor/
 node_modules/

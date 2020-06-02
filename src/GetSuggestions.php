@@ -14,6 +14,8 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;
@@ -62,6 +64,11 @@ class GetSuggestions extends ApiBase {
 	private $entitySearchHelper;
 
 	/**
+	 * @var ApiErrorReporter
+	 */
+	private $errorReporter;
+
+	/**
 	 * @param ApiMain $main
 	 * @param string $name
 	 * @param string $prefix
@@ -76,6 +83,12 @@ class GetSuggestions extends ApiBase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$store = $wikibaseRepo->getStore();
 		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
+
+		$this->errorReporter = new ApiErrorReporter(
+			$this,
+			$wikibaseRepo->getExceptionLocalizer(),
+			$this->getLanguage()
+		);
 
 		$this->termBuffer = $wikibaseRepo->getTermBuffer();
 		$this->entitySearchHelper = new TypeDispatchingEntitySearchHelper(
@@ -124,6 +137,8 @@ class GetSuggestions extends ApiBase {
 					$params->context,
 					$suggest
 				);
+			} catch ( RevisionedUnresolvedRedirectException $ex ) {
+				$this->errorReporter->dieException( $ex, 'unresolved-redirect' );
 			} catch ( InvalidArgumentException $ex ) {
 				$this->dieWithException( $ex );
 			}
