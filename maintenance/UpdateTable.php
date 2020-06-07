@@ -103,20 +103,20 @@ class UpdateTable extends Maintenance {
 
 		$lb = $lbFactory->getMainLB();
 		$db = $lb->getMaintenanceConnectionRef( DB_MASTER );
-		if ( !$db->tableExists( $tableName ) ) {
+		if ( !$db->tableExists( $tableName, __METHOD__ ) ) {
 			$this->fatalError( "$tableName table does not exist.\n" .
 				"Executing core/maintenance/update.php may help.\n" );
 		}
 		$this->output( "Removing old entries\n" );
 		if ( $wgDBtype === 'sqlite' ) {
-			$db->delete( $tableName, "*" );
+			$db->delete( $tableName, "*", __METHOD__ );
 		} else {
 			do {
 				$db->commit( __METHOD__, 'flush' );
 				$lbFactory->waitForReplication();
 				$this->output( "Deleting a batch\n" );
 				$table = $db->tableName( $tableName );
-				$db->query( "DELETE FROM $table LIMIT $this->mBatchSize" );
+				$db->query( "DELETE FROM $table LIMIT $this->mBatchSize", __METHOD__ );
 			} while ( $db->affectedRows() > 0 );
 		}
 		$lb->reuseConnection( $db );
