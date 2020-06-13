@@ -52,8 +52,8 @@ class HooksTest extends MediaWikiTestCase {
 	}
 
 	private function getTitleForId( EntityId $entityId ) {
-		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-		return $entityContentFactory->getTitleForId( $entityId );
+		$lookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		return $lookup->getTitleForId( $entityId );
 	}
 
 	private function getContext( Title $title = null ) {
