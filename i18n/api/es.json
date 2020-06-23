@@ -3,6 +3,7 @@
 		"authors": [
 			"AlvaroMolina",
 			"Dgstranz",
+			"Fitoschido",
 			"Macofe"
 		]
 	},
@@ -12,7 +13,7 @@
 	"apihelp-wbsgetsuggestions-example-3": "Obtener sugerencias para la combinación de propiedades P21 y P31",
 	"apihelp-wbsgetsuggestions-example-4": "Obtener sugerencias para los calificadores empleados con P21",
 	"apihelp-wbsgetsuggestions-example-5": "Obtener sugerencias para las referencias que se utilizan con P21",
-	"apihelp-wbsgetsuggestions-param-context": "Cualquiera de los elementos, de referencia o de clasificación.",
+	"apihelp-wbsgetsuggestions-param-context": "Cualquiera de los elementos, de referencia o calificativo.",
 	"apihelp-wbsgetsuggestions-param-continue": "Desplazamiento desde donde continuar una búsqueda.",
 	"apihelp-wbsgetsuggestions-param-entity": "Sugerir propiedades para la entidad dada, basado en la lista de propiedades existentes de la entidad.",
 	"apihelp-wbsgetsuggestions-param-language": "Idioma del resultado.",
