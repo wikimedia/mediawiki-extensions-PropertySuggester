@@ -29,14 +29,6 @@ final class Hooks {
 		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
 		$itemNamespace = $entityNamespaceLookup->getEntityNamespace( Item::ENTITY_TYPE );
 
-		if ( !is_int( $itemNamespace ) ) {
-			// try looking up namespace by content model, for any instances of PropertySuggester
-			// running with older Wikibase prior to ef622b1bc.
-			$itemNamespace = $entityNamespaceLookup->getEntityNamespace(
-				CONTENT_MODEL_WIKIBASE_ITEM
-			);
-		}
-
 		if ( $out->getTitle() === null || $out->getTitle()->getNamespace() !== $itemNamespace ) {
 			return;
 		}
