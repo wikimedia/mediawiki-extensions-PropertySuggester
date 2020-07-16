@@ -29,7 +29,6 @@ This extension adds a new table "wbs_propertypairs" that contains the informatio
 suggestions. You can use [property-suggester-scripts](https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/property-suggester-scripts/) to
 generate this data from a wikidata dump.
 
-* run ```composer dump-autoload``` in the extension folder (if installed without composer)
 * add ```wfLoadExtension( 'PropertySuggester' );``` to your localsettings
 * run ```maintenance/update.php``` to create the necessary table
 * follow the readme of PropertySuggester-Python to generate and load suggestion data
