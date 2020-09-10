@@ -59,18 +59,20 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 			$item3 = new Item( new ItemId( "Q3" ) );
 			$item3->setLabel( "sv", "asdf" );
 
+			$editor = $this->getTestUser()->getUser();
+
 			$redirect = new EntityRedirect( $item->getId(), $item2->getId() );
-			$store->saveRedirect( $redirect, "RedirectNewItem1->Item2", $GLOBALS['wgUser'], EDIT_NEW, false );
+			$store->saveRedirect( $redirect, "RedirectNewItem1->Item2", $editor, EDIT_NEW, false );
 
 			$redirect2 = new EntityRedirect( $item2->getId(), $item3->getId() );
-			$store->saveRedirect( $redirect2, "RedirectNewItem1->Item2", $GLOBALS['wgUser'], EDIT_NEW, false );
+			$store->saveRedirect( $redirect2, "RedirectNewItem1->Item2", $editor, EDIT_NEW, false );
 
 			$prop = Property::newFromType( 'string' );
-			$store->saveEntity( $prop, 'EditEntityTestP56', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $prop, 'EditEntityTestP56', $editor, EDIT_NEW );
 			self::$idMap['%P56%'] = $prop->getId()->getSerialization();
 
 			$prop = Property::newFromType( 'string' );
-			$store->saveEntity( $prop, 'EditEntityTestP72', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $prop, 'EditEntityTestP72', $editor, EDIT_NEW );
 			self::$idMap['%P72%'] = $prop->getId()->getSerialization();
 
 			self::$hasSetup = true;
