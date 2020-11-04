@@ -41,7 +41,7 @@ class ImportContext {
 	private $batchSize;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $quiet;
 
