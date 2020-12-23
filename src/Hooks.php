@@ -39,7 +39,7 @@ final class Hooks {
 	public static function onCreateSchema( DatabaseUpdater $updater ) {
 		$updater->addExtensionTable(
 			'wbs_propertypairs',
-			__DIR__ . '/../sql/create_propertypairs.sql'
+			dirname( __DIR__ ) . "/sql/{$updater->getDB()->getType()}/tables-generated.sql"
 		);
 	}
 

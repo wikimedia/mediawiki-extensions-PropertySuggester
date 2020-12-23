@@ -1,0 +1,50 @@
+[
+	{
+		"name": "wbs_propertypairs",
+		"columns": [
+			{
+				"name": "row_id",
+				"type": "bigint",
+				"options": { "autoincrement": true, "notnull": true, "unsigned": true }
+			},
+			{
+				"name": "pid1",
+				"type": "integer",
+				"options": { "notnull": true, "unsigned": true }
+			},
+			{
+				"name": "qid1",
+				"type": "integer",
+				"options": { "notnull": false, "unsigned": true }
+			},
+			{
+				"name": "pid2",
+				"type": "integer",
+				"options": { "notnull": true, "unsigned": true }
+			},
+			{
+				"name": "count",
+				"type": "integer",
+				"options": { "notnull": true, "unsigned": true }
+			},
+			{
+				"name": "probability",
+				"type": "float",
+				"options": { "notnull": true }
+			},
+			{
+				"name": "context",
+				"type": "binary",
+				"options": { "length": 32, "notnull": true }
+			}
+		],
+		"indexes": [
+			{
+				"name": "propertypairs_pid1_pid2_qid1_context",
+				"columns": [ "pid1", "qid1", "pid2", "context" ],
+				"unique": false
+			}
+		],
+		"pk": [ "row_id" ]
+	}
+]
