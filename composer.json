@@ -15,17 +15,17 @@
 		"wikibase/data-model-services": "~1.1|~2.0|~3.0"
 	},
 	"require-dev": {
-		"jakub-onderka/php-console-highlighter": "0.3.2",
-		"jakub-onderka/php-parallel-lint": "1.0.0",
 		"mediawiki/minus-x": "0.3.1",
+		"php-parallel-lint/php-console-highlighter": "0.3.2",
+		"php-parallel-lint/php-parallel-lint": "1.0.0",
 		"satooshi/php-coveralls": "^2.0",
-		"wikibase/wikibase-codesniffer": "^0.4.1",
+		"wikibase/wikibase-codesniffer": "0.5.1",
 		"wikimedia/testing-access-wrapper": "~1.0"
 	},
 	"scripts": {
 		"fix": [
-			"phpcbf",
-			"minus-x fix ."
+			"minus-x fix .",
+			"phpcbf"
 		],
 		"test": [
 			"parallel-lint . --exclude vendor --exclude node_modules",
