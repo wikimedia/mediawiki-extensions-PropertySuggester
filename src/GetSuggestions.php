@@ -10,9 +10,10 @@ use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use PropertySuggester\Suggesters\SimpleSuggester;
 use PropertySuggester\Suggesters\SuggesterEngine;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Api\ApiErrorReporter;
@@ -49,11 +50,6 @@ class GetSuggestions extends ApiBase {
 	private $suggester;
 
 	/**
-	 * @var TermBuffer
-	 */
-	private $termBuffer;
-
-	/**
 	 * @var SuggesterParamsParser
 	 */
 	private $paramsParser;
@@ -67,6 +63,16 @@ class GetSuggestions extends ApiBase {
 	 * @var ApiErrorReporter
 	 */
 	private $errorReporter;
+
+	/**
+	 * @var PrefetchingTermLookup
+	 */
+	private $prefetchingTermLookup;
+
+	/**
+	 * @var LanguageFallbackChainFactory
+	 */
+	private $languageFallbackLabelDescriptionLookup;
 
 	/**
 	 * @param ApiMain $main
@@ -89,8 +95,8 @@ class GetSuggestions extends ApiBase {
 			$wikibaseRepo->getExceptionLocalizer(),
 			$this->getLanguage()
 		);
-
-		$this->termBuffer = $wikibaseRepo->getTermBuffer();
+		$this->prefetchingTermLookup = $wikibaseRepo->getPrefetchingTermLookup();
+		$this->languageFallbackLabelDescriptionLookup = $wikibaseRepo->getLanguageFallbackChainFactory();
 		$this->entitySearchHelper = new TypeDispatchingEntitySearchHelper(
 			$wikibaseRepo->getEntitySearchHelperCallbacks(),
 			$main->getRequest()
@@ -163,7 +169,8 @@ class GetSuggestions extends ApiBase {
 		// Build result array
 		$resultBuilder = new ResultBuilder(
 			$this->getResult(),
-			$this->termBuffer,
+			$this->prefetchingTermLookup,
+			$this->languageFallbackLabelDescriptionLookup,
 			$this->entityTitleLookup,
 			$params->search
 		);

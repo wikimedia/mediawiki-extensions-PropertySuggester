@@ -4,8 +4,10 @@ namespace PropertySuggester;
 
 use ApiResult;
 use PropertySuggester\Suggesters\Suggestion;
-use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 
 /**
  * ResultBuilder builds Json-compatible array structure from suggestions
@@ -21,11 +23,6 @@ class ResultBuilder {
 	private $entityTitleLookup;
 
 	/**
-	 * @var TermBuffer
-	 */
-	private $termBuffer;
-
-	/**
 	 * @var ApiResult
 	 */
 	private $result;
@@ -36,52 +33,70 @@ class ResultBuilder {
 	private $searchPattern;
 
 	/**
+	 * @var PrefetchingTermLookup
+	 */
+	private $prefetchingTermLookup;
+
+	/**
+	 * @var LanguageFallbackChainFactory
+	 */
+	private $languageFallbackChainFactory;
+
+	/**
 	 * @param ApiResult $result
-	 * @param TermBuffer $termBuffer
+	 * @param PrefetchingTermLookup $prefetchingTermLookup
+	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param string $search
 	 */
 	public function __construct(
 		ApiResult $result,
-		TermBuffer $termBuffer,
+		PrefetchingTermLookup $prefetchingTermLookup,
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		EntityTitleLookup $entityTitleLookup,
 		$search
 	) {
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->termBuffer = $termBuffer;
+		$this->prefetchingTermLookup = $prefetchingTermLookup;
+		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->result = $result;
 		$this->searchPattern = '/^' . preg_quote( $search, '/' ) . '/i';
 	}
 
-	/**
-	 * @param Suggestion[] $suggestions
-	 * @param string $language
-	 * @return array[]
-	 */
-	public function createResultArray( array $suggestions, $language ) {
+	public function createResultArray( array $suggestions, string $language ) : array {
 		$ids = [];
 		foreach ( $suggestions as $suggestion ) {
 			$ids[] = $suggestion->getPropertyId();
 		}
+		$fallbackChain = $this->languageFallbackChainFactory->newFromLanguageCode( $language );
 
-		$this->termBuffer->prefetchTerms(
+		$this->prefetchingTermLookup->prefetchTerms(
 			$ids,
 			[ 'label', 'description', 'alias' ],
-			[ $language ]
+			$fallbackChain->getFetchLanguageCodes()
 		);
 
-		return array_map( function ( Suggestion $suggestion ) use ( $language ) {
-			return $this->buildEntry( $suggestion, $language );
+		$fallbackTermLookup = new LanguageFallbackLabelDescriptionLookup(
+			$this->prefetchingTermLookup,
+			$fallbackChain
+		);
+		return array_map( function ( Suggestion $suggestion ) use ( $language, $fallbackTermLookup ) {
+			return $this->buildEntry( $suggestion, $language, $fallbackTermLookup );
 		}, $suggestions );
 	}
 
 	/**
 	 * @param Suggestion $suggestion
 	 * @param string $language
+	 * @param LanguageFallbackLabelDescriptionLookup $fallbackTermLookup
 	 *
 	 * @return array
 	 */
-	private function buildEntry( Suggestion $suggestion, $language ) {
+	private function buildEntry(
+		Suggestion $suggestion,
+		string $language,
+		LanguageFallbackLabelDescriptionLookup $fallbackTermLookup
+	): array {
 		$id = $suggestion->getPropertyId();
 		$entry = [
 			'id' => $id->getSerialization(),
@@ -89,19 +104,19 @@ class ResultBuilder {
 			'rating' => $suggestion->getProbability(),
 		];
 
-		$label = $this->termBuffer->getPrefetchedTerm( $id, 'label', $language );
-		if ( is_string( $label ) ) {
-			$entry['label'] = $label;
+		$label = $fallbackTermLookup->getLabel( $id );
+		if ( $label !== null ) {
+			$entry['label'] = $label->getText();
 		}
 
-		$description = $this->termBuffer->getPrefetchedTerm( $id, 'description', $language );
-		if ( is_string( $description ) ) {
-			$entry['description'] = $description;
+		$description = $fallbackTermLookup->getDescription( $id );
+		if ( $description !== null ) {
+			$entry['description'] = $description->getText();
 		}
 
-		$alias = $this->termBuffer->getPrefetchedTerm( $id, 'alias', $language );
-		if ( is_string( $alias ) ) {
-			$this->checkAndSetAlias( $entry, $alias );
+		$aliases = $this->prefetchingTermLookup->getPrefetchedAliases( $id, $language );
+		if ( is_array( $aliases ) && !empty( $aliases ) ) {
+			$this->checkAndSetAlias( $entry, $aliases[0] );
 		}
 
 		if ( !isset( $entry['label'] ) ) {
