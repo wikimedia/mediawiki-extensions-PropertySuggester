@@ -7,6 +7,7 @@ $cfg['directory_list'] = array_merge(
 	[
 		'../../extensions/Wikibase/repo',
 		'../../extensions/Wikibase/lib',
+		'../../extensions/Wikibase/data-access',
 	]
 );
 
@@ -15,6 +16,7 @@ $cfg['exclude_analysis_directory_list'] = array_merge(
 	[
 		'../../extensions/Wikibase/repo',
 		'../../extensions/Wikibase/lib',
+		'../../extensions/Wikibase/data-access',
 	]
 );
 
