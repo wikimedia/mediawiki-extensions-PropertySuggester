@@ -72,7 +72,7 @@ class GetSuggestions extends ApiBase {
 	/**
 	 * @var LanguageFallbackChainFactory
 	 */
-	private $languageFallbackLabelDescriptionLookup;
+	private $languageFallbackChainFactory;
 
 	/**
 	 * @param ApiMain $main
@@ -96,7 +96,7 @@ class GetSuggestions extends ApiBase {
 			$this->getLanguage()
 		);
 		$this->prefetchingTermLookup = $wikibaseRepo->getPrefetchingTermLookup();
-		$this->languageFallbackLabelDescriptionLookup = $wikibaseRepo->getLanguageFallbackChainFactory();
+		$this->languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
 		$this->entitySearchHelper = new TypeDispatchingEntitySearchHelper(
 			$wikibaseRepo->getEntitySearchHelperCallbacks(),
 			$main->getRequest()
@@ -170,7 +170,7 @@ class GetSuggestions extends ApiBase {
 		$resultBuilder = new ResultBuilder(
 			$this->getResult(),
 			$this->prefetchingTermLookup,
-			$this->languageFallbackLabelDescriptionLookup,
+			$this->languageFallbackChainFactory,
 			$this->entityTitleLookup,
 			$params->search
 		);
