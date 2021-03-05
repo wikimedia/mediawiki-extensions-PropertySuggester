@@ -52,7 +52,7 @@ class HooksTest extends MediaWikiTestCase {
 	}
 
 	private function getTitleForId( EntityId $entityId ) {
-		$lookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
+		$lookup = WikibaseRepo::getEntityTitleLookup();
 		return $lookup->getTitleForId( $entityId );
 	}
 
