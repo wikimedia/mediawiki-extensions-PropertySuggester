@@ -104,7 +104,7 @@ class GetSuggestions extends ApiBase {
 		);
 		$this->entityLookup = $store->getEntityLookup();
 		$this->entityTitleLookup = WikibaseRepo::getEntityTitleLookup( $mwServices );
-		$this->languageCodes = $wikibaseRepo->getTermsLanguages()->getLanguages();
+		$this->languageCodes = WikibaseRepo::getTermsLanguages( $mwServices )->getLanguages();
 
 		$this->suggester = new SimpleSuggester( $lb );
 		$this->suggester->setDeprecatedPropertyIds( $wgPropertySuggesterDeprecatedIds );
