@@ -26,7 +26,7 @@ final class Hooks {
 			return;
 		}
 
-		$entityNamespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$entityNamespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 		$itemNamespace = $entityNamespaceLookup->getEntityNamespace( Item::ENTITY_TYPE );
 
 		if ( $out->getTitle() === null || $out->getTitle()->getNamespace() !== $itemNamespace ) {
