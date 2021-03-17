@@ -96,7 +96,7 @@ class GetSuggestions extends ApiBase {
 			$wikibaseRepo->getExceptionLocalizer(),
 			$this->getLanguage()
 		);
-		$this->prefetchingTermLookup = $wikibaseRepo->getPrefetchingTermLookup();
+		$this->prefetchingTermLookup = WikibaseRepo::getPrefetchingTermLookup();
 		$this->languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
 		$this->entitySearchHelper = new TypeDispatchingEntitySearchHelper(
 			$wikibaseRepo->getEntitySearchHelperCallbacks(),
