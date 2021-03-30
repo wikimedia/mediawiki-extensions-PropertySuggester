@@ -88,7 +88,7 @@ class GetSuggestions extends ApiBase {
 
 		$mwServices = MediaWikiServices::getInstance();
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$store = $wikibaseRepo->getStore();
+		$store = WikibaseRepo::getStore( $mwServices );
 		$lb = $mwServices->getDBLoadBalancer();
 
 		$this->errorReporter = new ApiErrorReporter(
