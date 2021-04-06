@@ -48,7 +48,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 
 	public function addDBData() {
 		if ( !self::$hasSetup ) {
-			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+			$store = WikibaseRepo::getEntityStore();
 
 			$item = new Item( new ItemId( "Q1" ) );
 			$item->setLabel( "en", "asdf" );
