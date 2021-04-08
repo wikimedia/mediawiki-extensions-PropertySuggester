@@ -93,7 +93,7 @@ class GetSuggestions extends ApiBase {
 
 		$this->errorReporter = new ApiErrorReporter(
 			$this,
-			$wikibaseRepo->getExceptionLocalizer(),
+			WikibaseRepo::getExceptionLocalizer(),
 			$this->getLanguage()
 		);
 		$this->prefetchingTermLookup = WikibaseRepo::getPrefetchingTermLookup();
