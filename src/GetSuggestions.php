@@ -87,7 +87,6 @@ class GetSuggestions extends ApiBase {
 		global $wgPropertySuggesterInitialSuggestions;
 
 		$mwServices = MediaWikiServices::getInstance();
-		$store = WikibaseRepo::getStore( $mwServices );
 		$lb = $mwServices->getDBLoadBalancer();
 
 		$this->errorReporter = new ApiErrorReporter(
@@ -101,7 +100,7 @@ class GetSuggestions extends ApiBase {
 			WikibaseRepo::getEntitySearchHelperCallbacks( $mwServices ),
 			$main->getRequest()
 		);
-		$this->entityLookup = $store->getEntityLookup();
+		$this->entityLookup = WikibaseRepo::getEntityLookup( $mwServices );
 		$this->entityTitleLookup = WikibaseRepo::getEntityTitleLookup( $mwServices );
 		$this->languageCodes = WikibaseRepo::getTermsLanguages( $mwServices )->getLanguages();
 
