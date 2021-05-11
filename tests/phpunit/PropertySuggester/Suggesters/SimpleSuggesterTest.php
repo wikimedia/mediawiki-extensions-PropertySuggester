@@ -67,6 +67,7 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 
 		$res = $this->suggester->suggestByPropertyIds(
 			$ids,
+			[],
 			100,
 			0.0,
 			'item',
@@ -84,6 +85,7 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 
 		$res = $this->suggester->suggestByPropertyIds(
 			$ids,
+			[],
 			100,
 			0.0,
 			'item',
@@ -147,6 +149,7 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 
 		$res = $this->suggester->suggestByPropertyIds(
 			$ids,
+			[],
 			100,
 			0.0,
 			'item',
@@ -164,6 +167,7 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 		$this->assertEmpty(
 			$this->suggester->suggestByPropertyIds(
 				[],
+				[],
 				10,
 				0.01,
 				'item',
@@ -178,6 +182,7 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 			[ new Suggestion( new PropertyId( 'P42' ), 1.0 ) ],
 			$this->suggester->suggestByPropertyIds(
 				[],
+				[],
 				10,
 				0.01,
 				'item',
@@ -190,6 +195,7 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 		$this->expectException( InvalidArgumentException::class );
 		$this->suggester->suggestByPropertyIds(
 			[],
+			[],
 			'10',
 			0.01,
 			'item',
@@ -200,6 +206,7 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 	public function testInvalidMinProbability() {
 		$this->expectException( InvalidArgumentException::class );
 		$this->suggester->suggestByPropertyIds(
+			[],
 			[],
 			10,
 			'0.01',

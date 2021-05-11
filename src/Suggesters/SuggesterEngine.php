@@ -3,6 +3,7 @@
 namespace PropertySuggester\Suggesters;
 
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 
 /**
@@ -27,6 +28,7 @@ interface SuggesterEngine {
 	 * Returns suggested attributes
 	 *
 	 * @param PropertyId[] $propertyIds
+	 * @param ItemId[] $typesIds
 	 * @param int $limit
 	 * @param float $minProbability
 	 * @param string $context
@@ -35,6 +37,7 @@ interface SuggesterEngine {
 	 */
 	public function suggestByPropertyIds(
 		array $propertyIds,
+		array $typesIds,
 		$limit,
 		$minProbability,
 		$context,

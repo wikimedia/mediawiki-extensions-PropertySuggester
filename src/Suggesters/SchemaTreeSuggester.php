@@ -2,24 +2,24 @@
 
 namespace PropertySuggester\Suggesters;
 
+use Exception;
 use InvalidArgumentException;
 use LogicException;
+use MediaWiki\Http\HttpRequestFactory;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikimedia\Rdbms\ILoadBalancer;
-use Wikimedia\Rdbms\IResultWrapper;
 
 /**
- * a Suggester implementation that creates suggestion via MySQL
- * Needs the wbs_propertypairs table filled with pair probabilities.
+ * a Suggester implementation that creates suggestions using
+ * the SchemaTree suggester. Requires the PropertySuggesterSchemaTreeUrl
+ * to be defined in the configuration.
  *
- * @author BP2013N2
  * @license GPL-2.0-or-later
  */
-class SimpleSuggester implements SuggesterEngine {
+class SchemaTreeSuggester implements SuggesterEngine {
 
 	/**
 	 * @var int[]
@@ -32,18 +32,19 @@ class SimpleSuggester implements SuggesterEngine {
 	private $classifyingPropertyIds = [];
 
 	/**
-	 * @var Suggestion[]
+	 * @var string
 	 */
-	private $initialSuggestions = [];
+	private $schemaTreeSuggesterUrl;
 
 	/**
-	 * @var ILoadBalancer
+	 * @var string
 	 */
-	private $lb;
+	private $propertyBaseUrl;
 
-	public function __construct( ILoadBalancer $lb ) {
-		$this->lb = $lb;
-	}
+	/**
+	 * @var string
+	 */
+	private $typesBaseUrl;
 
 	/**
 	 * @param int[] $deprecatedPropertyIds
@@ -60,102 +61,110 @@ class SimpleSuggester implements SuggesterEngine {
 	}
 
 	/**
-	 * @param int[] $initialSuggestionIds
+	 * @param string $schemaTreeSuggesterUrl
 	 */
-	public function setInitialSuggestions( array $initialSuggestionIds ) {
-		$suggestions = [];
-		foreach ( $initialSuggestionIds as $id ) {
-			$suggestions[] = new Suggestion( PropertyId::newFromNumber( $id ), 1.0 );
-		}
+	public function setSchemaTreeSuggesterUrl( string $schemaTreeSuggesterUrl ) {
+		$this->schemaTreeSuggesterUrl = $schemaTreeSuggesterUrl;
+	}
 
-		$this->initialSuggestions = $suggestions;
+	/**
+	 * @param string $propertyBaseUrl
+	 */
+	public function setPropertyBaseUrl( string $propertyBaseUrl ) {
+		$this->propertyBaseUrl = $propertyBaseUrl;
+	}
+
+	/**
+	 * @param string $typesBaseUrl
+	 */
+	public function setTypesBaseUrl( string $typesBaseUrl ) {
+		$this->typesBaseUrl = $typesBaseUrl;
+	}
+
+	/**
+	 * @var HttpRequestFactory
+	 */
+	private $httpFactory;
+
+	public function __construct( HttpRequestFactory $httpFactory ) {
+		$this->httpFactory = $httpFactory;
 	}
 
 	/**
 	 * @param int[] $propertyIds
-	 * @param array[] $idTuples Array of ( int property ID, int item ID ) tuples
+	 * @param int[] $typesIds
 	 * @param int $limit
 	 * @param float $minProbability
-	 * @param string $context
 	 * @param string $include
+	 * @return Suggestion[]|null
 	 * @throws InvalidArgumentException
-	 * @return Suggestion[]
+	 * @throws Exception
 	 */
 	private function getSuggestions(
 		array $propertyIds,
-		array $idTuples,
-		$limit,
-		$minProbability,
-		$context,
-		$include
+		array $typesIds,
+		int $limit,
+		float $minProbability,
+		string $include
 	) {
-		if ( !is_int( $limit ) ) {
-			throw new InvalidArgumentException( '$limit must be int!' );
-		}
-		if ( !is_float( $minProbability ) ) {
-			throw new InvalidArgumentException( '$minProbability must be float!' );
-		}
 		if ( !in_array( $include, [ self::SUGGEST_ALL, self::SUGGEST_NEW ] ) ) {
 			throw new InvalidArgumentException( '$include must be one of the SUGGEST_* constants!' );
 		}
-		if ( !$propertyIds ) {
-			return $this->initialSuggestions;
-		}
-
 		$excludedIds = [];
 		if ( $include === self::SUGGEST_NEW ) {
 			$excludedIds = array_merge( $propertyIds, $this->deprecatedPropertyIds );
 		}
+		$excludedIds = array_map( static function ( int $id ) {
+			return 'P' . $id;
+		}, $excludedIds );
 
-		$count = count( $propertyIds );
-
-		$dbr = $this->lb->getConnection( DB_REPLICA );
-
-		$tupleConditions = [];
-		foreach ( $idTuples as $tuple ) {
-			$tupleConditions[] = $this->buildTupleCondition( $tuple[0], $tuple[1] );
+		$properties = [];
+		foreach ( $propertyIds as $id ) {
+			$properties[] = $this->propertyBaseUrl . 'P' . $id;
 		}
 
-		if ( empty( $tupleConditions ) ) {
-			$condition = 'pid1 IN (' . $dbr->makeList( $propertyIds ) . ')';
-		} else {
-			$condition = $dbr->makeList( $tupleConditions, LIST_OR );
+		$types = [];
+		foreach ( $typesIds as $id ) {
+			$types[] = $this->typesBaseUrl . 'Q' . $id;
 		}
-		$res = $dbr->select(
-			'wbs_propertypairs',
+
+		$response = $this->httpFactory->post(
+			$this->schemaTreeSuggesterUrl,
 			[
-				'pid' => 'pid2',
-				'prob' => "sum(probability)/$count",
+				'postData' => json_encode( [
+					'Properties' => $properties,
+					'Types' => $types
+				] ),
+				'timeout' => 1
 			],
-			array_merge(
-				[
-					$condition,
-					'context' => $context,
-				],
-				$excludedIds ? [ 'pid2 NOT IN (' . $dbr->makeList( $excludedIds ) . ')' ] : []
-			),
-			__METHOD__,
-			[
-				'GROUP BY' => 'pid2',
-				'ORDER BY' => 'prob DESC',
-				'LIMIT'    => $limit,
-				'HAVING'   => 'prob > ' . $minProbability
-			]
+			__METHOD__
 		);
-		$this->lb->reuseConnection( $dbr );
 
-		return $this->buildResult( $res );
+		// if request fails fall back to original property suggester
+		if ( !$response ) {
+			return null;
+		}
+
+		$result = json_decode( $response, true );
+
+		$result = $result['recommendations'] ?? null;
+		if ( !is_array( $result ) ) {
+			return null;
+		}
+
+		return $this->buildResult( $result, $minProbability, $excludedIds, $limit );
 	}
 
 	/**
 	 * @see SuggesterEngine::suggestByPropertyIds
+	 *
 	 * @param PropertyId[] $propertyIds
 	 * @param ItemId[] $typesIds
 	 * @param int $limit
 	 * @param float $minProbability
 	 * @param string $context
 	 * @param string $include One of the self::SUGGEST_* constants
-	 * @return Suggestion[]
+	 * @return Suggestion[]|null
 	 */
 	public function suggestByPropertyIds(
 		array $propertyIds,
@@ -169,12 +178,15 @@ class SimpleSuggester implements SuggesterEngine {
 			return $propertyId->getNumericId();
 		}, $propertyIds );
 
+		$numericTypeIds = array_map( static function ( ItemId $typeId ) {
+			return $typeId->getNumericId();
+		}, $typesIds );
+
 		return $this->getSuggestions(
 			$numericIds,
-			[],
+			$numericTypeIds,
 			$limit,
 			$minProbability,
-			$context,
 			$include
 		);
 	}
@@ -187,21 +199,20 @@ class SimpleSuggester implements SuggesterEngine {
 	 * @param float $minProbability
 	 * @param string $context
 	 * @param string $include One of the self::SUGGEST_* constants
-	 * @throws LogicException
-	 * @return Suggestion[]
+	 * @return Suggestion[]|null
+	 * @throws LogicException|Exception
 	 */
 	public function suggestByItem( Item $item, $limit, $minProbability, $context, $include ) {
 		$ids = [];
-		$idTuples = [];
+		$types = [];
 
 		foreach ( $item->getStatements()->toArray() as $statement ) {
 			$mainSnak = $statement->getMainSnak();
 			$numericPropertyId = $mainSnak->getPropertyId()->getNumericId();
 			$ids[] = $numericPropertyId;
 
-			if ( !isset( $this->classifyingPropertyIds[$numericPropertyId] ) ) {
-				$idTuples[] = [ $numericPropertyId, 0 ];
-			} elseif ( $mainSnak instanceof PropertyValueSnak ) {
+			if ( isset( $this->classifyingPropertyIds[$numericPropertyId] )
+				&& ( $mainSnak instanceof PropertyValueSnak ) ) {
 				$dataValue = $mainSnak->getDataValue();
 
 				if ( !( $dataValue instanceof EntityIdValue ) ) {
@@ -220,45 +231,42 @@ class SimpleSuggester implements SuggesterEngine {
 						'and data type (not wikibase-item).'
 					);
 				}
-
 				$numericEntityId = $entityId->getNumericId();
-				$idTuples[] = [ $numericPropertyId, $numericEntityId ];
+				$types[] = $numericEntityId;
 			}
 		}
-
 		return $this->getSuggestions(
 			$ids,
-			$idTuples,
+			$types,
 			$limit,
 			$minProbability,
-			$context,
 			$include
 		);
 	}
 
 	/**
-	 * @param int $pid
-	 * @param int $qid
-	 * @return string
-	 */
-	private function buildTupleCondition( $pid, $qid ) {
-		return '(pid1 = ' . (int)$pid . ' AND qid1 = ' . (int)$qid . ')';
-	}
-
-	/**
-	 * Converts the rows of the SQL result to Suggestion objects
-	 *
-	 * @param IResultWrapper $res
+	 * Converts the JSON object results to Suggestion objects
+	 * @param array $response
+	 * @param float $minProbability
+	 * @param array $excludedIds
+	 * @param int $limit
 	 * @return Suggestion[]
 	 */
-	private function buildResult( IResultWrapper $res ) {
+	private function buildResult( array $response, float $minProbability, array $excludedIds, int $limit ): array {
 		$resultArray = [];
-		foreach ( $res as $row ) {
-			$pid = PropertyId::newFromNumber( $row->pid );
-			$suggestion = new Suggestion( $pid, $row->prob );
-			$resultArray[] = $suggestion;
+		foreach ( $response as $pos => $res ) {
+			if ( $pos > $limit ) {
+				break;
+			}
+			if ( $res['probability'] > $minProbability && strpos( $res['property'], $this->propertyBaseUrl ) === 0 ) {
+				$id = str_replace( $this->propertyBaseUrl, '', $res['property'] );
+				if ( !in_array( $id, $excludedIds ) ) {
+					$pid = new PropertyId( $id );
+					$suggestion = new Suggestion( $pid, $res["probability"] );
+					$resultArray[] = $suggestion;
+				}
+			}
 		}
 		return $resultArray;
 	}
-
 }

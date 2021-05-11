@@ -48,6 +48,9 @@ class SuggesterParamsParser {
 				"Provide either entity-id parameter 'entity' or a list of properties 'properties'"
 			);
 		}
+
+		$result->types = $params['types'];
+
 		if ( $params['continue'] !== null && !is_numeric( $params['continue'] ) ) {
 			throw new InvalidArgumentException( 'Continue must be int!' );
 		}

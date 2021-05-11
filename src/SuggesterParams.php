@@ -18,6 +18,11 @@ class SuggesterParams {
 	public $properties;
 
 	/**
+	 * @var string[]|null
+	 */
+	public $types;
+
+	/**
 	 * @var string
 	 */
 	public $search;

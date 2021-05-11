@@ -8,10 +8,13 @@ use ApiResult;
 use DerivativeRequest;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
+use PropertySuggester\Suggesters\SchemaTreeSuggester;
 use PropertySuggester\Suggesters\SimpleSuggester;
 use PropertySuggester\Suggesters\SuggesterEngine;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -19,6 +22,7 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -50,6 +54,11 @@ class GetSuggestions extends ApiBase {
 	private $suggester;
 
 	/**
+	 * @var SuggesterEngine
+	 */
+	private $schemaTreeSuggester;
+
+	/**
 	 * @var SuggesterParamsParser
 	 */
 	private $paramsParser;
@@ -75,19 +84,32 @@ class GetSuggestions extends ApiBase {
 	private $languageFallbackChainFactory;
 
 	/**
+	 * @var bool
+	 */
+	private $abTestingState;
+
+	/**
+	 * @var SuggesterEngine
+	 */
+	private $defaultSuggester;
+
+	/**
+	 * @var float
+	 */
+	private $testingRatio;
+
+	/**
 	 * @param ApiMain $main
 	 * @param string $name
 	 * @param string $prefix
 	 */
 	public function __construct( ApiMain $main, $name, $prefix = '' ) {
 		parent::__construct( $main, $name, $prefix );
-		global $wgPropertySuggesterDeprecatedIds;
-		global $wgPropertySuggesterMinProbability;
-		global $wgPropertySuggesterClassifyingPropertyIds;
-		global $wgPropertySuggesterInitialSuggestions;
+		$config = $this->getConfig();
 
 		$mwServices = MediaWikiServices::getInstance();
 		$lb = $mwServices->getDBLoadBalancer();
+		$httpFactory = $mwServices->getHttpRequestFactory();
 
 		$this->errorReporter = new ApiErrorReporter(
 			$this,
@@ -103,13 +125,32 @@ class GetSuggestions extends ApiBase {
 		$this->entityLookup = WikibaseRepo::getEntityLookup( $mwServices );
 		$this->entityTitleLookup = WikibaseRepo::getEntityTitleLookup( $mwServices );
 		$this->languageCodes = WikibaseRepo::getTermsLanguages( $mwServices )->getLanguages();
+		$this->abTestingState = $config->get( 'PropertySuggesterABTestingState' );
+		$rdfVocabulary = WikibaseRepo::getRdfVocabulary( $mwServices );
 
 		$this->suggester = new SimpleSuggester( $lb );
-		$this->suggester->setDeprecatedPropertyIds( $wgPropertySuggesterDeprecatedIds );
-		$this->suggester->setClassifyingPropertyIds( $wgPropertySuggesterClassifyingPropertyIds );
-		$this->suggester->setInitialSuggestions( $wgPropertySuggesterInitialSuggestions );
+		$this->suggester->setDeprecatedPropertyIds( $config->get( 'PropertySuggesterDeprecatedIds' ) );
+		$this->suggester->setClassifyingPropertyIds( $config->get( 'PropertySuggesterClassifyingPropertyIds' ) );
+		$this->suggester->setInitialSuggestions( $config->get( 'PropertySuggesterInitialSuggestions' ) );
 
-		$this->paramsParser = new SuggesterParamsParser( 500, $wgPropertySuggesterMinProbability );
+		$this->schemaTreeSuggester = new SchemaTreeSuggester( $httpFactory );
+		$this->schemaTreeSuggester->setSchemaTreeSuggesterUrl( $config->get( 'PropertySuggesterSchemaTreeUrl' ) );
+		$propertyRepoName = $rdfVocabulary->getEntityRepositoryName( new PropertyId( 'P1' ) );
+		$this->schemaTreeSuggester->setPropertyBaseUrl( $rdfVocabulary->getNamespaceURI(
+			$rdfVocabulary->propertyNamespaceNames[$propertyRepoName][RdfVocabulary::NSP_DIRECT_CLAIM]
+		) );
+		$itemRepoName = $rdfVocabulary->getEntityRepositoryName( new ItemId( 'Q1' ) );
+		$this->schemaTreeSuggester->setTypesBaseUrl( $rdfVocabulary->getNamespaceURI(
+			$rdfVocabulary->entityNamespaceNames[$itemRepoName] ) );
+
+		if ( $config->get( 'PropertySuggesterDefaultSuggester' ) === 'PropertySuggester' ) {
+			$this->defaultSuggester = $this->suggester;
+		} else {
+			$this->defaultSuggester = $this->schemaTreeSuggester;
+		}
+
+		$this->testingRatio = $config->get( 'PropertySuggesterTestingRatio' );
+		$this->paramsParser = new SuggesterParamsParser( 500, $config->get( 'PropertySuggesterMinProbability' ) );
 	}
 
 	/**
@@ -123,10 +164,26 @@ class GetSuggestions extends ApiBase {
 			$this->dieWithException( $ex );
 		}
 
+		if ( $params->context === 'item' ) {
+			if ( $this->abTestingState && $params->entity !== null ) {
+				$hashId = $this->hasher( $params->entity );
+				if ( $hashId % $this->testingRatio === 0 ) {
+					$suggester = $this->schemaTreeSuggester;
+				} else {
+					$suggester = $this->suggester;
+				}
+			} else {
+				$suggester = $this->defaultSuggester;
+			}
+		} else {
+			$suggester = $this->suggester;
+		}
+
 		$suggestionGenerator = new SuggestionGenerator(
 			$this->entityLookup,
 			$this->entitySearchHelper,
-			$this->suggester
+			$suggester,
+			$this->suggester // used in cases where schema tree recommender request fails
 		);
 
 		$suggest = SuggesterEngine::SUGGEST_NEW;
@@ -148,8 +205,12 @@ class GetSuggestions extends ApiBase {
 				$this->dieWithException( $ex );
 			}
 		} else {
+			if ( $params->types === null ) {
+				$params->types = [];
+			}
 			$suggestions = $suggestionGenerator->generateSuggestionsByPropertyList(
 				$params->properties,
+				$params->types,
 				$params->suggesterLimit,
 				$params->minProbability,
 				$params->context,
@@ -158,7 +219,7 @@ class GetSuggestions extends ApiBase {
 		}
 
 		$suggestions = $suggestionGenerator->filterSuggestions(
-			// @phan-suppress-next-line PhanTypeMismatchArgumentNullable T240141
+		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable T240141
 			$suggestions,
 			$params->search,
 			$params->language,
@@ -238,6 +299,22 @@ class GetSuggestions extends ApiBase {
 	}
 
 	/**
+	 * Creates a numeric hash for the entity IDs
+	 *
+	 * @param string $code
+	 * @return int a 64 bit decimal hash
+	 */
+	private function hasher( $code ) {
+		$hex16 = substr( hash( 'sha256', $code ), 0, 16 );
+
+		$hexhi = substr( $hex16, 0, 8 );
+		$hexlo = substr( $hex16, 8, 8 );
+
+		$int = hexdec( $hexlo ) | ( hexdec( $hexhi ) << 32 );
+		return $int;
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	public function getAllowedParams() {
@@ -246,6 +323,10 @@ class GetSuggestions extends ApiBase {
 				ApiBase::PARAM_TYPE => 'string',
 			],
 			'properties' => [
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_ISMULTI => true
+			],
+			'types' => [
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_ISMULTI => true
 			],

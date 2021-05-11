@@ -61,6 +61,22 @@
 		},
 		"PropertySuggesterMinProbability": {
 			"value": 0.05
+		},
+		"PropertySuggesterSchemaTreeUrl": {
+			"value": "",
+			"description": "If the SchemaTree suggester is used, the value should contain the URL of the endpoint for the SchemaTree suggester"
+		},
+		"PropertySuggesterABTestingState": {
+			"value": false,
+			"description": "The state of A/B testing. When set to true, additional properties will be suggested from both the PropertySuggester and the SchemaTree suggester, additionally, event logging will be enabled"
+		},
+		"PropertySuggesterDefaultSuggester": {
+			"value": "PropertySuggester",
+			"description": "When PropertySuggesterABTestingState is set to false additional properties will be suggested using PropertySuggesterDefaultSuggester. Value can be either PropertySuggester or SchemaTreeSuggester"
+		},
+		"PropertySuggesterTestingRatio": {
+			"value": 2,
+			"description": "Ratio of suggesters used when A/B testing is enabled. Value of 2 will result in an approximate 50/50 split, values greater than 2 will result in the PropertySuggester being used more often"
 		}
 	},
 	"load_composer_autoloader": true,

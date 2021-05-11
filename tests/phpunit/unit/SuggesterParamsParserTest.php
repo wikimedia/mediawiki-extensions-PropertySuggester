@@ -25,6 +25,7 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 	private $defaultParams = [
 		'entity' => null,
 		'properties' => null,
+		'types' => null,
 		'continue' => 10,
 		'limit' => 5,
 		'language' => 'en',
@@ -48,6 +49,7 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 
 		$this->assertEquals( 'Q1', $params->entity );
 		$this->assertNull( $params->properties );
+		$this->assertNull( $params->types );
 		$this->assertEquals( 'en', $params->language );
 		$this->assertEquals( 10, $params->continue );
 		$this->assertEquals( 5, $params->limit );
@@ -92,7 +94,7 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 	public function testSuggestionWithNonNumericContinue() {
 		$this->expectException( InvalidArgumentException::class );
 		$this->paramsParser->parseAndValidate(
-			[ 'entity' => 'Q1', 'properties' => null, 'continue' => 'drop' ]
+			[ 'entity' => 'Q1', 'properties' => null, 'types' => null, 'continue' => 'drop' ]
 		);
 	}
 

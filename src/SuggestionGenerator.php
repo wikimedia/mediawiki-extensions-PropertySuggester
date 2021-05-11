@@ -34,14 +34,21 @@ class SuggestionGenerator {
 	 */
 	private $suggester;
 
+	/**
+	 * @var SuggesterEngine|null
+	 */
+	private $fallbackSuggester;
+
 	public function __construct(
 		EntityLookup $entityLookup,
 		EntitySearchHelper $entityTermSearchHelper,
-		SuggesterEngine $suggester
+		SuggesterEngine $suggester,
+		?SuggesterEngine $fallbackSuggester = null
 	) {
 		$this->entityLookup = $entityLookup;
 		$this->entityTermSearchHelper = $entityTermSearchHelper;
 		$this->suggester = $suggester;
+		$this->fallbackSuggester = $fallbackSuggester;
 	}
 
 	/**
@@ -69,17 +76,32 @@ class SuggestionGenerator {
 		}
 		'@phan-var Item $item';
 
-		return $this->suggester->suggestByItem(
+		$suggestions = $this->suggester->suggestByItem(
 			$item,
 			$limit,
 			$minProbability,
 			$context,
 			$include
 		);
+
+		if ( $suggestions === null ) {
+			if ( $this->fallbackSuggester === null ) {
+				return [];
+			}
+			$suggestions = $this->fallbackSuggester->suggestByItem(
+				$item,
+				$limit,
+				$minProbability,
+				$context,
+				$include
+			);
+		}
+		return $suggestions;
 	}
 
 	/**
 	 * @param string[] $propertyIdList - A list of property-id-strings
+	 * @param string[] $typesIdList - A list of types-id-strings
 	 * @param int $limit
 	 * @param float $minProbability
 	 * @param string $context
@@ -88,6 +110,7 @@ class SuggestionGenerator {
 	 */
 	public function generateSuggestionsByPropertyList(
 		array $propertyIdList,
+		array $typesIdList,
 		$limit,
 		$minProbability,
 		$context,
@@ -98,13 +121,33 @@ class SuggestionGenerator {
 			$propertyIds[] = new PropertyId( $stringId );
 		}
 
+		$typesIds = [];
+		foreach ( $typesIdList as $stringId ) {
+			$typesIds[] = new ItemId( $stringId );
+		}
+
 		$suggestions = $this->suggester->suggestByPropertyIds(
 			$propertyIds,
+			$typesIds,
 			$limit,
 			$minProbability,
 			$context,
 			$include
 		);
+
+		if ( $suggestions === null ) {
+			if ( $this->fallbackSuggester === null ) {
+				return [];
+			}
+			$suggestions = $this->fallbackSuggester->suggestByPropertyIds(
+				$propertyIds,
+				$typesIds,
+				$limit,
+				$minProbability,
+				$context,
+				$include
+			);
+		}
 
 		return $suggestions;
 	}
