@@ -164,7 +164,7 @@ class SimpleSuggester implements SuggesterEngine {
 		$context,
 		$include
 	) {
-		$numericIds = array_map( function ( PropertyId $propertyId ) {
+		$numericIds = array_map( static function ( PropertyId $propertyId ) {
 			return $propertyId->getNumericId();
 		}, $propertyIds );
 

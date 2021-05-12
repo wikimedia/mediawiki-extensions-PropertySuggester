@@ -153,7 +153,7 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 			SuggesterEngine::SUGGEST_NEW
 		);
 
-		$resultIds = array_map( function ( Suggestion $r ) {
+		$resultIds = array_map( static function ( Suggestion $r ) {
 			return $r->getPropertyId()->getNumericId();
 		}, $res );
 		$this->assertNotContains( 2, $resultIds );

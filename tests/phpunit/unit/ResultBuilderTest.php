@@ -184,7 +184,7 @@ class ResultBuilderTest extends MediaWikiUnitTestCase {
 		$stub = $this->createStub( LanguageWithConversion::class );
 		$stub->method( 'getLanguageCode' )->willReturn( $code );
 		$stub->method( 'getFetchLanguageCode' )->willReturn( $code );
-		$stub->method( 'translate' )->willReturnCallback( function ( $value ) {
+		$stub->method( 'translate' )->willReturnCallback( static function ( $value ) {
 			return $value;
 		} );
 
