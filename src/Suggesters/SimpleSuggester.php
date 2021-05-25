@@ -4,6 +4,7 @@ namespace PropertySuggester\Suggesters;
 
 use InvalidArgumentException;
 use LogicException;
+use PropertySuggester\EventLogger;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -41,6 +42,11 @@ class SimpleSuggester implements SuggesterEngine {
 	 */
 	private $lb;
 
+	/**
+	 * @var EventLogger|null
+	 */
+	private $eventLogger;
+
 	public function __construct( ILoadBalancer $lb ) {
 		$this->lb = $lb;
 	}
@@ -72,6 +78,13 @@ class SimpleSuggester implements SuggesterEngine {
 	}
 
 	/**
+	 * @param EventLogger $eventLogger
+	 */
+	public function setEventLogger( EventLogger $eventLogger ) {
+		$this->eventLogger = $eventLogger;
+	}
+
+	/**
 	 * @param int[] $propertyIds
 	 * @param array[] $idTuples Array of ( int property ID, int item ID ) tuples
 	 * @param int $limit
@@ -89,6 +102,9 @@ class SimpleSuggester implements SuggesterEngine {
 		$context,
 		$include
 	) {
+		$this->eventLogger->setPropertySuggesterName( 'PropertySuggester' );
+		$startTime = microtime( true );
+
 		if ( !is_int( $limit ) ) {
 			throw new InvalidArgumentException( '$limit must be int!' );
 		}
@@ -99,6 +115,7 @@ class SimpleSuggester implements SuggesterEngine {
 			throw new InvalidArgumentException( '$include must be one of the SUGGEST_* constants!' );
 		}
 		if ( !$propertyIds ) {
+			$this->eventLogger->setRequestDuration( (int)( ( microtime( true ) - $startTime ) * 1000 ) );
 			return $this->initialSuggestions;
 		}
 
@@ -144,7 +161,9 @@ class SimpleSuggester implements SuggesterEngine {
 		);
 		$this->lb->reuseConnection( $dbr );
 
-		return $this->buildResult( $res );
+		$results = $this->buildResult( $res );
+		$this->eventLogger->setRequestDuration( (int)( ( microtime( true ) - $startTime ) * 1000 ) );
+		return $results;
 	}
 
 	/**
@@ -193,6 +212,7 @@ class SimpleSuggester implements SuggesterEngine {
 	public function suggestByItem( Item $item, $limit, $minProbability, $context, $include ) {
 		$ids = [];
 		$idTuples = [];
+		$types = [];
 
 		foreach ( $item->getStatements()->toArray() as $statement ) {
 			$mainSnak = $statement->getMainSnak();
@@ -223,8 +243,12 @@ class SimpleSuggester implements SuggesterEngine {
 
 				$numericEntityId = $entityId->getNumericId();
 				$idTuples[] = [ $numericPropertyId, $numericEntityId ];
+				$types[] = $numericEntityId;
 			}
 		}
+
+		$this->eventLogger->setExistingProperties( array_map( 'strval', $ids ) );
+		$this->eventLogger->setExistingTypes( array_map( 'strval', $types ) );
 
 		return $this->getSuggestions(
 			$ids,

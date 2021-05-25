@@ -83,6 +83,8 @@ class SuggesterParamsParser {
 			$result->include = '';
 		}
 
+		$result->event = $params['event'];
+
 		return Status::newGood( $result );
 	}
 

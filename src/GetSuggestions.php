@@ -152,6 +152,11 @@ class GetSuggestions extends ApiBase {
 		/** @var SuggesterParams $params */
 		$params = $paramsStatus->getValue();
 
+		$eventLogger = new EventLogger(
+			$params->event,
+			$params->language
+		);
+
 		if ( $params->context === 'item' ) {
 			if ( $this->abTestingState && $params->entity !== null ) {
 				$hashId = $this->hasher( $params->entity );
@@ -166,6 +171,9 @@ class GetSuggestions extends ApiBase {
 		} else {
 			$suggester = $this->suggester;
 		}
+
+		$suggester->setEventLogger( $eventLogger );
+		$this->suggester->setEventLogger( $eventLogger );
 
 		$suggestionGenerator = new SuggestionGenerator(
 			$this->entityLookup,
@@ -210,6 +218,13 @@ class GetSuggestions extends ApiBase {
 			$params->language,
 			$params->resultSize
 		);
+
+		$addSuggestions = [];
+		foreach ( $suggestions as $suggestion ) {
+			$addSuggestions[] = strval( $suggestion->getPropertyId()->getNumericId() );
+		}
+		$eventLogger->setAddSuggestions( $addSuggestions );
+		$eventLogger->logEvent();
 
 		// Build result array
 		$resultBuilder = new ResultBuilder(
@@ -338,6 +353,10 @@ class GetSuggestions extends ApiBase {
 				ApiBase::PARAM_DFLT => '',
 			],
 			'search' => [
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_DFLT => '',
+			],
+			'event' => [
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_DFLT => '',
 			],

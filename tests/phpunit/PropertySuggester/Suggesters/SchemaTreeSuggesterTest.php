@@ -4,6 +4,7 @@ namespace PropertySuggester;
 
 use MediaWikiTestCase;
 use MockHttpTrait;
+use PHPUnit\Framework\MockObject\MockObject;
 use PropertySuggester\Suggesters\SchemaTreeSuggester;
 use PropertySuggester\Suggesters\SuggesterEngine;
 use Wikibase\DataModel\Entity\Item;
@@ -26,6 +27,11 @@ class SchemaTreeSuggesterTest extends MediaWikiTestCase {
 	 */
 	private $suggester;
 
+	/**
+	 * @var EventLogger|MockObject
+	 */
+	private $eventLogger;
+
 	public function setUp() : void {
 		$response = json_encode( [
 			'recommendations' => [ [ 'property' => '/prop/direct/P2', 'probability' => 0.1 ],
@@ -33,8 +39,11 @@ class SchemaTreeSuggesterTest extends MediaWikiTestCase {
 				[ 'property' => '/prop/direct/P4', 'probability' => 0.25 ] ]
 		] );
 
+		$this->eventLogger = $this->createMock( EventLogger::class );
+
 		$this->suggester = new SchemaTreeSuggester( $this->makeMockHttpRequestFactory( $response ) );
 
+		$this->suggester->setEventLogger( $this->eventLogger );
 		$this->suggester->setSchemaTreeSuggesterUrl( 'mockURL' );
 		$this->suggester->setPropertyBaseUrl( '/prop/direct/' );
 		$this->suggester->setTypesBaseUrl( '/entity/' );
@@ -124,6 +133,7 @@ class SchemaTreeSuggesterTest extends MediaWikiTestCase {
 		$this->suggester = new SchemaTreeSuggester( $this->makeMockHttpRequestFactory( $response ) );
 		$this->suggester->setPropertyBaseUrl( '/prop/direct/' );
 		$this->suggester->setTypesBaseUrl( '/entity/' );
+		$this->suggester->setEventLogger( $this->eventLogger );
 
 		$ids = [ new PropertyId( 'P1' ) ];
 
@@ -144,6 +154,8 @@ class SchemaTreeSuggesterTest extends MediaWikiTestCase {
 		$response = json_encode( [ 'recommendations' => 'Incorrect response' ] );
 
 		$this->suggester = new SchemaTreeSuggester( $this->makeMockHttpRequestFactory( $response ) );
+		$this->suggester->setEventLogger( $this->eventLogger );
+
 		$ids = [ new PropertyId( 'P1' ) ];
 
 		$res = $this->suggester->suggestByPropertyIds(

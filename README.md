@@ -38,6 +38,10 @@ generate this data from a wikidata dump.
 * $wgPropertySuggesterMinProbability - a float that sets a minimum threshold for suggestions (default 0.05)
 * $wgPropertySuggesterDeprecatedIds - a list of ints that won't be used for suggestions
 * $wgPropertySuggesterInitialSuggestions - a list of ints that will be suggested when no statements exist
+* $wgPropertySuggesterSchemaTreeUrl - a string that contains the URL of the endpoint for the SchemaTree suggester (required if the default suggester is SchemaTree or if A/B testing is enabled)
+* $wgPropertySuggesterABTestingState - a boolean representing the state of A/B testing
+* $wgPropertySuggesterDefaultSuggester - a string representing the default suggester used (either SchemaTreeSuggester or PropertySuggester)
+* $wgPropertySuggesterTestingRatio - a float that represents the ratio of suggesters used when A/B testing is enabled. Value of 2 will result in an approximate 50/50 split, values greater than 2 will result in the PropertySuggester being used more often
 
 ## Release notes
 

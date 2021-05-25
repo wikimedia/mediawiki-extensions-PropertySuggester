@@ -30,24 +30,18 @@
 	"ExtensionMessagesFiles": {
 		"PropertySuggesterAlias": "PropertySuggester.alias.php"
 	},
-	"ResourceModules": {
-		"propertySuggester.suggestions": {
-			"scripts": [
-				"modules/PropertySuggester.js",
-				"modules/hook.js"
-			],
-			"dependencies": [
-				"wikibase.view.ControllerViewFactory"
-			]
-		}
-	},
-	"ResourceFileModulePaths": {
-		"localBasePath": "",
-		"remoteExtPath": "PropertySuggester"
-	},
 	"Hooks": {
 		"BeforePageDisplay": "PropertySuggester\\Hooks::onBeforePageDisplay",
-		"LoadExtensionSchemaUpdates": "PropertySuggester\\Hooks::onCreateSchema"
+		"LoadExtensionSchemaUpdates": "PropertySuggester\\Hooks::onCreateSchema",
+		"ResourceLoaderRegisterModules": "PropertySuggester\\Hooks::onResourceLoaderRegisterModules"
+	},
+	"attributes": {
+		"EventLogging": {
+			"Schemas": {
+				"PropertySuggesterServerSidePropertyRequest": "/analytics/mediawiki/wd_propertysuggester/server_side_property_request/1.0.0",
+				"PropertySuggesterClientSidePropertyRequest": "/analytics/mediawiki/wd_propertysuggester/client_side_property_request/1.0.0"
+			}
+		}
 	},
 	"config": {
 		"PropertySuggesterDeprecatedIds": {

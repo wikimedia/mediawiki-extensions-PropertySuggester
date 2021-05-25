@@ -4,6 +4,7 @@ namespace PropertySuggester\Suggesters;
 
 use InvalidArgumentException;
 use MediaWikiTestCase;
+use PropertySuggester\EventLogger;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -55,6 +56,7 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 		$this->tablesUsed[] = 'wbs_propertypairs';
 		$lb = new LoadBalancerSingle( [ 'connection' => $this->db ] );
 		$this->suggester = new SimpleSuggester( $lb );
+		$this->suggester->setEventLogger( $this->createMock( EventLogger::class ) );
 	}
 
 	public function testDatabaseHasRows() {
