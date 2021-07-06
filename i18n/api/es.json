@@ -4,6 +4,7 @@
 			"AlvaroMolina",
 			"Dgstranz",
 			"Fitoschido",
+			"Jackiezelaya",
 			"Macofe"
 		]
 	},
@@ -20,5 +21,6 @@
 	"apihelp-wbsgetsuggestions-param-limit": "Número máximo de resultados.",
 	"apihelp-wbsgetsuggestions-param-properties": "Sugerir propiedades adicionales para la lista dada de propiedades.",
 	"apihelp-wbsgetsuggestions-param-search": "Buscar este texto.",
-	"apihelp-wbsgetsuggestions-param-size": "Especificar el número de sugerencias que se devolverán."
+	"apihelp-wbsgetsuggestions-param-size": "Especificar el número de sugerencias que se devolverán.",
+	"apihelp-wbsgetsuggestions-param-types": "Sugiere propiedades adicionales para la lista dada de tipos (estos valores son iguales a unos aquello sería reunido a través del classifyingPropertyIds si una entidad está proporcionada en el API llamada). Utilizado en combinación con el parámetro de propiedades."
 }
