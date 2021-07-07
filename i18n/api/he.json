@@ -20,5 +20,6 @@
 	"apihelp-wbsgetsuggestions-param-limit": "מספר התוצאות המרבי.",
 	"apihelp-wbsgetsuggestions-param-properties": "לציין מאפיינים נוספים עבור רשימת המאפיינים הנתונה.",
 	"apihelp-wbsgetsuggestions-param-search": "לחפש את הטקסט הזה.",
-	"apihelp-wbsgetsuggestions-param-size": "נא לציין את מספר ההצעות שתוחזרנה."
+	"apihelp-wbsgetsuggestions-param-size": "נא לציין את מספר ההצעות שתוחזרנה.",
+	"apihelp-wbsgetsuggestions-param-types": "הצעת מאפיינים נוספים לרשימה נתונה של סוגים (הערכים האלה שווים לאלה שייאספו דרך classifyingPropertyIds אם ישות מסופקת דרך קריאת API). משמש בצירוף עם הפרמטר properties."
 }

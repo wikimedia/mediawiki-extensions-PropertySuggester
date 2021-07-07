@@ -19,5 +19,6 @@
 	"apihelp-wbsgetsuggestions-param-limit": "Numere massime de resultate.",
 	"apihelp-wbsgetsuggestions-param-properties": "Suggerisce otre probbietà pe l'elenghe de le probbietà indicate.",
 	"apihelp-wbsgetsuggestions-param-search": "Cirche stu teste.",
-	"apihelp-wbsgetsuggestions-param-size": "Mitte 'u numere de suggereminde da turnà."
+	"apihelp-wbsgetsuggestions-param-size": "Mitte 'u numere de suggereminde da turnà.",
+	"apihelp-wbsgetsuggestions-param-types": "Suggerisce probbietà aggiundive pe 'nu certe elenghe de tipe (ste valore sò uguale a une ca avessera essere carresciate cu 'u classifyingPropertyIds ce 'n'endità pò fà 'na chiamate a l'API). Ausate in combinazione cu 'u parametre de le probbietà."
 }

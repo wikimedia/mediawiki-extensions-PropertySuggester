@@ -22,5 +22,6 @@
 	"apihelp-wbsgetsuggestions-param-limit": "Nombre maximum de résultats.",
 	"apihelp-wbsgetsuggestions-param-properties": "Proposer des propriétés supplémentaires pour la liste donnée des propriétés.",
 	"apihelp-wbsgetsuggestions-param-search": "Rechercher ce texte.",
-	"apihelp-wbsgetsuggestions-param-size": "Spécifier le nombre de suggestions devant être retournées."
+	"apihelp-wbsgetsuggestions-param-size": "Spécifier le nombre de suggestions devant être retournées.",
+	"apihelp-wbsgetsuggestions-param-types": "Suggérer des propriétés supplémentaires pour la liste fournie de types (ces valeurs sont égales à celles qui seraient rassemblées via classifyingPropertyIds  si une entité est fournie dans l’appel de l’API). Utilisé en lien avec le paramètre 'properties'."
 }
