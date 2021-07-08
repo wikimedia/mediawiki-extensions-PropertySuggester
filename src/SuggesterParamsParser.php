@@ -51,10 +51,6 @@ class SuggesterParamsParser {
 
 		$result->types = $params['types'];
 
-		if ( $params['continue'] !== null && !is_numeric( $params['continue'] ) ) {
-			throw new InvalidArgumentException( 'Continue must be int!' );
-		}
-
 		// The entityselector doesn't allow a search for '' so '*' gets mapped to ''
 		if ( $params['search'] !== '*' ) {
 			$result->search = trim( $params['search'] );

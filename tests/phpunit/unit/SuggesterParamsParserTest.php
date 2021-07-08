@@ -91,11 +91,4 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 		);
 	}
 
-	public function testSuggestionWithNonNumericContinue() {
-		$this->expectException( InvalidArgumentException::class );
-		$this->paramsParser->parseAndValidate(
-			[ 'entity' => 'Q1', 'properties' => null, 'types' => null, 'continue' => 'drop' ]
-		);
-	}
-
 }

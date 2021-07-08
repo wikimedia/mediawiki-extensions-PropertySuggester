@@ -337,7 +337,9 @@ class GetSuggestions extends ApiBase {
 				ApiBase::PARAM_MAX2 => ApiBase::LIMIT_SML2,
 				ApiBase::PARAM_MIN => 0,
 			],
-			'continue' => null,
+			'continue' => [
+				ApiBase::PARAM_TYPE => 'integer',
+			],
 			'language' => [
 				ApiBase::PARAM_TYPE => $this->languageCodes,
 				ApiBase::PARAM_DFLT => $this->getContext()->getLanguage()->getCode(),
