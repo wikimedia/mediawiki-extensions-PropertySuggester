@@ -3,12 +3,15 @@
 namespace PropertySuggester;
 
 use InvalidArgumentException;
+use Message;
 use PropertySuggester\Suggesters\SuggesterEngine;
 use PropertySuggester\Suggesters\Suggestion;
+use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\Repo\Api\EntitySearchHelper;
 
 /**
@@ -57,8 +60,7 @@ class SuggestionGenerator {
 	 * @param float $minProbability
 	 * @param string $context
 	 * @param string $include One of the SuggesterEngine::SUGGEST_* constants
-	 * @throws InvalidArgumentException
-	 * @return Suggestion[]
+	 * @return Status containing Suggestion[]
 	 */
 	public function generateSuggestionsByItem(
 		$itemIdString,
@@ -66,13 +68,22 @@ class SuggestionGenerator {
 		$minProbability,
 		$context,
 		$include
-	) {
-		$itemId = new ItemId( $itemIdString );
+	): Status {
+		try {
+			$itemId = new ItemId( $itemIdString );
+		} catch ( InvalidArgumentException $e ) {
+			return Status::newFatal( 'wikibase-api-invalid-entity-id' );
+		}
 		/** @var Item $item */
-		$item = $this->entityLookup->getEntity( $itemId );
+		try {
+			$item = $this->entityLookup->getEntity( $itemId );
+		} catch ( UnresolvedEntityRedirectException $e ) {
+			return Status::newFatal( 'wikibase-api-unresolved-redirect' );
+		}
 
 		if ( $item === null ) {
-			throw new InvalidArgumentException( 'Item ' . $itemIdString . ' could not be found' );
+			return Status::newFatal( 'wikibase-api-no-such-entity',
+				Message::plaintextParam( $itemIdString ) );
 		}
 		'@phan-var Item $item';
 
@@ -86,7 +97,7 @@ class SuggestionGenerator {
 
 		if ( $suggestions === null ) {
 			if ( $this->fallbackSuggester === null ) {
-				return [];
+				return Status::newGood( [] );
 			}
 			$suggestions = $this->fallbackSuggester->suggestByItem(
 				$item,
@@ -96,7 +107,7 @@ class SuggestionGenerator {
 				$include
 			);
 		}
-		return $suggestions;
+		return Status::newGood( $suggestions );
 	}
 
 	/**
@@ -106,7 +117,7 @@ class SuggestionGenerator {
 	 * @param float $minProbability
 	 * @param string $context
 	 * @param string $include One of the SuggesterEngine::SUGGEST_* constants
-	 * @return Suggestion[]
+	 * @return Status containing Suggestion[]
 	 */
 	public function generateSuggestionsByPropertyList(
 		array $propertyIdList,
@@ -115,15 +126,23 @@ class SuggestionGenerator {
 		$minProbability,
 		$context,
 		$include
-	) {
+	): Status {
 		$propertyIds = [];
 		foreach ( $propertyIdList as $stringId ) {
-			$propertyIds[] = new PropertyId( $stringId );
+			try {
+				$propertyIds[] = new PropertyId( $stringId );
+			} catch ( InvalidArgumentException $e ) {
+				return Status::newFatal( 'wikibase-api-invalid-property-id' );
+			}
 		}
 
 		$typesIds = [];
 		foreach ( $typesIdList as $stringId ) {
-			$typesIds[] = new ItemId( $stringId );
+			try {
+				$typesIds[] = new ItemId( $stringId );
+			} catch ( InvalidArgumentException $e ) {
+				return Status::newFatal( 'wikibase-api-invalid-entity-id' );
+			}
 		}
 
 		$suggestions = $this->suggester->suggestByPropertyIds(
@@ -137,7 +156,7 @@ class SuggestionGenerator {
 
 		if ( $suggestions === null ) {
 			if ( $this->fallbackSuggester === null ) {
-				return [];
+				return Status::newGood( [] );
 			}
 			$suggestions = $this->fallbackSuggester->suggestByPropertyIds(
 				$propertyIds,
@@ -149,7 +168,7 @@ class SuggestionGenerator {
 			);
 		}
 
-		return $suggestions;
+		return Status::newGood( $suggestions );
 	}
 
 	/**

@@ -2,7 +2,6 @@
 
 namespace PropertySuggester;
 
-use InvalidArgumentException;
 use MediaWikiUnitTestCase;
 
 /**
@@ -43,9 +42,11 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testSuggesterParameters() {
-		$params = $this->paramsParser->parseAndValidate(
+		$paramsStatus = $this->paramsParser->parseAndValidate(
 			array_merge( $this->defaultParams, [ 'entity' => 'Q1', 'search' => '*' ] )
 		);
+		$this->assertTrue( $paramsStatus->isGood() );
+		$params = $paramsStatus->getValue();
 
 		$this->assertEquals( 'Q1', $params->entity );
 		$this->assertNull( $params->properties );
@@ -61,9 +62,11 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testSuggesterWithSearchParameters() {
-		$params = $this->paramsParser->parseAndValidate(
+		$paramsStatus = $this->paramsParser->parseAndValidate(
 			array_merge( $this->defaultParams, [ 'properties' => [ 'P31' ], 'search' => 'asd' ] )
 		);
+		$this->assertTrue( $paramsStatus->isGood() );
+		$params = $paramsStatus->getValue();
 
 		$this->assertNull( $params->entity );
 		$this->assertEquals( [ 'P31' ], $params->properties );
@@ -78,17 +81,21 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 	}
 
 	public function testSuggestionWithoutEntityOrProperties() {
-		$this->expectException( InvalidArgumentException::class );
-		$this->paramsParser->parseAndValidate(
+		$paramsStatus = $this->paramsParser->parseAndValidate(
 			[ 'entity' => null, 'properties' => null ]
 		);
+		$this->assertFalse( $paramsStatus->isGood() );
+		$this->assertSame( 'propertysuggester-wbsgetsuggestions-either-entity-or-properties',
+			$paramsStatus->getErrors()[0]['message'] );
 	}
 
 	public function testSuggestionWithEntityAndProperties() {
-		$this->expectException( InvalidArgumentException::class );
-		$this->paramsParser->parseAndValidate(
+		$paramsStatus = $this->paramsParser->parseAndValidate(
 			[ 'entity' => 'Q1', 'properties' => [ 'P31' ] ]
 		);
+		$this->assertFalse( $paramsStatus->isGood() );
+		$this->assertSame( 'propertysuggester-wbsgetsuggestions-either-entity-or-properties',
+			$paramsStatus->getErrors()[0]['message'] );
 	}
 
 }

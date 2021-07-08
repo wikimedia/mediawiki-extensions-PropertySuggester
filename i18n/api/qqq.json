@@ -22,5 +22,6 @@
 	"apihelp-wbsgetsuggestions-param-properties": "{{doc-apihelp-param|wbsgetsuggestions|properties}}",
 	"apihelp-wbsgetsuggestions-param-search": "{{doc-apihelp-param|wbsgetsuggestions|search}}",
 	"apihelp-wbsgetsuggestions-param-size": "{{doc-apihelp-param|wbsgetsuggestions|size}}",
-	"apihelp-wbsgetsuggestions-param-types": "{{doc-apihelp-param|wbsgetsuggestions|types}}"
+	"apihelp-wbsgetsuggestions-param-types": "{{doc-apihelp-param|wbsgetsuggestions|types}}",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "API error message when either both or neither of the two parameters are given."
 }

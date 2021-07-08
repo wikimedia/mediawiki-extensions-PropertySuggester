@@ -6,7 +6,6 @@ use ApiBase;
 use ApiMain;
 use ApiResult;
 use DerivativeRequest;
-use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use PropertySuggester\Suggesters\SchemaTreeSuggester;
 use PropertySuggester\Suggesters\SimpleSuggester;
@@ -18,8 +17,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -69,11 +66,6 @@ class GetSuggestions extends ApiBase {
 	private $entitySearchHelper;
 
 	/**
-	 * @var ApiErrorReporter
-	 */
-	private $errorReporter;
-
-	/**
 	 * @var PrefetchingTermLookup
 	 */
 	private $prefetchingTermLookup;
@@ -111,11 +103,6 @@ class GetSuggestions extends ApiBase {
 		$lb = $mwServices->getDBLoadBalancer();
 		$httpFactory = $mwServices->getHttpRequestFactory();
 
-		$this->errorReporter = new ApiErrorReporter(
-			$this,
-			WikibaseRepo::getExceptionLocalizer(),
-			$this->getLanguage()
-		);
 		$this->prefetchingTermLookup = WikibaseRepo::getPrefetchingTermLookup();
 		$this->languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
 		$this->entitySearchHelper = new TypeDispatchingEntitySearchHelper(
@@ -158,11 +145,12 @@ class GetSuggestions extends ApiBase {
 	 */
 	public function execute() {
 		$extracted = $this->extractRequestParams();
-		try {
-			$params = $this->paramsParser->parseAndValidate( $extracted );
-		} catch ( InvalidArgumentException $ex ) {
-			$this->dieWithException( $ex );
+		$paramsStatus = $this->paramsParser->parseAndValidate( $extracted );
+		if ( !$paramsStatus->isGood() ) {
+			$this->dieStatus( $paramsStatus );
 		}
+		/** @var SuggesterParams $params */
+		$params = $paramsStatus->getValue();
 
 		if ( $params->context === 'item' ) {
 			if ( $this->abTestingState && $params->entity !== null ) {
@@ -191,24 +179,18 @@ class GetSuggestions extends ApiBase {
 			$suggest = SuggesterEngine::SUGGEST_ALL;
 		}
 		if ( $params->entity !== null ) {
-			try {
-				$suggestions = $suggestionGenerator->generateSuggestionsByItem(
-					$params->entity,
-					$params->suggesterLimit,
-					$params->minProbability,
-					$params->context,
-					$suggest
-				);
-			} catch ( RevisionedUnresolvedRedirectException $ex ) {
-				$this->errorReporter->dieException( $ex, 'unresolved-redirect' );
-			} catch ( InvalidArgumentException $ex ) {
-				$this->dieWithException( $ex );
-			}
+			$suggestionsStatus = $suggestionGenerator->generateSuggestionsByItem(
+				$params->entity,
+				$params->suggesterLimit,
+				$params->minProbability,
+				$params->context,
+				$suggest
+			);
 		} else {
 			if ( $params->types === null ) {
 				$params->types = [];
 			}
-			$suggestions = $suggestionGenerator->generateSuggestionsByPropertyList(
+			$suggestionsStatus = $suggestionGenerator->generateSuggestionsByPropertyList(
 				$params->properties,
 				$params->types,
 				$params->suggesterLimit,
@@ -217,9 +199,12 @@ class GetSuggestions extends ApiBase {
 				$suggest
 			);
 		}
+		if ( !$suggestionsStatus->isGood() ) {
+			$this->dieStatus( $suggestionsStatus );
+		}
+		$suggestions = $suggestionsStatus->getValue();
 
 		$suggestions = $suggestionGenerator->filterSuggestions(
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable T240141
 			$suggestions,
 			$params->search,
 			$params->language,

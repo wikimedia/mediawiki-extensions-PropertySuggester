@@ -2,7 +2,7 @@
 
 namespace PropertySuggester;
 
-use InvalidArgumentException;
+use Status;
 
 /**
  * Parses the suggester parameters
@@ -34,19 +34,16 @@ class SuggesterParamsParser {
 	/**
 	 * parses and validates the parameters of GetSuggestion
 	 * @param array $params
-	 * @throws InvalidArgumentException
-	 * @return SuggesterParams
+	 * @return Status containing SuggesterParams
 	 */
-	public function parseAndValidate( array $params ) {
+	public function parseAndValidate( array $params ): Status {
 		$result = new SuggesterParams();
 
 		$result->entity = $params['entity'];
 		$result->properties = $params['properties'];
 
 		if ( !( $result->entity xor $result->properties ) ) {
-			throw new InvalidArgumentException(
-				"Provide either entity-id parameter 'entity' or a list of properties 'properties'"
-			);
+			return Status::newFatal( 'propertysuggester-wbsgetsuggestions-either-entity-or-properties' );
 		}
 
 		$result->types = $params['types'];
@@ -86,7 +83,7 @@ class SuggesterParamsParser {
 			$result->include = '';
 		}
 
-		return $result;
+		return Status::newGood( $result );
 	}
 
 }

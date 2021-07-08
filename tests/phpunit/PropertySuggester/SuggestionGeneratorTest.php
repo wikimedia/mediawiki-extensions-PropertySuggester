@@ -2,7 +2,6 @@
 
 namespace PropertySuggester;
 
-use InvalidArgumentException;
 use MediaWikiTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use PropertySuggester\Suggesters\SuggesterEngine;
@@ -150,7 +149,8 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 			'item',
 			SuggesterEngine::SUGGEST_NEW
 		);
-		$this->assertEquals( $result1, [ 'foo' ] );
+		$this->assertTrue( $result1->isGood() );
+		$this->assertEquals( $result1->getValue(), [ 'foo' ] );
 	}
 
 	public function testGenerateSuggestionsWithItem() {
@@ -178,7 +178,8 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 			SuggesterEngine::SUGGEST_NEW
 		);
 
-		$this->assertEquals( $result3, [ 'foo' ] );
+		$this->assertTrue( $result3->isGood() );
+		$this->assertEquals( $result3->getValue(), [ 'foo' ] );
 	}
 
 	public function testGenerateSuggestionsWithNonExistentItem() {
@@ -189,14 +190,16 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 			->with( $this->equalTo( $itemId ) )
 			->will( $this->returnValue( null ) );
 
-		$this->expectException( InvalidArgumentException::class );
-		$this->suggestionGenerator->generateSuggestionsByItem(
+		$result = $this->suggestionGenerator->generateSuggestionsByItem(
 			'Q41',
 			100,
 			0.0,
 			'item',
 			SuggesterEngine::SUGGEST_NEW
 		);
+		$this->assertFalse( $result->isGood() );
+		$this->assertSame( 'wikibase-api-no-such-entity',
+			$result->getErrors()[0]['message'] );
 	}
 
 	public function testFallbackBehaviourByItem() {
@@ -229,7 +232,8 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 			SuggesterEngine::SUGGEST_NEW
 		);
 
-		$this->assertEquals( $result4, [ 'foo' ] );
+		$this->assertTrue( $result4->isGood() );
+		$this->assertEquals( $result4->getValue(), [ 'foo' ] );
 	}
 
 	public function testFallbackBehaviourByPropertyIDs() {
@@ -257,7 +261,8 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 			'item',
 			SuggesterEngine::SUGGEST_NEW
 		);
-		$this->assertEquals( $result5, [ 'foo' ] );
+		$this->assertTrue( $result5->isGood() );
+		$this->assertEquals( $result5->getValue(), [ 'foo' ] );
 	}
 
 }

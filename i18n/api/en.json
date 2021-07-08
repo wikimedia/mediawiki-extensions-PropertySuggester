@@ -21,5 +21,6 @@
 	"apihelp-wbsgetsuggestions-param-properties": "Suggest additional properties for the given list of properties.",
 	"apihelp-wbsgetsuggestions-param-search": "Search for this text.",
 	"apihelp-wbsgetsuggestions-param-size": "Specify number of suggestions to be returned.",
-	"apihelp-wbsgetsuggestions-param-types": "Suggest additional properties for the given list of types (these values are equal to ones that would be gathered through the classifyingPropertyIds if an entity is provided in the API call). Used in combination with the properties parameter."
+	"apihelp-wbsgetsuggestions-param-types": "Suggest additional properties for the given list of types (these values are equal to ones that would be gathered through the classifyingPropertyIds if an entity is provided in the API call). Used in combination with the properties parameter.",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Provide either entity-id parameter 'entity' or a list of properties 'properties'"
 }
