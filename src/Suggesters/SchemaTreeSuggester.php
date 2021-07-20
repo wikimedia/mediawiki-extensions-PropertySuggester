@@ -38,16 +38,6 @@ class SchemaTreeSuggester implements SuggesterEngine {
 	private $schemaTreeSuggesterUrl;
 
 	/**
-	 * @var string
-	 */
-	private $propertyBaseUrl;
-
-	/**
-	 * @var string
-	 */
-	private $typesBaseUrl;
-
-	/**
 	 * @var EventLogger|null
 	 */
 	private $eventLogger;
@@ -71,20 +61,6 @@ class SchemaTreeSuggester implements SuggesterEngine {
 	 */
 	public function setSchemaTreeSuggesterUrl( string $schemaTreeSuggesterUrl ) {
 		$this->schemaTreeSuggesterUrl = $schemaTreeSuggesterUrl;
-	}
-
-	/**
-	 * @param string $propertyBaseUrl
-	 */
-	public function setPropertyBaseUrl( string $propertyBaseUrl ) {
-		$this->propertyBaseUrl = $propertyBaseUrl;
-	}
-
-	/**
-	 * @param string $typesBaseUrl
-	 */
-	public function setTypesBaseUrl( string $typesBaseUrl ) {
-		$this->typesBaseUrl = $typesBaseUrl;
 	}
 
 	/**
@@ -136,12 +112,12 @@ class SchemaTreeSuggester implements SuggesterEngine {
 
 		$properties = [];
 		foreach ( $propertyIds as $id ) {
-			$properties[] = $this->propertyBaseUrl . 'P' . $id;
+			$properties[] = 'P' . $id;
 		}
 
 		$types = [];
 		foreach ( $typesIds as $id ) {
-			$types[] = $this->typesBaseUrl . 'Q' . $id;
+			$types[] = 'Q' . $id;
 		}
 
 		$response = $this->httpFactory->post(
@@ -282,10 +258,9 @@ class SchemaTreeSuggester implements SuggesterEngine {
 			if ( $pos > $limit ) {
 				break;
 			}
-			if ( $res['probability'] > $minProbability && strpos( $res['property'], $this->propertyBaseUrl ) === 0 ) {
-				$id = str_replace( $this->propertyBaseUrl, '', $res['property'] );
-				if ( !in_array( $id, $excludedIds ) ) {
-					$pid = new PropertyId( $id );
+			if ( $res['probability'] > $minProbability && strpos( $res['property'], 'P' ) === 0 ) {
+				if ( !in_array( $res['property'], $excludedIds ) ) {
+					$pid = new PropertyId( $res['property'] );
 					$suggestion = new Suggestion( $pid, $res["probability"] );
 					$resultArray[] = $suggestion;
 				}
