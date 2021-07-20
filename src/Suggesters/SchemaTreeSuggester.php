@@ -6,6 +6,7 @@ use Exception;
 use InvalidArgumentException;
 use LogicException;
 use MediaWiki\Http\HttpRequestFactory;
+use PropertySuggester\EventLogger;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -47,6 +48,11 @@ class SchemaTreeSuggester implements SuggesterEngine {
 	private $typesBaseUrl;
 
 	/**
+	 * @var EventLogger|null
+	 */
+	private $eventLogger;
+
+	/**
 	 * @param int[] $deprecatedPropertyIds
 	 */
 	public function setDeprecatedPropertyIds( array $deprecatedPropertyIds ) {
@@ -86,6 +92,13 @@ class SchemaTreeSuggester implements SuggesterEngine {
 	 */
 	private $httpFactory;
 
+	/**
+	 * @param EventLogger $eventLogger
+	 */
+	public function setEventLogger( EventLogger $eventLogger ) {
+		$this->eventLogger = $eventLogger;
+	}
+
 	public function __construct( HttpRequestFactory $httpFactory ) {
 		$this->httpFactory = $httpFactory;
 	}
@@ -107,6 +120,9 @@ class SchemaTreeSuggester implements SuggesterEngine {
 		float $minProbability,
 		string $include
 	) {
+		$this->eventLogger->setPropertySuggesterName( 'SchemaTreeSuggester' );
+		$startTime = microtime( true );
+
 		if ( !in_array( $include, [ self::SUGGEST_ALL, self::SUGGEST_NEW ] ) ) {
 			throw new InvalidArgumentException( '$include must be one of the SUGGEST_* constants!' );
 		}
@@ -142,6 +158,8 @@ class SchemaTreeSuggester implements SuggesterEngine {
 
 		// if request fails fall back to original property suggester
 		if ( !$response ) {
+			$this->eventLogger->setRequestDuration( -1 );
+			$this->eventLogger->logEvent();
 			return null;
 		}
 
@@ -152,7 +170,9 @@ class SchemaTreeSuggester implements SuggesterEngine {
 			return null;
 		}
 
-		return $this->buildResult( $result, $minProbability, $excludedIds, $limit );
+		$results = $this->buildResult( $result, $minProbability, $excludedIds, $limit );
+		$this->eventLogger->setRequestDuration( (int)( ( microtime( true ) - $startTime ) * 1000 ) );
+		return $results;
 	}
 
 	/**
@@ -235,6 +255,10 @@ class SchemaTreeSuggester implements SuggesterEngine {
 				$types[] = $numericEntityId;
 			}
 		}
+
+		$this->eventLogger->setExistingProperties( array_map( 'strval', $ids ) );
+		$this->eventLogger->setExistingTypes( array_map( 'strval', $types ) );
+
 		return $this->getSuggestions(
 			$ids,
 			$types,

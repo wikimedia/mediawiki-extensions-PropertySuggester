@@ -31,6 +31,7 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 		'search' => '',
 		'context' => 'item',
 		'include' => '',
+		'event' => '',
 	];
 
 	public function setUp() : void {

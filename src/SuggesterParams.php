@@ -68,4 +68,9 @@ class SuggesterParams {
 	 */
 	public $include;
 
+	/**
+	 * @var string|null
+	 */
+	public $event;
+
 }
