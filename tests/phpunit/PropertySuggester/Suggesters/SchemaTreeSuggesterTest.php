@@ -34,9 +34,9 @@ class SchemaTreeSuggesterTest extends MediaWikiTestCase {
 
 	public function setUp() : void {
 		$response = json_encode( [
-			'recommendations' => [ [ 'property' => '/prop/direct/P2', 'probability' => 0.1 ],
-				[ 'property' => '/prop/direct/P3', 'probability' => 0.05 ],
-				[ 'property' => '/prop/direct/P4', 'probability' => 0.25 ] ]
+			'recommendations' => [ [ 'property' => 'P2', 'probability' => 0.1 ],
+				[ 'property' => 'P3', 'probability' => 0.05 ],
+				[ 'property' => 'P4', 'probability' => 0.25 ] ]
 		] );
 
 		$this->eventLogger = $this->createMock( EventLogger::class );
@@ -45,8 +45,6 @@ class SchemaTreeSuggesterTest extends MediaWikiTestCase {
 
 		$this->suggester->setEventLogger( $this->eventLogger );
 		$this->suggester->setSchemaTreeSuggesterUrl( 'mockURL' );
-		$this->suggester->setPropertyBaseUrl( '/prop/direct/' );
-		$this->suggester->setTypesBaseUrl( '/entity/' );
 	}
 
 	public function testSuggestByPropertyIds() {
@@ -125,14 +123,12 @@ class SchemaTreeSuggesterTest extends MediaWikiTestCase {
 
 	public function testReturnOnlyProperties() {
 		$response = json_encode( [
-			'recommendations' => [ [ 'property' => '/prop/direct/P2', 'probability' => 0.1 ],
-				[ 'property' => '/entity/Q3', 'probability' => 0.05 ],
-				[ 'property' => '/prop/direct/P4', 'probability' => 0.25 ] ]
+			'recommendations' => [ [ 'property' => 'P2', 'probability' => 0.1 ],
+				[ 'property' => 'Q3', 'probability' => 0.05 ],
+				[ 'property' => 'P4', 'probability' => 0.25 ] ]
 		] );
 
 		$this->suggester = new SchemaTreeSuggester( $this->makeMockHttpRequestFactory( $response ) );
-		$this->suggester->setPropertyBaseUrl( '/prop/direct/' );
-		$this->suggester->setTypesBaseUrl( '/entity/' );
 		$this->suggester->setEventLogger( $this->eventLogger );
 
 		$ids = [ new PropertyId( 'P1' ) ];

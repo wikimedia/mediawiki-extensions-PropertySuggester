@@ -11,15 +11,12 @@ use PropertySuggester\Suggesters\SchemaTreeSuggester;
 use PropertySuggester\Suggesters\SimpleSuggester;
 use PropertySuggester\Suggesters\SuggesterEngine;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
-use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -122,13 +119,6 @@ class GetSuggestions extends ApiBase {
 
 		$this->schemaTreeSuggester = new SchemaTreeSuggester( $httpFactory );
 		$this->schemaTreeSuggester->setSchemaTreeSuggesterUrl( $config->get( 'PropertySuggesterSchemaTreeUrl' ) );
-		$propertyRepoName = $rdfVocabulary->getEntityRepositoryName( new PropertyId( 'P1' ) );
-		$this->schemaTreeSuggester->setPropertyBaseUrl( $rdfVocabulary->getNamespaceURI(
-			$rdfVocabulary->propertyNamespaceNames[$propertyRepoName][RdfVocabulary::NSP_DIRECT_CLAIM]
-		) );
-		$itemRepoName = $rdfVocabulary->getEntityRepositoryName( new ItemId( 'Q1' ) );
-		$this->schemaTreeSuggester->setTypesBaseUrl( $rdfVocabulary->getNamespaceURI(
-			$rdfVocabulary->entityNamespaceNames[$itemRepoName] ) );
 
 		if ( $config->get( 'PropertySuggesterDefaultSuggester' ) === 'PropertySuggester' ) {
 			$this->defaultSuggester = $this->suggester;
