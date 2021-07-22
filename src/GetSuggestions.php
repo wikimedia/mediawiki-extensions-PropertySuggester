@@ -110,15 +110,19 @@ class GetSuggestions extends ApiBase {
 		$this->entityTitleLookup = WikibaseRepo::getEntityTitleLookup( $mwServices );
 		$this->languageCodes = WikibaseRepo::getTermsLanguages( $mwServices )->getLanguages();
 		$this->abTestingState = $config->get( 'PropertySuggesterABTestingState' );
-		$rdfVocabulary = WikibaseRepo::getRdfVocabulary( $mwServices );
+
+		$deprecatedPropertyIds = $config->get( 'PropertySuggesterDeprecatedIds' );
+		$classifyingPropertyIds = $config->get( 'PropertySuggesterClassifyingPropertyIds' );
 
 		$this->suggester = new SimpleSuggester( $lb );
-		$this->suggester->setDeprecatedPropertyIds( $config->get( 'PropertySuggesterDeprecatedIds' ) );
-		$this->suggester->setClassifyingPropertyIds( $config->get( 'PropertySuggesterClassifyingPropertyIds' ) );
+		$this->suggester->setDeprecatedPropertyIds( $deprecatedPropertyIds );
+		$this->suggester->setClassifyingPropertyIds( $classifyingPropertyIds );
 		$this->suggester->setInitialSuggestions( $config->get( 'PropertySuggesterInitialSuggestions' ) );
 
 		$this->schemaTreeSuggester = new SchemaTreeSuggester( $httpFactory );
 		$this->schemaTreeSuggester->setSchemaTreeSuggesterUrl( $config->get( 'PropertySuggesterSchemaTreeUrl' ) );
+		$this->schemaTreeSuggester->setDeprecatedPropertyIds( $deprecatedPropertyIds );
+		$this->schemaTreeSuggester->setClassifyingPropertyIds( $classifyingPropertyIds );
 
 		if ( $config->get( 'PropertySuggesterDefaultSuggester' ) === 'PropertySuggester' ) {
 			$this->defaultSuggester = $this->suggester;
