@@ -22,5 +22,6 @@
 	"apihelp-wbsgetsuggestions-param-search": "לחפש את הטקסט הזה.",
 	"apihelp-wbsgetsuggestions-param-size": "נא לציין את מספר ההצעות שתוחזרנה.",
 	"apihelp-wbsgetsuggestions-param-types": "הצעת מאפיינים נוספים לרשימה נתונה של סוגים (הערכים האלה שווים לאלה שייאספו דרך classifyingPropertyIds אם ישות מסופקת דרך קריאת API). משמש בצירוף עם הפרמטר properties.",
-	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "נא לספק או את פרמטר מזהה הישות 'entity' או את רשימת המאפיינים 'properties'"
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "נא לספק או את פרמטר מזהה הישות 'entity' או את רשימת המאפיינים 'properties'",
+	"apihelp-wbsgetsuggestions-param-event": "מזהה אירוע שמשמש להתאמת אירועים שנרשמים בצד הלקוח ובצד השרת."
 }

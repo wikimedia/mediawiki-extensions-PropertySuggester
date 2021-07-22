@@ -22,5 +22,6 @@
 	"apihelp-wbsgetsuggestions-param-limit": "Número máximo de resultados.",
 	"apihelp-wbsgetsuggestions-param-properties": "Sugira propriedades adicionais para a determinada lista de propriedades.",
 	"apihelp-wbsgetsuggestions-param-search": "Pesquisar este texto.",
-	"apihelp-wbsgetsuggestions-param-size": "Especificar o número de sugestões a serem retornadas."
+	"apihelp-wbsgetsuggestions-param-size": "Especificar o número de sugestões a serem retornadas.",
+	"apihelp-wbsgetsuggestions-param-event": "ID de evento usado para corresponder aos eventos registrados cliente e servidor do servidor."
 }

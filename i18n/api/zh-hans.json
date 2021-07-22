@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"Zhang8569"
 		]
 	},
 	"apihelp-wbsgetsuggestions-description": "用于获取添加至Wikibase实体的额外属性建议的API模块。API模块主要在用户编辑Wikibase实体时，由建议器小部件使用。",
@@ -18,5 +19,6 @@
 	"apihelp-wbsgetsuggestions-param-limit": "结果的最大值。",
 	"apihelp-wbsgetsuggestions-param-properties": "为提供的属性列表建议额外属性。",
 	"apihelp-wbsgetsuggestions-param-search": "搜索此文本。",
-	"apihelp-wbsgetsuggestions-param-size": "指定要返回的建议数量。"
+	"apihelp-wbsgetsuggestions-param-size": "指定要返回的建议数量。",
+	"apihelp-wbsgetsuggestions-param-event": "用于匹配客户端和服务器端记录的事件的事件 ID。"
 }
