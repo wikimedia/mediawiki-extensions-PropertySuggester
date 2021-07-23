@@ -50,7 +50,7 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 		$this->db->insert( 'wbs_propertypairs', $rows );
 	}
 
-	public function setUp() : void {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->tablesUsed[] = 'wbs_propertypairs';

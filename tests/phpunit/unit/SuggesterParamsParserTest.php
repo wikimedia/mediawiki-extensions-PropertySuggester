@@ -34,7 +34,7 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 		'event' => '',
 	];
 
-	public function setUp() : void {
+	public function setUp(): void {
 		parent::setUp();
 		$this->paramsParser = new SuggesterParamsParser(
 			$this->defaultSuggesterResultSize,

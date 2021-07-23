@@ -32,7 +32,7 @@ class SchemaTreeSuggesterTest extends MediaWikiTestCase {
 	 */
 	private $eventLogger;
 
-	public function setUp() : void {
+	public function setUp(): void {
 		$response = json_encode( [
 			'recommendations' => [ [ 'property' => 'P2', 'probability' => 0.1 ],
 				[ 'property' => 'P3', 'probability' => 0.05 ],

@@ -63,7 +63,7 @@ class ResultBuilder {
 		$this->searchPattern = '/^' . preg_quote( $search, '/' ) . '/i';
 	}
 
-	public function createResultArray( array $suggestions, string $language ) : array {
+	public function createResultArray( array $suggestions, string $language ): array {
 		$ids = [];
 		foreach ( $suggestions as $suggestion ) {
 			$ids[] = $suggestion->getPropertyId();

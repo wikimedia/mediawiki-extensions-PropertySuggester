@@ -38,7 +38,7 @@ class ResultBuilderTest extends MediaWikiUnitTestCase {
 	 */
 	private $languageFallbackChainFactory;
 
-	public function setUp() : void {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->titleLookup = $this->createMock( EntityTitleLookup::class );

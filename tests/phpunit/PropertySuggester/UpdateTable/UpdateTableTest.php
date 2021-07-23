@@ -26,7 +26,7 @@ class UpdateTableTest extends MediaWikiTestCase {
 	 */
 	private $rowHeader = [ 'pid1', 'qid1', 'pid2', 'count', 'probability', 'context' ];
 
-	public function setUp() : void {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->tablesUsed[] = 'wbs_propertypairs';
@@ -101,7 +101,7 @@ class UpdateTableTest extends MediaWikiTestCase {
 		fclose( $fhandle );
 	}
 
-	public function tearDown() : void {
+	public function tearDown(): void {
 		if ( file_exists( $this->testfilename ) ) {
 			unlink( $this->testfilename );
 		}

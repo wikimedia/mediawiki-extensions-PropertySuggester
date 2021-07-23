@@ -49,7 +49,7 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 	 */
 	private $entitySearchHelper;
 
-	public function setUp() : void {
+	public function setUp(): void {
 		parent::setUp();
 
 		$this->lookup = $this->createMock( EntityLookup::class );
