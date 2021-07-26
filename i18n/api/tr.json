@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"BaRaN6161 TURK"
+			"BaRaN6161 TURK",
+			"Hedda"
 		]
 	},
 	"apihelp-wbsgetsuggestions-description": "Bir Wikibase varlığına eklenecek ek özellik önerileri almak için API modülü. API modülü, kullanıcılar Wikibase varlıklarını düzenlerken öncelikli olarak widget tarafından kullanılmak üzere tasarlanmıştır.",
@@ -19,5 +20,8 @@
 	"apihelp-wbsgetsuggestions-param-limit": "Maksimum sonuç sayısı.",
 	"apihelp-wbsgetsuggestions-param-properties": "Belirli özellikler listesi için ek özellikler önerin.",
 	"apihelp-wbsgetsuggestions-param-search": "Bu metni arayın.",
-	"apihelp-wbsgetsuggestions-param-size": "Döndürülecek öneri sayısını belirtin."
+	"apihelp-wbsgetsuggestions-param-size": "Döndürülecek öneri sayısını belirtin.",
+	"apihelp-wbsgetsuggestions-param-types": "Verilen tür listesi için ek özellikler önerin (bu değerler, API çağrısında bir varlık sağlanmışsa classifyingPropertyIds aracılığıyla toplanan değerlere eşittir). Özellikler, parametresiyle birlikte kullanılır.",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Varlık kimliği parametresi 'varlık' veya 'özellikler' özelliklerinin bir listesini sağlayın",
+	"apihelp-wbsgetsuggestions-param-event": "İstemci ve sunucu tarafında kaydedilen olayları eşleştirmek için kullanılan olay kimliği."
 }

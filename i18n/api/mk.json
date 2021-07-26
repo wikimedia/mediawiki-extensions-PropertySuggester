@@ -21,5 +21,6 @@
 	"apihelp-wbsgetsuggestions-param-search": "Пребарај го текстов.",
 	"apihelp-wbsgetsuggestions-param-size": "Укажете колку предлози да се дадат.",
 	"apihelp-wbsgetsuggestions-param-types": "Предлагање на дополнителни својства за дадениот список на видови (овие вредности се еднакви на оние што би се собрале преку classifyingPropertyIds ако се укаже единица во приложничкиот повик). Се кроисти заедно со параметарот за својства.",
-	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Внесете или параметар „entity“ за назнака на единицата, или список на својства под „properties“"
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Внесете или параметар „entity“ за назнака на единицата, или список на својства под „properties“",
+	"apihelp-wbsgetsuggestions-param-event": "Назнака која служи за врзување на одговарачките настани заведени на клиентска и опслужувачка страна."
 }
