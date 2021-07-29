@@ -18,7 +18,7 @@
 					element = null;
 					/* eslint-disable camelcase */
 					mw.eventLog.submit(
-						'wd_propertysuggester.client_ab_testing',
+						'wd_propertysuggester.client_side_property_request',
 						{
 							$schema: schemas.PropertySuggesterClientSidePropertyRequest,
 							rank_selected: index,
