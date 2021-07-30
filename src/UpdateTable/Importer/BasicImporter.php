@@ -29,7 +29,7 @@ class BasicImporter implements Importer {
 
 		$lbFactory = $importContext->getLbFactory();
 		$lb = $lbFactory->getMainLB();
-		$db = $lb->getConnection( DB_MASTER );
+		$db = $lb->getConnection( DB_PRIMARY );
 		$this->doImport( $fileHandle, $lbFactory, $db, $importContext );
 		$lb->reuseConnection( $db );
 

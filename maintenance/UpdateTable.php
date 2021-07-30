@@ -102,7 +102,7 @@ class UpdateTable extends Maintenance {
 		global $wgDBtype;
 
 		$lb = $lbFactory->getMainLB();
-		$db = $lb->getMaintenanceConnectionRef( DB_MASTER );
+		$db = $lb->getMaintenanceConnectionRef( DB_PRIMARY );
 		if ( !$db->tableExists( $tableName, __METHOD__ ) ) {
 			$this->fatalError( "$tableName table does not exist.\n" .
 				"Executing core/maintenance/update.php may help.\n" );
