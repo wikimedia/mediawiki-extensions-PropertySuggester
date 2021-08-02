@@ -117,7 +117,7 @@ class EventLogger {
 			self::EVENT_SUGGESTER_NAME => $this->propertySuggesterName ?: 'Failed setting name',
 			self::EVENT_EXISTING_PROPERTIES => $this->existingProperties ?: [],
 			self::EVENT_EXISTING_TYPES => $this->existingTypes ?: [],
-			self::EVENT_REQ_DURATION_MS => $this->requestDuration ?: -1,
+			self::EVENT_REQ_DURATION_MS => $this->requestDuration ?? -1,
 			self::EVENT_ADD_SUGGESTIONS => $this->addSuggestions ?: [],
 			self::EVENT_LANGUAGE_CODE => $this->languageCode,
 			self::EVENT_ID => $this->eventID
