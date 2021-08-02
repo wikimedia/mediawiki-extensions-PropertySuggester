@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"GuoPC",
 			"Liuxinyu970226",
 			"Zhang8569"
 		]
@@ -20,5 +21,6 @@
 	"apihelp-wbsgetsuggestions-param-properties": "为提供的属性列表建议额外属性。",
 	"apihelp-wbsgetsuggestions-param-search": "搜索此文本。",
 	"apihelp-wbsgetsuggestions-param-size": "指定要返回的建议数量。",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "提供实体ID参数“entity”或属性列表“properties”",
 	"apihelp-wbsgetsuggestions-param-event": "用于匹配客户端和服务器端记录的事件的事件 ID。"
 }
