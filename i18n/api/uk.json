@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"DDPAT",
 			"Piramidion",
 			"Ата"
 		]
@@ -20,5 +21,8 @@
 	"apihelp-wbsgetsuggestions-param-limit": "Максимальна кількість результатів.",
 	"apihelp-wbsgetsuggestions-param-properties": "Запропонувати додаткові властивості для заданого списку властивостей.",
 	"apihelp-wbsgetsuggestions-param-search": "Шукати цей текст.",
-	"apihelp-wbsgetsuggestions-param-size": "Вказати кількість пропозицій, які треба вивести."
+	"apihelp-wbsgetsuggestions-param-size": "Вказати кількість пропозицій, які треба вивести.",
+	"apihelp-wbsgetsuggestions-param-types": "Запропонуйте додаткові властивості для даного списку типів (ці значення дорівнюють тим, які будуть зібрані за допомогою класифікуючих PropertyIds, якщо сутність надається у виклику API). Використовується в поєднанні з параметром властивостей.",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Надайте параметр \"entity\" ідентифікатор \"entity\" або список властивостей \"properties\"",
+	"apihelp-wbsgetsuggestions-param-event": "Ідентифікатор події, що використовується для узгодження подій, зареєстрованих з боку клієнта та сервера."
 }
