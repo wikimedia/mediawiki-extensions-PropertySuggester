@@ -21,5 +21,6 @@
 	"apihelp-wbsgetsuggestions-param-search": "Cirche stu teste.",
 	"apihelp-wbsgetsuggestions-param-size": "Mitte 'u numere de suggereminde da turnà.",
 	"apihelp-wbsgetsuggestions-param-types": "Suggerisce probbietà aggiundive pe 'nu certe elenghe de tipe (ste valore sò uguale a une ca avessera essere carresciate cu 'u classifyingPropertyIds ce 'n'endità pò fà 'na chiamate a l'API). Ausate in combinazione cu 'u parametre de le probbietà.",
-	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Dèje totte e doje le parametre de l'ID de l'endità 'entity' o 'n'elenghe de probbietà 'properties'"
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Dèje totte e doje le parametre de l'ID de l'endità 'entity' o 'n'elenghe de probbietà 'properties'",
+	"apihelp-wbsgetsuggestions-param-event": "ID de l'avvenimende ausate pe accucchià le avveneminde reggistrate late client e server."
 }
