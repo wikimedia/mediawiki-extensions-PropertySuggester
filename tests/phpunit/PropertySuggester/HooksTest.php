@@ -7,7 +7,7 @@ use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -45,7 +45,7 @@ class HooksTest extends MediaWikiTestCase {
 
 	public function onBeforePageDisplay_resourceLoaderModuleNotAddedProvider() {
 		return [
-			[ $this->getTitleForId( new PropertyId( 'P1' ) ) ],
+			[ $this->getTitleForId( new NumericPropertyId( 'P1' ) ) ],
 			[ Title::makeTitle( NS_HELP, 'Contents' ) ],
 			[ null ]
 		];

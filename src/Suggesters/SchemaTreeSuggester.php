@@ -10,6 +10,7 @@ use PropertySuggester\EventLogger;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
@@ -260,7 +261,7 @@ class SchemaTreeSuggester implements SuggesterEngine {
 			}
 			if ( $res['probability'] > $minProbability && strpos( $res['property'], 'P' ) === 0 ) {
 				if ( !in_array( $res['property'], $excludedIds ) ) {
-					$pid = new PropertyId( $res['property'] );
+					$pid = new NumericPropertyId( $res['property'] );
 					$suggestion = new Suggestion( $pid, $res["probability"] );
 					$resultArray[] = $suggestion;
 				}

@@ -8,6 +8,7 @@ use PropertySuggester\EventLogger;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -71,7 +72,7 @@ class SimpleSuggester implements SuggesterEngine {
 	public function setInitialSuggestions( array $initialSuggestionIds ) {
 		$suggestions = [];
 		foreach ( $initialSuggestionIds as $id ) {
-			$suggestions[] = new Suggestion( PropertyId::newFromNumber( $id ), 1.0 );
+			$suggestions[] = new Suggestion( NumericPropertyId::newFromNumber( $id ), 1.0 );
 		}
 
 		$this->initialSuggestions = $suggestions;
@@ -278,7 +279,7 @@ class SimpleSuggester implements SuggesterEngine {
 	private function buildResult( IResultWrapper $res ) {
 		$resultArray = [];
 		foreach ( $res as $row ) {
-			$pid = PropertyId::newFromNumber( $row->pid );
+			$pid = NumericPropertyId::newFromNumber( $row->pid );
 			$suggestion = new Suggestion( $pid, $row->prob );
 			$resultArray[] = $suggestion;
 		}

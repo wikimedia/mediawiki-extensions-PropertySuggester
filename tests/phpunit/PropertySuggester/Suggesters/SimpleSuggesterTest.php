@@ -7,7 +7,7 @@ use MediaWikiTestCase;
 use PropertySuggester\EventLogger;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikimedia\Rdbms\LoadBalancerSingle;
 
@@ -65,7 +65,7 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 	}
 
 	public function testSuggestByPropertyIds() {
-		$ids = [ new PropertyId( 'p1' ) ];
+		$ids = [ new NumericPropertyId( 'p1' ) ];
 
 		$res = $this->suggester->suggestByPropertyIds(
 			$ids,
@@ -76,14 +76,14 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 			SuggesterEngine::SUGGEST_NEW
 		);
 
-		$this->assertEquals( new PropertyId( 'p2' ), $res[0]->getPropertyId() );
+		$this->assertEquals( new NumericPropertyId( 'p2' ), $res[0]->getPropertyId() );
 		$this->assertEqualsWithDelta( 0.1, $res[0]->getProbability(), 0.0001 );
-		$this->assertEquals( new PropertyId( 'p3' ), $res[1]->getPropertyId() );
+		$this->assertEquals( new NumericPropertyId( 'p3' ), $res[1]->getPropertyId() );
 		$this->assertEqualsWithDelta( 0.05, $res[1]->getProbability(), 0.0001 );
 	}
 
 	public function testSuggestByPropertyIdsAll() {
-		$ids = [ new PropertyId( 'P1' ), new PropertyId( 'P3' ) ];
+		$ids = [ new NumericPropertyId( 'P1' ), new NumericPropertyId( 'P3' ) ];
 
 		$res = $this->suggester->suggestByPropertyIds(
 			$ids,
@@ -94,17 +94,17 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 			SuggesterEngine::SUGGEST_ALL
 		);
 
-		$this->assertEquals( new PropertyId( 'P1' ), $res[0]->getPropertyId() );
+		$this->assertEquals( new NumericPropertyId( 'P1' ), $res[0]->getPropertyId() );
 		$this->assertEqualsWithDelta( 0.25, $res[0]->getProbability(), 0.0001 );
-		$this->assertEquals( new PropertyId( 'P2' ), $res[1]->getPropertyId() );
+		$this->assertEquals( new NumericPropertyId( 'P2' ), $res[1]->getPropertyId() );
 		$this->assertEqualsWithDelta( 0.05, $res[1]->getProbability(), 0.0001 );
-		$this->assertEquals( new PropertyId( 'P3' ), $res[2]->getPropertyId() );
+		$this->assertEquals( new NumericPropertyId( 'P3' ), $res[2]->getPropertyId() );
 		$this->assertEqualsWithDelta( 0.025, $res[2]->getProbability(), 0.0001 );
 	}
 
 	public function testSuggestByItem() {
 		$item = new Item( new ItemId( 'Q42' ) );
-		$snak = new PropertySomeValueSnak( new PropertyId( 'P1' ) );
+		$snak = new PropertySomeValueSnak( new NumericPropertyId( 'P1' ) );
 		$guid = 'claim0';
 		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
 
@@ -116,15 +116,15 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 			SuggesterEngine::SUGGEST_NEW
 		);
 
-		$this->assertEquals( new PropertyId( 'p2' ), $res[0]->getPropertyId() );
-		$this->assertEquals( new PropertyId( 'p3' ), $res[1]->getPropertyId() );
+		$this->assertEquals( new NumericPropertyId( 'p2' ), $res[0]->getPropertyId() );
+		$this->assertEquals( new NumericPropertyId( 'p3' ), $res[1]->getPropertyId() );
 	}
 
 	public function testSuggestByItemAll() {
 		$item = new Item( new ItemId( 'Q42' ) );
-		$snak = new PropertySomeValueSnak( new PropertyId( 'P1' ) );
+		$snak = new PropertySomeValueSnak( new NumericPropertyId( 'P1' ) );
 		$item->getStatements()->addNewStatement( $snak, null, null, 'claim0' );
-		$snak = new PropertySomeValueSnak( new PropertyId( 'P3' ) );
+		$snak = new PropertySomeValueSnak( new NumericPropertyId( 'P3' ) );
 		$item->getStatements()->addNewStatement( $snak, null, null, 'claim1' );
 
 		// Make sure even deprecated properties are included
@@ -139,13 +139,13 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 			SuggesterEngine::SUGGEST_ALL
 		);
 
-		$this->assertEquals( new PropertyId( 'P1' ), $res[0]->getPropertyId() );
-		$this->assertEquals( new PropertyId( 'P2' ), $res[1]->getPropertyId() );
-		$this->assertEquals( new PropertyId( 'P3' ), $res[2]->getPropertyId() );
+		$this->assertEquals( new NumericPropertyId( 'P1' ), $res[0]->getPropertyId() );
+		$this->assertEquals( new NumericPropertyId( 'P2' ), $res[1]->getPropertyId() );
+		$this->assertEquals( new NumericPropertyId( 'P3' ), $res[2]->getPropertyId() );
 	}
 
 	public function testDeprecatedProperties() {
-		$ids = [ new PropertyId( 'p1' ) ];
+		$ids = [ new NumericPropertyId( 'p1' ) ];
 
 		$this->suggester->setDeprecatedPropertyIds( [ 2 ] );
 
@@ -181,7 +181,7 @@ class SimpleSuggesterTest extends MediaWikiTestCase {
 	public function testInitialSuggestionsResult() {
 		$this->suggester->setInitialSuggestions( [ 42 ] );
 		$this->assertEquals(
-			[ new Suggestion( new PropertyId( 'P42' ), 1.0 ) ],
+			[ new Suggestion( new NumericPropertyId( 'P42' ), 1.0 ) ],
 			$this->suggester->suggestByPropertyIds(
 				[],
 				[],

@@ -7,7 +7,7 @@ use MediaWikiUnitTestCase;
 use PropertySuggester\Suggesters\Suggestion;
 use Title;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\Lib\StaticContentLanguages;
@@ -94,7 +94,7 @@ class ResultBuilderTest extends MediaWikiUnitTestCase {
 
 	public function testCreateResultsArray() {
 		$language = 'en';
-		$propertyId = new PropertyId( 'P123' );
+		$propertyId = new NumericPropertyId( 'P123' );
 		$label = 'is potato';
 		$description = 'boolean potato check';
 		$alias = 'isPotato';
@@ -138,7 +138,7 @@ class ResultBuilderTest extends MediaWikiUnitTestCase {
 	public function testGivenMissingTermsForRequestedLanguage_createResultsArrayUsesFallback() {
 		$language = 'en-gb';
 		$fallbackLanguage = 'en';
-		$propertyId = new PropertyId( 'P123' );
+		$propertyId = new NumericPropertyId( 'P123' );
 		$fallbackLabel = 'is potato';
 		$fallbackDescription = 'boolean potato check';
 

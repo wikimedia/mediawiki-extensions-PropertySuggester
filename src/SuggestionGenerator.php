@@ -9,7 +9,7 @@ use PropertySuggester\Suggesters\Suggestion;
 use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\Repo\Api\EntitySearchHelper;
@@ -130,7 +130,7 @@ class SuggestionGenerator {
 		$propertyIds = [];
 		foreach ( $propertyIdList as $stringId ) {
 			try {
-				$propertyIds[] = new PropertyId( $stringId );
+				$propertyIds[] = new NumericPropertyId( $stringId );
 			} catch ( InvalidArgumentException $e ) {
 				return Status::newFatal( 'wikibase-api-invalid-property-id' );
 			}

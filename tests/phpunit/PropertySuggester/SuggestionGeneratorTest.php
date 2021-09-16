@@ -8,7 +8,7 @@ use PropertySuggester\Suggesters\SuggesterEngine;
 use PropertySuggester\Suggesters\Suggestion;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Term\Term;
@@ -66,11 +66,11 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 	}
 
 	public function testFilterSuggestions() {
-		$p7 = new PropertyId( 'P7' );
-		$p10 = new PropertyId( 'P10' );
-		$p12 = new PropertyId( 'P12' );
-		$p15 = new PropertyId( 'P15' );
-		$p23 = new PropertyId( 'P23' );
+		$p7 = new NumericPropertyId( 'P7' );
+		$p10 = new NumericPropertyId( 'P10' );
+		$p12 = new NumericPropertyId( 'P12' );
+		$p15 = new NumericPropertyId( 'P15' );
+		$p23 = new NumericPropertyId( 'P23' );
 
 		$suggestions = [
 			new Suggestion( $p12, 0.9 ), // this will stay at pos 0
@@ -98,7 +98,7 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @param PropertyId[] $ids
+	 * @param NumericPropertyId[] $ids
 	 *
 	 * @return TermSearchResult[]
 	 */
@@ -131,9 +131,9 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 
 	public function testGenerateSuggestionsWithPropertyList() {
 		$properties = [
-			new PropertyId( 'P12' ),
-			new PropertyId( 'P13' ),
-			new PropertyId( 'P14' ),
+			new NumericPropertyId( 'P12' ),
+			new NumericPropertyId( 'P13' ),
+			new NumericPropertyId( 'P14' ),
 		];
 
 		$this->suggester->expects( $this->any() )
@@ -156,7 +156,7 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 	public function testGenerateSuggestionsWithItem() {
 		$itemId = new ItemId( 'Q42' );
 		$item = new Item( $itemId );
-		$snak = new PropertySomeValueSnak( new PropertyId( 'P12' ) );
+		$snak = new PropertySomeValueSnak( new NumericPropertyId( 'P12' ) );
 		$guid = 'claim0';
 		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
 
@@ -205,7 +205,7 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 	public function testFallbackBehaviourByItem() {
 		$itemId = new ItemId( 'Q42' );
 		$item = new Item( $itemId );
-		$snak = new PropertySomeValueSnak( new PropertyId( 'P12' ) );
+		$snak = new PropertySomeValueSnak( new NumericPropertyId( 'P12' ) );
 		$guid = 'claim0';
 		$item->getStatements()->addNewStatement( $snak, null, null, $guid );
 
@@ -238,9 +238,9 @@ class SuggestionGeneratorTest extends MediaWikiTestCase {
 
 	public function testFallbackBehaviourByPropertyIDs() {
 		$properties = [
-			new PropertyId( 'P12' ),
-			new PropertyId( 'P13' ),
-			new PropertyId( 'P14' ),
+			new NumericPropertyId( 'P12' ),
+			new NumericPropertyId( 'P13' ),
+			new NumericPropertyId( 'P14' ),
 		];
 
 		$this->suggester->expects( $this->any() )
