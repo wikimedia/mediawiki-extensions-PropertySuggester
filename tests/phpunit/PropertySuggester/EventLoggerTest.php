@@ -3,7 +3,7 @@
 namespace PropertySuggester;
 
 use ExtensionRegistry;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 
 /**
  * @covers \PropertySuggester\EventLogger
@@ -12,7 +12,7 @@ use MediaWikiTestCase;
  * @group API
  * @group medium
  */
-class EventLoggerTest extends MediaWikiTestCase {
+class EventLoggerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var string

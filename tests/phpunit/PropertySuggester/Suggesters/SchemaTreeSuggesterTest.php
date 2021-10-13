@@ -2,7 +2,7 @@
 
 namespace PropertySuggester;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use MockHttpTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PropertySuggester\Suggesters\SchemaTreeSuggester;
@@ -19,7 +19,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
  * @group API
  * @group medium
  */
-class SchemaTreeSuggesterTest extends MediaWikiTestCase {
+class SchemaTreeSuggesterTest extends MediaWikiIntegrationTestCase {
 	use MockHttpTrait;
 
 	/**

@@ -2,7 +2,7 @@
 
 namespace PropertySuggester;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use PropertySuggester\Suggesters\SuggesterEngine;
 use PropertySuggester\Suggesters\Suggestion;
@@ -22,7 +22,7 @@ use Wikibase\Repo\Api\EntitySearchHelper;
  * @group API
  * @group medium
  */
-class SuggestionGeneratorTest extends MediaWikiTestCase {
+class SuggestionGeneratorTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var SuggestionGenerator

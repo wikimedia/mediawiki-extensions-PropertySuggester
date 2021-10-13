@@ -2,7 +2,7 @@
 
 namespace PropertySuggester;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
@@ -16,7 +16,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @group PropertySuggester
  * @group Wikibase
  */
-class HooksTest extends MediaWikiTestCase {
+class HooksTest extends MediaWikiIntegrationTestCase {
 
 	public function testOnBeforePageDisplay_resourceLoaderModuleAdded() {
 		$title = $this->getTitleForId( new ItemId( 'Q1' ) );

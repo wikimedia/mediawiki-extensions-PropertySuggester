@@ -2,7 +2,7 @@
 
 namespace PropertySuggester\UpdateTable;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use PropertySuggester\Maintenance\UpdateTable;
 
 /**
@@ -14,7 +14,7 @@ use PropertySuggester\Maintenance\UpdateTable;
  * @group Database
  * @group medium
  */
-class UpdateTableTest extends MediaWikiTestCase {
+class UpdateTableTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var string

@@ -3,7 +3,7 @@
 namespace PropertySuggester\Suggesters;
 
 use InvalidArgumentException;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use PropertySuggester\EventLogger;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -20,7 +20,7 @@ use Wikimedia\Rdbms\LoadBalancerSingle;
  * @group Database
  * @group medium
  */
-class SimpleSuggesterTest extends MediaWikiTestCase {
+class SimpleSuggesterTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var SimpleSuggester
