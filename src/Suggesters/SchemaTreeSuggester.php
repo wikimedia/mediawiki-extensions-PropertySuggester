@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
@@ -155,7 +154,7 @@ class SchemaTreeSuggester implements SuggesterEngine {
 	/**
 	 * @see SuggesterEngine::suggestByPropertyIds
 	 *
-	 * @param PropertyId[] $propertyIds
+	 * @param NumericPropertyId[] $propertyIds
 	 * @param ItemId[] $typesIds
 	 * @param int $limit
 	 * @param float $minProbability
@@ -171,7 +170,7 @@ class SchemaTreeSuggester implements SuggesterEngine {
 		$context,
 		$include
 	) {
-		$numericIds = array_map( static function ( PropertyId $propertyId ) {
+		$numericIds = array_map( static function ( NumericPropertyId $propertyId ) {
 			return $propertyId->getNumericId();
 		}, $propertyIds );
 
@@ -205,7 +204,13 @@ class SchemaTreeSuggester implements SuggesterEngine {
 
 		foreach ( $item->getStatements()->toArray() as $statement ) {
 			$mainSnak = $statement->getMainSnak();
-			$numericPropertyId = $mainSnak->getPropertyId()->getNumericId();
+
+			$id = $mainSnak->getPropertyId();
+			if ( !( $id instanceof NumericPropertyId ) ) {
+				throw new LogicException( 'PropertySuggester is incompatible with non-numeric Property IDs' );
+			}
+
+			$numericPropertyId = $id->getNumericId();
 			$ids[] = $numericPropertyId;
 
 			if ( isset( $this->classifyingPropertyIds[$numericPropertyId] )

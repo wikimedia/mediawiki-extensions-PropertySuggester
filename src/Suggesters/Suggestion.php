@@ -2,7 +2,7 @@
 
 namespace PropertySuggester\Suggesters;
 
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 
 /**
  * Suggestion returned by a SuggesterEngine
@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 class Suggestion {
 
 	/**
-	 * @var PropertyId
+	 * @var NumericPropertyId
 	 */
 	private $propertyId;
 
@@ -24,16 +24,16 @@ class Suggestion {
 	private $probability;
 
 	/**
-	 * @param PropertyId $propertyId
+	 * @param NumericPropertyId $propertyId
 	 * @param float $probability
 	 */
-	public function __construct( PropertyId $propertyId, $probability ) {
+	public function __construct( NumericPropertyId $propertyId, $probability ) {
 		$this->propertyId = $propertyId;
 		$this->probability = $probability;
 	}
 
 	/**
-	 * @return PropertyId
+	 * @return NumericPropertyId
 	 */
 	public function getPropertyId() {
 		return $this->propertyId;
