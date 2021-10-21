@@ -9,6 +9,8 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\Repo\Api\EntitySearchException;
+use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Tests\Api\WikibaseApiTestCase;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -25,7 +27,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @group medium
  */
 class GetSuggestionsTest extends WikibaseApiTestCase {
-
 	/** @var EntityId[] */
 	private static $idMap;
 
@@ -35,14 +36,35 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 	/** @var GetSuggestions */
 	public $getSuggestions;
 
+	/** @var bool */
+	private $simulateBackendFailure;
+
 	protected function setUp(): void {
 		parent::setUp();
+		$this->simulateBackendFailure = false;
 
 		$this->tablesUsed[] = 'wbs_propertypairs';
 
 		$apiMain = $this->createMock( ApiMain::class );
 		$apiMain->method( 'getContext' )->willReturn( new \RequestContext() );
 		$apiMain->method( 'getRequest' )->willReturn( new \FauxRequest() );
+
+		$this->getServiceContainer()->addServiceManipulator( 'WikibaseRepo.EntitySearchHelper',
+			function ( EntitySearchHelper $entitySearchHelper ) {
+				$entitySearchHelperMock = $this->createMock( EntitySearchHelper::class );
+				$entitySearchHelperMock->method( 'getRankedSearchResults' )
+					->willReturnCallback(
+						function ( ...$args ) use ( $entitySearchHelper ) {
+							if ( $this->simulateBackendFailure ) {
+								throw new EntitySearchException( \Status::newFatal( 'search-backend-error' ) );
+							} else {
+								return $entitySearchHelper->getRankedSearchResults( ...$args );
+							}
+						}
+					);
+				return $entitySearchHelperMock;
+			}
+		);
 		$this->getSuggestions = new GetSuggestions( $apiMain, 'wbgetsuggestion' );
 	}
 
@@ -145,6 +167,25 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 		$this->assertSame( 1, $result['success'] );
 		$this->assertEquals( 'IdontExist', $result['searchinfo']['search'] );
 		$this->assertCount( 0, $result['search'] );
+	}
+
+	public function testExecutionWithSearchBackendFailure() {
+		$p56 = self::$idMap['%P56%'];
+
+		$params = [
+			'action' => 'wbsgetsuggestions',
+			'properties' => $p56,
+			'search' => 'IdontExist',
+			'continue' => 0,
+			'context' => 'item'
+		];
+		try {
+			$this->simulateBackendFailure = true;
+			$this->doApiRequest( $params );
+			$this->fail( "ApiUsageException should be thrown" );
+		} catch ( ApiUsageException $aue ) {
+			$this->assertTrue( $aue->getStatusValue()->hasMessage( 'search-backend-error' ) );
+		}
 	}
 
 	public function provideExecutionWithInclude() {

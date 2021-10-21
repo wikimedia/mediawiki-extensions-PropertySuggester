@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -99,9 +100,9 @@ class GetSuggestions extends ApiBase {
 		$lb = $mwServices->getDBLoadBalancer();
 		$httpFactory = $mwServices->getHttpRequestFactory();
 
-		$this->prefetchingTermLookup = WikibaseRepo::getPrefetchingTermLookup();
-		$this->languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
-		$this->entitySearchHelper = WikibaseRepo::getEntitySearchHelper();
+		$this->prefetchingTermLookup = WikibaseRepo::getPrefetchingTermLookup( $mwServices );
+		$this->languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory( $mwServices );
+		$this->entitySearchHelper = WikibaseRepo::getEntitySearchHelper( $mwServices );
 		$this->entityLookup = WikibaseRepo::getEntityLookup( $mwServices );
 		$this->entityTitleLookup = WikibaseRepo::getEntityTitleLookup( $mwServices );
 		$this->languageCodes = WikibaseRepo::getTermsLanguages( $mwServices )->getLanguages();
@@ -202,12 +203,16 @@ class GetSuggestions extends ApiBase {
 		}
 		$suggestions = $suggestionsStatus->getValue();
 
-		$suggestions = $suggestionGenerator->filterSuggestions(
-			$suggestions,
-			$params->search,
-			$params->language,
-			$params->resultSize
-		);
+		try {
+			$suggestions = $suggestionGenerator->filterSuggestions(
+				$suggestions,
+				$params->search,
+				$params->language,
+				$params->resultSize
+			);
+		} catch ( EntitySearchException $ese ) {
+			$this->dieStatus( $ese->getStatus() );
+		}
 
 		$addSuggestions = [];
 		foreach ( $suggestions as $suggestion ) {

@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntitySearchHelper;
 
 /**
@@ -177,6 +178,7 @@ class SuggestionGenerator {
 	 * @param string $language
 	 * @param int $resultSize
 	 * @return Suggestion[]
+	 * @throws EntitySearchException
 	 */
 	public function filterSuggestions( array $suggestions, $search, $language, $resultSize ) {
 		if ( !$search ) {
