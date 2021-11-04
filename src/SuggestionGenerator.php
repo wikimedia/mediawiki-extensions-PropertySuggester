@@ -112,8 +112,8 @@ class SuggestionGenerator {
 	}
 
 	/**
-	 * @param string[] $propertyIdList - A list of property-id-strings
-	 * @param string[] $typesIdList - A list of types-id-strings
+	 * @param string[] $propertyIdList A list of property-id-strings
+	 * @param string[] $typesIdList A list of types-id-strings
 	 * @param int $limit
 	 * @param float $minProbability
 	 * @param string $context
