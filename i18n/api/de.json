@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Metalhead64"
+			"Metalhead64",
+			"Umherirrender"
 		]
 	},
+	"apihelp-wbsgetsuggestions-description": "API-Modul zum Abrufen von Vorschlägen für zusätzliche Eigenschaften zum Hinzufügen zu einer Wikibase-Entität. Das API-Modul ist in erster Linie für die Verwendung durch das Vorschlags-Widget gedacht, wenn Benutzer Wikibase-Entitäten bearbeiten.",
+	"apihelp-wbsgetsuggestions-summary": "API-Modul zum Abrufen von Vorschlägen für zusätzliche Eigenschaften zum Hinzufügen zu einer Wikibase-Entität. Das API-Modul ist in erster Linie für die Verwendung durch das Vorschlags-Widget gedacht, wenn Benutzer Wikibase-Entitäten bearbeiten.",
 	"apihelp-wbsgetsuggestions-example-1": "Ruft Vorschläge für das Objekt Q4 ab",
 	"apihelp-wbsgetsuggestions-example-2": "Ruft Vorschläge für das Objekt Q4 von Rang 10 bis 15 ab",
 	"apihelp-wbsgetsuggestions-example-3": "Ruft Vorschläge für die Eigenschaftskombination P21 und P31 ab",
@@ -11,6 +14,7 @@
 	"apihelp-wbsgetsuggestions-example-5": "Ruft Vorschläge für die Einzelnachweise ab, die mit P21 verwendet werden.",
 	"apihelp-wbsgetsuggestions-param-context": "Entweder Objekt, Einzelnachweis oder Qualifikator.",
 	"apihelp-wbsgetsuggestions-param-continue": "Versatz, wo eine Suche fortgeführt werden soll.",
+	"apihelp-wbsgetsuggestions-param-entity": "Vorschlagen von Eigenschaften für die angegebene Entität, basierend auf der vorhandenen Liste von Eigenschaften, die die Entität hat.",
 	"apihelp-wbsgetsuggestions-param-include": "Welche Vorschläge eingeschlossen werden sollen: Standardmäßig werden nur Eigenschaften vorgeschlagen, die hinzugefügt werden können (nicht veraltet, noch nicht vorhanden).",
 	"apihelp-wbsgetsuggestions-param-language": "Sprache für das Ergebnis.",
 	"apihelp-wbsgetsuggestions-param-limit": "Maximale Anzahl der Ergebnisse.",

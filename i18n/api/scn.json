@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ajeje Brazorf"
+		]
+	},
+	"apihelp-wbsgetsuggestions-param-language": "Lingua pû risurtatu.",
+	"apihelp-wbsgetsuggestions-param-limit": "Nùmmiru màssimu di risurtati."
+}
