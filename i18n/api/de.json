@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Metalhead64"
+			"Metalhead64",
+			"Umherirrender"
 		]
 	},
 	"apihelp-wbsgetsuggestions-description": "API-Modul zum Abrufen von Vorschlägen für zusätzliche Eigenschaften zum Hinzufügen zu einer Wikibase-Entität. Das API-Modul ist in erster Linie für die Verwendung durch das Vorschlags-Widget gedacht, wenn Benutzer Wikibase-Entitäten bearbeiten.",
@@ -21,6 +22,6 @@
 	"apihelp-wbsgetsuggestions-param-search": "Sucht nach diesem Text.",
 	"apihelp-wbsgetsuggestions-param-size": "Gibt die Anzahl der zurückzugebenden Vorschläge an.",
 	"apihelp-wbsgetsuggestions-param-types": "Vorschlagen zusätzlicher Eigenschaften für die angegebene Liste von Typen vor (diese Werte sind gleich denen, die über classifyingPropertyIds gesammelt würden, wenn eine Entität im API-Aufruf bereitgestellt wird). Wird in Kombination mit dem Parameter properties verwendet.",
-	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Gib entweder den Entitäts-ID-Parameter „entity“ oder eine Liste von  „properties“-Eigenschaften an.",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Gib entweder den Entitäts-ID-Parameter „entity“ oder eine Liste von „properties“-Eigenschaften an.",
 	"apihelp-wbsgetsuggestions-param-event": "Ereignis-ID, die verwendet wird, um auf Client- und Serverseite aufgezeichnete Ereignisse abzugleichen."
 }
