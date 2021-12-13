@@ -20,5 +20,5 @@
 	"apihelp-wbsgetsuggestions-param-limit": "מספר התוצאות המרבי.",
 	"apihelp-wbsgetsuggestions-param-properties": "לציין מאפיינים נוספים עבור רשימת המאפיינים הנתונה.",
 	"apihelp-wbsgetsuggestions-param-search": "לחפש את הטקסט הזה.",
-	"apihelp-wbsgetsuggestions-param-size": "ציון מספר ההצעות שתוחזרנה."
+	"apihelp-wbsgetsuggestions-param-size": "נא לציין את מספר ההצעות שתוחזרנה."
 }
