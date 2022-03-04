@@ -89,7 +89,7 @@ class ResultBuilderTest extends MediaWikiUnitTestCase {
 			[ 'id' => '13' ],
 		];
 
-		$this->assertEquals( $mergedResult, $expected );
+		$this->assertEquals( $expected, $mergedResult );
 	}
 
 	public function testCreateResultsArray() {
