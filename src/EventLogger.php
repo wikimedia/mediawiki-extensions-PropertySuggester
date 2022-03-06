@@ -2,8 +2,8 @@
 
 namespace PropertySuggester;
 
-use EventLogging;
 use ExtensionRegistry;
+use MediaWiki\Extension\EventLogging\EventLogging;
 
 class EventLogger {
 
