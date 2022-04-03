@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ParamValidator\TypeDef\IntegerDef;
 
 /**
  * API module to get property suggestions.
@@ -328,9 +329,9 @@ class GetSuggestions extends ApiBase {
 			'limit' => [
 				ApiBase::PARAM_TYPE => 'limit',
 				ApiBase::PARAM_DFLT => 7,
-				ApiBase::PARAM_MAX => ApiBase::LIMIT_SML1,
-				ApiBase::PARAM_MAX2 => ApiBase::LIMIT_SML2,
-				ApiBase::PARAM_MIN => 0,
+				IntegerDef::PARAM_MAX => ApiBase::LIMIT_SML1,
+				IntegerDef::PARAM_MAX2 => ApiBase::LIMIT_SML2,
+				IntegerDef::PARAM_MIN => 0,
 			],
 			'continue' => [
 				ApiBase::PARAM_TYPE => 'integer',
