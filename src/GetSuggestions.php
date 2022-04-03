@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\ParamValidator\TypeDef\IntegerDef;
 
 /**
@@ -316,45 +317,45 @@ class GetSuggestions extends ApiBase {
 	public function getAllowedParams() {
 		return [
 			'entity' => [
-				ApiBase::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_TYPE => 'string',
 			],
 			'properties' => [
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_ISMULTI => true
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_ISMULTI => true
 			],
 			'types' => [
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_ISMULTI => true
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_ISMULTI => true
 			],
 			'limit' => [
-				ApiBase::PARAM_TYPE => 'limit',
-				ApiBase::PARAM_DFLT => 7,
+				ParamValidator::PARAM_TYPE => 'limit',
+				ParamValidator::PARAM_DEFAULT => 7,
 				IntegerDef::PARAM_MAX => ApiBase::LIMIT_SML1,
 				IntegerDef::PARAM_MAX2 => ApiBase::LIMIT_SML2,
 				IntegerDef::PARAM_MIN => 0,
 			],
 			'continue' => [
-				ApiBase::PARAM_TYPE => 'integer',
+				ParamValidator::PARAM_TYPE => 'integer',
 			],
 			'language' => [
-				ApiBase::PARAM_TYPE => $this->languageCodes,
-				ApiBase::PARAM_DFLT => $this->getContext()->getLanguage()->getCode(),
+				ParamValidator::PARAM_TYPE => $this->languageCodes,
+				ParamValidator::PARAM_DEFAULT => $this->getContext()->getLanguage()->getCode(),
 			],
 			'context' => [
-				ApiBase::PARAM_TYPE => [ 'item', 'qualifier', 'reference' ],
-				ApiBase::PARAM_DFLT => 'item',
+				ParamValidator::PARAM_TYPE => [ 'item', 'qualifier', 'reference' ],
+				ParamValidator::PARAM_DEFAULT => 'item',
 			],
 			'include' => [
-				ApiBase::PARAM_TYPE => [ '', 'all' ],
-				ApiBase::PARAM_DFLT => '',
+				ParamValidator::PARAM_TYPE => [ '', 'all' ],
+				ParamValidator::PARAM_DEFAULT => '',
 			],
 			'search' => [
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_DFLT => '',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_DEFAULT => '',
 			],
 			'event' => [
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_DFLT => '',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_DEFAULT => '',
 			],
 		];
 	}
