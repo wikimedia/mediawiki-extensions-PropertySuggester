@@ -185,12 +185,14 @@ class SuggestionGenerator {
 			return array_slice( $suggestions, 0, $resultSize );
 		}
 
+		// @phan-suppress-next-line PhanParamTooMany
 		$searchResults = $this->entityTermSearchHelper->getRankedSearchResults(
 			$search,
 			$language,
 			'property',
 			$resultSize,
-			true
+			true,
+			null
 		);
 
 		$id_set = [];
