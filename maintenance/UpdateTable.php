@@ -108,7 +108,7 @@ class UpdateTable extends Maintenance {
 				"Executing core/maintenance/update.php may help.\n" );
 		}
 		$this->output( "Removing old entries\n" );
-		if ( $wgDBtype === 'sqlite' ) {
+		if ( $wgDBtype === 'sqlite' || $wgDBtype === 'postgres' ) {
 			$db->delete( $tableName, "*", __METHOD__ );
 		} else {
 			do {
