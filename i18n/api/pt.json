@@ -5,8 +5,8 @@
 			"Vitorvicentevalente"
 		]
 	},
-	"apihelp-wbsgetsuggestions-description": "Módulo da API para obter sugestões de propriedades suplementares a adicionar a uma entidade Wikibase. O módulo da API destina-se a ser usado principalmente pelo widget de sugestões quando os utilizadores estão a editar entidades Wikibase.",
-	"apihelp-wbsgetsuggestions-summary": "Módulo da API para obter sugestões de propriedades suplementares a adicionar a uma entidade Wikibase. O módulo da API destina-se a ser usado principalmente pelo widget de sugestões quando os utilizadores estão a editar entidades Wikibase.",
+	"apihelp-wbsgetsuggestions-description": "Módulo da API para obter sugestões de propriedades suplementares a adicionar a uma entidade Wikibase. O módulo da API destina-se a ser usado principalmente pelo ''widget'' de sugestões quando os utilizadores estão a editar entidades Wikibase.",
+	"apihelp-wbsgetsuggestions-summary": "Módulo da API para obter sugestões de propriedades suplementares a adicionar a uma entidade Wikibase. O módulo da API destina-se a ser usado principalmente pelo ''widget'' de sugestões quando os utilizadores estão a editar entidades Wikibase.",
 	"apihelp-wbsgetsuggestions-example-1": "Obter sugestões para a entidade Q4",
 	"apihelp-wbsgetsuggestions-example-2": "Obter sugestões para a entidade Q4 com classificação entre 10 e 15",
 	"apihelp-wbsgetsuggestions-example-3": "Obter sugestões para a combinação de propriedades P21 e P31",
@@ -20,5 +20,8 @@
 	"apihelp-wbsgetsuggestions-param-limit": "Número máximo de resultados.",
 	"apihelp-wbsgetsuggestions-param-properties": "Sugerir propriedades adicionais para a lista de propriedades fornecida.",
 	"apihelp-wbsgetsuggestions-param-search": "Pesquisar este texto.",
-	"apihelp-wbsgetsuggestions-param-size": "Especificar o número de sugestões a serem devolvidas."
+	"apihelp-wbsgetsuggestions-param-size": "Especificar o número de sugestões a serem devolvidas.",
+	"apihelp-wbsgetsuggestions-param-types": "Sugerir propriedades adicionais para a lista de tipos fornecida (estes valores são iguais aos que seriam coligidos por meio de classifyingPropertyIds se for fornecida uma entidade na chamada da API). Usado em combinação com o parâmetro 'properties'.",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Forneça o parâmetro de identificação da entidade 'entity' ou uma lista de propriedades 'properties'",
+	"apihelp-wbsgetsuggestions-param-event": "Identificador do evento usado para fazer corresponder eventos registados do lado do cliente e do lado do servidor."
 }
