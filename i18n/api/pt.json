@@ -5,8 +5,8 @@
 			"Vitorvicentevalente"
 		]
 	},
-	"apihelp-wbsgetsuggestions-description": "Módulo da API para obter sugestões de propriedades suplementares a adicionar a uma entidade Wikibase. O módulo da API destina-se a ser usado principalmente pelo widget de sugestões quando os utilizadores estão a editar entidades Wikibase.",
-	"apihelp-wbsgetsuggestions-summary": "Módulo da API para obter sugestões de propriedades suplementares a adicionar a uma entidade Wikibase. O módulo da API destina-se a ser usado principalmente pelo widget de sugestões quando os utilizadores estão a editar entidades Wikibase.",
+	"apihelp-wbsgetsuggestions-description": "Módulo da API para obter sugestões de propriedades suplementares a adicionar a uma entidade Wikibase. O módulo da API destina-se a ser usado principalmente pelo ''widget'' de sugestões quando os utilizadores estão a editar entidades Wikibase.",
+	"apihelp-wbsgetsuggestions-summary": "Módulo da API para obter sugestões de propriedades suplementares a adicionar a uma entidade Wikibase. O módulo da API destina-se a ser usado principalmente pelo ''widget'' de sugestões quando os utilizadores estão a editar entidades Wikibase.",
 	"apihelp-wbsgetsuggestions-example-1": "Obter sugestões para a entidade Q4",
 	"apihelp-wbsgetsuggestions-example-2": "Obter sugestões para a entidade Q4 com classificação entre 10 e 15",
 	"apihelp-wbsgetsuggestions-example-3": "Obter sugestões para a combinação de propriedades P21 e P31",
