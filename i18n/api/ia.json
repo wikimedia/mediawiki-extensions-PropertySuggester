@@ -21,5 +21,6 @@
 	"apihelp-wbsgetsuggestions-param-search": "Cercar iste texto.",
 	"apihelp-wbsgetsuggestions-param-size": "Specificar le numero de suggestiones a retornar.",
 	"apihelp-wbsgetsuggestions-param-types": "Suggerer proprietates supplementari pro le lista fornite de typos (iste valores es equal a illos que se colligerea per medio de classifyingPropertyIds si un entitate es fornite in le appello API). Es usate in combination con le parametro 'properties'.",
-	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Es necessari fornir o le parametro de identification del entitate 'entity', o un lista de proprietates 'properties'."
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Es necessari fornir o le parametro de identification del entitate 'entity', o un lista de proprietates 'properties'.",
+	"apihelp-wbsgetsuggestions-param-event": "ID de evento usate pro trovar eventos registrate al latere del cliente e del servitor."
 }
