@@ -5,6 +5,7 @@
 		]
 	},
 	"apihelp-wbsgetsuggestions-description": "Modulo API pro obtener suggestiones de proprietates supplementari a adder a un entitate Wikibase. Le modulo API es concipite pro uso per le widget suggestor quando usatores modifica entitates Wikibase.",
+	"apihelp-wbsgetsuggestions-summary": "Modulo API pro obtener suggestiones de proprietates supplementari a adder a un entitate Wikibase. Le modulo API es concipite pro uso per le widget suggestor quando usatores modifica entitates Wikibase.",
 	"apihelp-wbsgetsuggestions-example-1": "Obtener suggestiones pro entitate Q4",
 	"apihelp-wbsgetsuggestions-example-2": "Obtener suggestiones pro entitate Q4 ab rango 10 a 15",
 	"apihelp-wbsgetsuggestions-example-3": "Obtener suggestiones pro le combination de proprietates P21 e P31",
@@ -13,6 +14,7 @@
 	"apihelp-wbsgetsuggestions-param-context": "Elemento, referentia o qualificator.",
 	"apihelp-wbsgetsuggestions-param-continue": "Position ubi continuar un recerca.",
 	"apihelp-wbsgetsuggestions-param-entity": "Suggerer proprietates pro le entitate date, a base del lista existente de proprietates que le entitate ha.",
+	"apihelp-wbsgetsuggestions-param-include": "Qual suggestiones includer: Per predefinition, solmente proprietates que poterea esser addite (non obsolescente, non ancora presente) essera suggerite.",
 	"apihelp-wbsgetsuggestions-param-language": "Lingua pro resultato.",
 	"apihelp-wbsgetsuggestions-param-limit": "Numero maxime de resultatos.",
 	"apihelp-wbsgetsuggestions-param-properties": "Suggerer proprietates supplementari pro le lista date de proprietates.",
