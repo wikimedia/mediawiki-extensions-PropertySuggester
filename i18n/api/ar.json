@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Meno25",
 			"ديفيد"
 		]
 	},
@@ -19,5 +20,8 @@
 	"apihelp-wbsgetsuggestions-param-limit": "أقصى عدد للنتائج.",
 	"apihelp-wbsgetsuggestions-param-properties": "اقتراح خصائص إضافية لقائمة معينة من الخصائص.",
 	"apihelp-wbsgetsuggestions-param-search": "ابحث عن هذا النص.",
-	"apihelp-wbsgetsuggestions-param-size": "حدد عدد الاقتراحات المراد إرجاعها."
+	"apihelp-wbsgetsuggestions-param-size": "حدد عدد الاقتراحات المراد إرجاعها.",
+	"apihelp-wbsgetsuggestions-param-types": "اقترح خصائص إضافية لقائمة الأنواع المحددة (هذه القيم مساوية لتلك التي سيتم جمعها من خلال classifyingPropertyIds إذا تم توفير كيان في استدعاء API). تستخدم مع معلمة الخصائص.",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "قدِّم إما معلمة معرّف الكيان \"كيان\" أو قائمة خصائص \"خصائص\"",
+	"apihelp-wbsgetsuggestions-param-event": "معرف الحدث المستخدم لمطابقة الأحداث المسجلة من جانب العميل والخادم."
 }
