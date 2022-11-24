@@ -166,7 +166,8 @@ class SimpleSuggesterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testEmptyResult() {
-		$this->assertEmpty(
+		$this->assertSame(
+			[],
 			$this->suggester->suggestByPropertyIds(
 				[],
 				[],
