@@ -5,7 +5,7 @@
 			"Guycn2"
 		]
 	},
-	"apihelp-wbsgetsuggestions-description": "מודול API לקבלת הצעות למאפיינים נוספים שניתן להוסיף לישות של Wikibase. מודול ה־API הזה מתאים בעיקר לשימוש על־ידי יישומון ההצעות כשמשתמשים מוסיפים ישויות של Wikibase.",
+	"apihelp-wbsgetsuggestions-description": "מודול API לקבלת הצעות למאפיינים נוספים שניתן להוסיף לישות ויקיבייס. מודול ה־API הזה מתאים בעיקר לשימוש על־ידי כלי ההצעות כשמשתמשים מוסיפים ישויות של כלי.",
 	"apihelp-wbsgetsuggestions-summary": "מודול API לקבלת הצעות למאפיינים נוספים שניתן להוסיף לישות של Wikibase. מודול ה־API הזה מתאים בעיקר לשימוש על־ידי יישומון ההצעות כשמשתמשים מוסיפים ישויות של Wikibase.",
 	"apihelp-wbsgetsuggestions-example-1": "קבלת הצעות עבור הישות Q4",
 	"apihelp-wbsgetsuggestions-example-2": "קבלת הצעות עבור הישות Q4 בדרגות 10 עד 15",
