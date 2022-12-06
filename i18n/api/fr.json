@@ -26,5 +26,5 @@
 	"apihelp-wbsgetsuggestions-param-size": "Spécifier le nombre de suggestions devant être retournées.",
 	"apihelp-wbsgetsuggestions-param-types": "Suggérer des propriétés supplémentaires pour la liste fournie de types (ces valeurs sont égales à celles qui seraient rassemblées via classifyingPropertyIds  si une entité est fournie dans l’appel de l’API). Utilisé en lien avec le paramètre 'properties'.",
 	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Fournissez soit le paramètre 'entity' avec l’id de l'entité ou bien une liste de propriétés 'properties'.",
-	"apihelp-wbsgetsuggestions-param-event": "ID de l’événement utilisé pour correspondre aux événements enregistrés côté client et serveur."
+	"apihelp-wbsgetsuggestions-param-event": "Identifiant de l’événement utilisé pour faire correspondre les événements enregistrés côté client et serveur."
 }
