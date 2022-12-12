@@ -4,6 +4,7 @@ namespace PropertySuggester;
 
 use DatabaseUpdater;
 use ExtensionRegistry;
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 use ResourceLoader;
 use Skin;
@@ -33,6 +34,15 @@ final class Hooks {
 
 		if ( $out->getTitle() === null || $out->getTitle()->getNamespace() !== $itemNamespace ) {
 			return;
+		}
+
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) ) {
+			$services = MediaWikiServices::getInstance();
+			if ( $services->getService( 'MobileFrontend.Context' )->shouldDisplayMobileView() ) {
+				// Wikibase currently does not support editing statements on mobile,
+				// so no need for PropertySuggester either.
+				return;
+			}
 		}
 
 		$out->addModules( 'propertySuggester.suggestions' );
