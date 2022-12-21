@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"apihelp-wbsgetsuggestions-description": "API modul za dobijanje sugestija za dodatna svojstva za dodavanje na entitet Vikibaze. API modul je primarno namenjen za upotrebu spravice za pravljenje sugestija kada korisnici uređuju entitete na Vikipodacima.",
+	"apihelp-wbsgetsuggestions-example-1": "Traži sugestije za entitet Q4",
+	"apihelp-wbsgetsuggestions-example-2": "Traži sugestije za entitet Q4 od ranga 10 do 15",
+	"apihelp-wbsgetsuggestions-example-3": "Traži sugestije za kombinaciju svojstava P21 i P31",
+	"apihelp-wbsgetsuggestions-example-4": "Traži sugestije za kvalifikatore korišćene sa P21",
+	"apihelp-wbsgetsuggestions-example-5": "Traži sugestije za reference korišćene sa P21",
+	"apihelp-wbsgetsuggestions-param-context": "Ili stavka, ili referenca, ili kvalifikator.",
+	"apihelp-wbsgetsuggestions-param-continue": "Ofset za nastavak pretrage.",
+	"apihelp-wbsgetsuggestions-param-entity": "Sugeriši svojstva za dati entitet, na osnovu postojećeg spiska svojstava koje entitet ima.",
+	"apihelp-wbsgetsuggestions-param-language": "Jezik za rezultat.",
+	"apihelp-wbsgetsuggestions-param-limit": "Maksimalni broj rezultata.",
+	"apihelp-wbsgetsuggestions-param-properties": "Sugeriši dodatna svojstva za dati spisak svojstava.",
+	"apihelp-wbsgetsuggestions-param-search": "Pretraga za ovaj tekst.",
+	"apihelp-wbsgetsuggestions-param-size": "Odredi broj sugestija koje će da budu vraćene."
+}
