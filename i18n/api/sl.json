@@ -5,5 +5,6 @@
 		]
 	},
 	"apihelp-wbsgetsuggestions-description": "Modul API za pridobivanje predlogov dodatnih lastnosti za dodajanje entiteti Wikibase. Modul API je v prvi vrsti namenjen uporabi gradnika za predlaganje, ko uporabniki urejajo entitete Wikibase.",
-	"apihelp-wbsgetsuggestions-summary": "Modul API za pridobivanje predlogov dodatnih lastnosti za dodajanje entiteti Wikibase. Modul API je v prvi vrsti namenjen uporabi gradnika za predlaganje, ko uporabniki urejajo entitete Wikibase."
+	"apihelp-wbsgetsuggestions-summary": "Modul API za pridobivanje predlogov dodatnih lastnosti za dodajanje entiteti Wikibase. Modul API je v prvi vrsti namenjen uporabi gradnika za predlaganje, ko uporabniki urejajo entitete Wikibase.",
+	"apihelp-wbsgetsuggestions-param-search": "Poišče to besedilo."
 }
