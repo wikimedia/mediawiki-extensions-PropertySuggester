@@ -6,5 +6,21 @@
 	},
 	"apihelp-wbsgetsuggestions-description": "Modul API za pridobivanje predlogov dodatnih lastnosti za dodajanje entiteti Wikibase. Modul API je v prvi vrsti namenjen uporabi gradnika za predlaganje, ko uporabniki urejajo entitete Wikibase.",
 	"apihelp-wbsgetsuggestions-summary": "Modul API za pridobivanje predlogov dodatnih lastnosti za dodajanje entiteti Wikibase. Modul API je v prvi vrsti namenjen uporabi gradnika za predlaganje, ko uporabniki urejajo entitete Wikibase.",
-	"apihelp-wbsgetsuggestions-param-search": "Poišče to besedilo."
+	"apihelp-wbsgetsuggestions-example-1": "Pridobite predloge za entiteto Q4",
+	"apihelp-wbsgetsuggestions-example-2": "Pridobite predloge za entiteto Q4 od 10. do 15. mesta",
+	"apihelp-wbsgetsuggestions-example-3": "Pridobite predloge za kombinacijo lastnosti P21 in P31",
+	"apihelp-wbsgetsuggestions-example-4": "Pridobite predloge za kvalifikatorje, ki se uporabljajo s P21",
+	"apihelp-wbsgetsuggestions-example-5": "Pridobite predloge za sklice, ki se uporabljajo s P21",
+	"apihelp-wbsgetsuggestions-param-context": "Predmet, sklic ali kvalifikator.",
+	"apihelp-wbsgetsuggestions-param-continue": "Odmik začetka iskanja.",
+	"apihelp-wbsgetsuggestions-param-entity": "Predlagajte lastnosti za dano entiteto na podlagi obstoječega seznama lastnosti, ki jih ima entiteta.",
+	"apihelp-wbsgetsuggestions-param-include": "Kateri predlogi naj bodo vključeni: Privzeto bodo predlagane samo lastnosti, ki bi jih lahko dodali (ne opuščene, ne še neprisotne).",
+	"apihelp-wbsgetsuggestions-param-language": "Jezik za rezultat.",
+	"apihelp-wbsgetsuggestions-param-limit": "Največje število zadetkov.",
+	"apihelp-wbsgetsuggestions-param-properties": "Predlagajte dodatne lastnosti za dani seznam lastnosti.",
+	"apihelp-wbsgetsuggestions-param-search": "Poišče to besedilo.",
+	"apihelp-wbsgetsuggestions-param-size": "Določite število vrnjenih predlogov",
+	"apihelp-wbsgetsuggestions-param-types": "Predlagajte dodatne lastnosti za dani seznam vrst (te vrednosti so enake tistim, ki bi bile zbrane s classifyingPropertyIds, če bi bila v klicu API-ja podana entiteta). Uporablja se v kombinaciji s parametrom lastnosti.",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Predložite ID-parameter »entity« ali seznam lastnosti »properties«.",
+	"apihelp-wbsgetsuggestions-param-event": "ID dogodka, ki se uporablja za uparitev dogodkov, zabeleženih na strani odjemalca in strežnika."
 }
