@@ -150,7 +150,7 @@ class SuggestionGeneratorTest extends MediaWikiIntegrationTestCase {
 			SuggesterEngine::SUGGEST_NEW
 		);
 		$this->assertTrue( $result1->isGood() );
-		$this->assertEquals( $result1->getValue(), [ 'foo' ] );
+		$this->assertEquals( [ 'foo' ], $result1->getValue() );
 	}
 
 	public function testGenerateSuggestionsWithItem() {
@@ -179,7 +179,7 @@ class SuggestionGeneratorTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$this->assertTrue( $result3->isGood() );
-		$this->assertEquals( $result3->getValue(), [ 'foo' ] );
+		$this->assertEquals( [ 'foo' ], $result3->getValue() );
 	}
 
 	public function testGenerateSuggestionsWithNonExistentItem() {
@@ -233,7 +233,7 @@ class SuggestionGeneratorTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$this->assertTrue( $result4->isGood() );
-		$this->assertEquals( $result4->getValue(), [ 'foo' ] );
+		$this->assertEquals( [ 'foo' ], $result4->getValue() );
 	}
 
 	public function testFallbackBehaviourByPropertyIDs() {
@@ -262,7 +262,7 @@ class SuggestionGeneratorTest extends MediaWikiIntegrationTestCase {
 			SuggesterEngine::SUGGEST_NEW
 		);
 		$this->assertTrue( $result5->isGood() );
-		$this->assertEquals( $result5->getValue(), [ 'foo' ] );
+		$this->assertEquals( [ 'foo' ], $result5->getValue() );
 	}
 
 }
