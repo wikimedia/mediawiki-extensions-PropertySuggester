@@ -4,6 +4,7 @@ namespace PropertySuggester;
 
 use ApiMain;
 use ApiUsageException;
+use MediaWiki\Request\FauxRequest;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -47,7 +48,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 
 		$apiMain = $this->createMock( ApiMain::class );
 		$apiMain->method( 'getContext' )->willReturn( new \RequestContext() );
-		$apiMain->method( 'getRequest' )->willReturn( new \FauxRequest() );
+		$apiMain->method( 'getRequest' )->willReturn( new FauxRequest() );
 
 		$this->getServiceContainer()->addServiceManipulator( 'WikibaseRepo.EntitySearchHelper',
 			function ( EntitySearchHelper $entitySearchHelper ) {
