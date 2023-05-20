@@ -189,7 +189,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public function provideExecutionWithInclude() {
+	public static function provideExecutionWithInclude() {
 		return [
 			'include all' => [ 1, 'all' ],
 			'include default' => [ 0, '' ],

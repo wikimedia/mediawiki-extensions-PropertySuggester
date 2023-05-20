@@ -19,7 +19,7 @@ use Wikibase\Repo\WikibaseRepo;
 class HooksTest extends MediaWikiIntegrationTestCase {
 
 	public function testOnBeforePageDisplay_resourceLoaderModuleAdded() {
-		$title = $this->getTitleForId( new ItemId( 'Q1' ) );
+		$title = self::getTitleForId( new ItemId( 'Q1' ) );
 
 		$context = $this->getContext( $title );
 		$output = $context->getOutput();
@@ -43,15 +43,15 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 		$this->assertNotContains( 'propertySuggester.suggestions', $output->getModules() );
 	}
 
-	public function onBeforePageDisplay_resourceLoaderModuleNotAddedProvider() {
+	public static function onBeforePageDisplay_resourceLoaderModuleNotAddedProvider() {
 		return [
-			[ $this->getTitleForId( new NumericPropertyId( 'P1' ) ) ],
+			[ self::getTitleForId( new NumericPropertyId( 'P1' ) ) ],
 			[ Title::makeTitle( NS_HELP, 'Contents' ) ],
 			[ null ]
 		];
 	}
 
-	private function getTitleForId( EntityId $entityId ) {
+	private static function getTitleForId( EntityId $entityId ) {
 		$lookup = WikibaseRepo::getEntityTitleLookup();
 		return $lookup->getTitleForId( $entityId );
 	}

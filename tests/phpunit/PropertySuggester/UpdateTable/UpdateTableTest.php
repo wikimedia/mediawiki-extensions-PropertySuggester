@@ -33,7 +33,7 @@ class UpdateTableTest extends MediaWikiIntegrationTestCase {
 		$this->testfilename = sys_get_temp_dir() . '/_temp_test_csv_file.csv';
 	}
 
-	public function getRows() {
+	public static function provideRows() {
 		$rows1 = [
 			[ 1, 0, 2, 100, 0.1, 'item' ],
 			[ 1, 0, 3, 50, 0.05, 'item' ],
@@ -54,7 +54,7 @@ class UpdateTableTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider getRows
+	 * @dataProvider provideRows
 	 */
 	public function testRewriteNativeStrategy( array $rows ) {
 		$args = [ 'file' => $this->testfilename, 'quiet' => true, 'use-loaddata' => true ];
@@ -62,7 +62,7 @@ class UpdateTableTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @dataProvider getRows
+	 * @dataProvider provideRows
 	 */
 	public function testRewriteWithSQLInserts( array $rows ) {
 		$args = [ 'file' => $this->testfilename, 'quiet' => true ];
