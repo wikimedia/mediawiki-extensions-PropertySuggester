@@ -59,8 +59,6 @@ final class Hooks {
 		$module = [
 			'localBasePath' => dirname( __DIR__ ) . '/modules',
 			'remoteExtPath' => 'PropertySuggester/modules',
-			// Must be desktop since dependency wikibase.view.ControllerViewFactory is desktop only.
-			'targets' => 'desktop',
 			'packageFiles' => [
 				'hook.js',
 				'PropertySuggester.js',
