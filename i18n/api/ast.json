@@ -4,7 +4,6 @@
 			"Xuacu"
 		]
 	},
-	"apihelp-wbsgetsuggestions-description": "Módulu API pa recibir suxerencies de más propiedaes p'amestar a una entidá de Wikibase. El módulu API ta destináu principalmente pa usar pol widget de suxerencies cuando los usuarios tán editando entidaes de Wikibase.",
 	"apihelp-wbsgetsuggestions-summary": "Módulu API pa recibir suxerencies de más propiedaes p'amestar a una entidá de Wikibase. El módulu API ta destináu principalmente pa usar pol widget de suxerencies cuando los usuarios tán editando entidaes de Wikibase.",
 	"apihelp-wbsgetsuggestions-example-1": "Recibir suxerencies pa la entidá Q4",
 	"apihelp-wbsgetsuggestions-example-2": "Recibir suxerencies pa la entidá Q4 nel intervalu 10 a 15",

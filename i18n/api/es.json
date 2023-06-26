@@ -8,7 +8,6 @@
 			"Macofe"
 		]
 	},
-	"apihelp-wbsgetsuggestions-description": "Módulo API para obtener sugerencias de propiedades adicionales para agregar a un Wikibase entidad. El módulo API está destinado principalmente para su uso por el suggester widget cuando los usuarios están editando Wikibase entidades.",
 	"apihelp-wbsgetsuggestions-example-1": "Obtener sugerencias para la entidad Q4",
 	"apihelp-wbsgetsuggestions-example-2": "Obtener sugerencias para la entidad Q4 en el intervalo 10 a 15",
 	"apihelp-wbsgetsuggestions-example-3": "Obtener sugerencias para la combinación de propiedades P21 y P31",

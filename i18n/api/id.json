@@ -5,7 +5,6 @@
 			"Rachmat04"
 		]
 	},
-	"apihelp-wbsgetsuggestions-description": "Modul API untuk mendapatkan saran atribut tambahan untuk menambahkan ke entitas Wikibase. Modul API itu pada awalnya ditujukan untuk digunakan oleh gawit saran ketika pengguna menyunting entitas Wikibase.",
 	"apihelp-wbsgetsuggestions-summary": "Modul API untuk mendapatkan saran atribut tambahan untuk menambahkan ke entitas Wikibase. Modul API itu pada awalnya ditujukan untuk digunakan oleh gawit saran ketika pengguna menyunting entitas Wikibase.",
 	"apihelp-wbsgetsuggestions-example-1": "Dapatkan saranan untuk entitas Q4",
 	"apihelp-wbsgetsuggestions-example-2": "Dapatkan saran untuk entitas Q4 dari peringkat 10 ke 15",

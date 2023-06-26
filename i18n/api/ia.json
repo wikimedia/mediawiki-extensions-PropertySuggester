@@ -4,7 +4,6 @@
 			"McDutchie"
 		]
 	},
-	"apihelp-wbsgetsuggestions-description": "Modulo API pro obtener suggestiones de proprietates supplementari a adder a un entitate Wikibase. Le modulo API es concipite pro uso per le widget suggestor quando usatores modifica entitates Wikibase.",
 	"apihelp-wbsgetsuggestions-summary": "Modulo API pro obtener suggestiones de proprietates supplementari a adder a un entitate Wikibase. Le modulo API es concipite pro uso per le widget suggestor quando usatores modifica entitates Wikibase.",
 	"apihelp-wbsgetsuggestions-example-1": "Obtener suggestiones pro entitate Q4",
 	"apihelp-wbsgetsuggestions-example-2": "Obtener suggestiones pro entitate Q4 ab rango 10 a 15",

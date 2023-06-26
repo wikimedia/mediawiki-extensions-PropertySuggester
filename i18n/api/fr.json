@@ -8,7 +8,6 @@
 			"Wladek92"
 		]
 	},
-	"apihelp-wbsgetsuggestions-description": "Module de l’API pour obtenir des suggestions de propriétés supplémentaires à ajouter à une entité de Wikibase. Le module de l’API est tout d’abord conçu pour une utilisation par le widget de suggestion quand les utilisateurs modifient les entités de Wikibase.",
 	"apihelp-wbsgetsuggestions-summary": "Module de l’API pour obtenir les suggestions de propriétés supplémentaires à ajouter à une entité Wikibase. Le module API est prévu en premier lieu pour être utilisé par le widget de suggestion quand les utilisateurs modifient les entités Wikibase.",
 	"apihelp-wbsgetsuggestions-example-1": "Obtenir des suggestions pour l’entité Q4",
 	"apihelp-wbsgetsuggestions-example-2": "Obtenir des suggestions pour l’entité Q4 du rang 10 à 15",

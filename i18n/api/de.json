@@ -5,7 +5,6 @@
 			"Umherirrender"
 		]
 	},
-	"apihelp-wbsgetsuggestions-description": "API-Modul zum Abrufen von Vorschlägen für zusätzliche Eigenschaften zum Hinzufügen zu einer Wikibase-Entität. Das API-Modul ist in erster Linie für die Verwendung durch das Vorschlags-Widget gedacht, wenn Benutzer Wikibase-Entitäten bearbeiten.",
 	"apihelp-wbsgetsuggestions-summary": "API-Modul zum Abrufen von Vorschlägen für zusätzliche Eigenschaften zum Hinzufügen zu einer Wikibase-Entität. Das API-Modul ist in erster Linie für die Verwendung durch das Vorschlags-Widget gedacht, wenn Benutzer Wikibase-Entitäten bearbeiten.",
 	"apihelp-wbsgetsuggestions-example-1": "Ruft Vorschläge für das Objekt Q4 ab",
 	"apihelp-wbsgetsuggestions-example-2": "Ruft Vorschläge für das Objekt Q4 von Rang 10 bis 15 ab",

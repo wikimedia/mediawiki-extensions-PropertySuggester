@@ -5,7 +5,6 @@
 			"Hedda"
 		]
 	},
-	"apihelp-wbsgetsuggestions-description": "Bir Wikibase varlığına eklenecek ek özellik önerileri almak için API modülü. API modülü, kullanıcılar Wikibase varlıklarını düzenlerken öncelikli olarak widget tarafından kullanılmak üzere tasarlanmıştır.",
 	"apihelp-wbsgetsuggestions-summary": "Bir Wikibase varlığına eklenecek ek özellik önerileri almak için API modülü. API modülü, kullanıcılar Wikibase varlıklarını düzenlerken öncelikli olarak widget tarafından kullanılmak üzere tasarlanmıştır.",
 	"apihelp-wbsgetsuggestions-example-1": "Q4 varlığı için öneriler alın",
 	"apihelp-wbsgetsuggestions-example-2": "10-15 seviyeden Q4 varlığı için öneriler alın",

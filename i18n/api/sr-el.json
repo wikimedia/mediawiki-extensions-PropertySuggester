@@ -2,7 +2,6 @@
 	"@metadata": {
 		"authors": []
 	},
-	"apihelp-wbsgetsuggestions-description": "API modul za dobijanje sugestija za dodatna svojstva za dodavanje na entitet Vikibaze. API modul je primarno namenjen za upotrebu spravice za pravljenje sugestija kada korisnici uređuju entitete na Vikipodacima.",
 	"apihelp-wbsgetsuggestions-example-1": "Traži sugestije za entitet Q4",
 	"apihelp-wbsgetsuggestions-example-2": "Traži sugestije za entitet Q4 od ranga 10 do 15",
 	"apihelp-wbsgetsuggestions-example-3": "Traži sugestije za kombinaciju svojstava P21 i P31",

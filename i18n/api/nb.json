@@ -4,7 +4,6 @@
 			"Jon Harald Søby"
 		]
 	},
-	"apihelp-wbsgetsuggestions-description": "API-modul for å få forslag for andre egenskaper som kan legges til i en Wikibase-entitet. API-modulen er primært tenkt å brukes med forslagsverktøyet når brukere redigerer Wikibase-entiteter.",
 	"apihelp-wbsgetsuggestions-summary": "API-modul for å få forslag for ekstra egenskaper som skal legges til en Wikibase-entitet. API-modulen er primært tiltenkt bruk av forslagswidgeten når brukere redigerer Wikibase-entiteter.",
 	"apihelp-wbsgetsuggestions-example-1": "Hent forslag for entitet Q4",
 	"apihelp-wbsgetsuggestions-example-2": "Hent forslag for entitet Q4 fra rang 10 til 15",

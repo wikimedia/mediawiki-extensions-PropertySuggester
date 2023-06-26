@@ -4,7 +4,6 @@
 			"Kly"
 		]
 	},
-	"apihelp-wbsgetsuggestions-description": "取得額外屬性建議來添加至 Wikibase 項目的 API。該 API 模組主要目的是讓當使用者編輯 Wikibase 項目時，讓建議用途小工具使用。",
 	"apihelp-wbsgetsuggestions-summary": "取得額外屬性建議來添加至 Wikibase 項目的 API。該 API 模組主要目的是讓當使用者編輯 Wikibase 項目時，讓建議用途小工具使用。",
 	"apihelp-wbsgetsuggestions-example-1": "取得項目 Q4 的建議",
 	"apihelp-wbsgetsuggestions-example-2": "取得從排名第 10 至第 15 之間項目 Q4 的建議",
