@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vlad5250"
+			"Winston Sung"
 		]
 	},
 	"apihelp-wbsgetsuggestions-summary": "Priložnički modul za dobivanje prijedloga dodatnih svojstava za dodavanje entitetu Wikibase. Primarno je namijenjen za upotrebu spravice za predlaganje kada korisnici uređuju entitete Wikibase."
