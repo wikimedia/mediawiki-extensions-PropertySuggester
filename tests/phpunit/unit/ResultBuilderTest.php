@@ -3,9 +3,9 @@
 namespace PropertySuggester;
 
 use ApiResult;
+use MediaWiki\Title\Title;
 use MediaWikiUnitTestCase;
 use PropertySuggester\Suggesters\Suggestion;
-use Title;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Lib\LanguageFallbackChainFactory;
