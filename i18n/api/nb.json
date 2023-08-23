@@ -18,5 +18,8 @@
 	"apihelp-wbsgetsuggestions-param-limit": "Maksimalt antall resultater.",
 	"apihelp-wbsgetsuggestions-param-properties": "Foreslå ekstra egenskaper for den gitte listen egenskaper.",
 	"apihelp-wbsgetsuggestions-param-search": "Søk etter denne teksten.",
-	"apihelp-wbsgetsuggestions-param-size": "Spesifiser antall forslag som skal returneres."
+	"apihelp-wbsgetsuggestions-param-size": "Spesifiser antall forslag som skal returneres.",
+	"apihelp-wbsgetsuggestions-param-types": "Foreslår ekstra egenskaper for den gitte liste over typer (disse verdiene tilsvarer de som samles inn via classifyingPropertyIds hvis en entitet angis med API-kallet). Brukes i kombinasjon med parameteren properties.",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Angi enten entitets-ID-parameteren, «entity», eller ei liste over egenskaper, «properties».",
+	"apihelp-wbsgetsuggestions-param-event": "Hendelses-ID som brukes for å matche hendelser som samles inn på klient- og tjenersiden."
 }
