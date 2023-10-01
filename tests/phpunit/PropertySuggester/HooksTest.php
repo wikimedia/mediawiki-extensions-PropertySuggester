@@ -25,7 +25,7 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 		$output = $context->getOutput();
 		$skin = $context->getSkin();
 
-		Hooks::onBeforePageDisplay( $output, $skin );
+		( new Hooks )->onBeforePageDisplay( $output, $skin );
 
 		$this->assertContains( 'propertySuggester.suggestions', $output->getModules() );
 	}
@@ -38,7 +38,7 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 		$output = $context->getOutput();
 		$skin = $context->getSkin();
 
-		Hooks::onBeforePageDisplay( $output, $skin );
+		( new Hooks )->onBeforePageDisplay( $output, $skin );
 
 		$this->assertNotContains( 'propertySuggester.suggestions', $output->getModules() );
 	}

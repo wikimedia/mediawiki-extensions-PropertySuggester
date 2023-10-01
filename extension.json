@@ -31,9 +31,17 @@
 		"PropertySuggesterAlias": "PropertySuggester.alias.php"
 	},
 	"Hooks": {
-		"BeforePageDisplay": "PropertySuggester\\Hooks::onBeforePageDisplay",
-		"LoadExtensionSchemaUpdates": "PropertySuggester\\Hooks::onCreateSchema",
-		"ResourceLoaderRegisterModules": "PropertySuggester\\Hooks::onResourceLoaderRegisterModules"
+		"BeforePageDisplay": "main",
+		"LoadExtensionSchemaUpdates": "schema",
+		"ResourceLoaderRegisterModules": "main"
+	},
+	"HookHandlers": {
+		"main": {
+			"class": "PropertySuggester\\Hooks"
+		},
+		"schema": {
+			"class": "PropertySuggester\\SchemaHooks"
+		}
 	},
 	"attributes": {
 		"EventLogging": {

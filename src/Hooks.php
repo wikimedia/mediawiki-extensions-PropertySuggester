@@ -2,9 +2,10 @@
 
 namespace PropertySuggester;
 
-use DatabaseUpdater;
 use ExtensionRegistry;
+use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use OutputPage;
 use ResourceLoader;
 use Skin;
@@ -15,16 +16,19 @@ use Wikibase\Repo\WikibaseRepo;
  * @author BP2013N2
  * @license GPL-2.0-or-later
  */
-final class Hooks {
+final class Hooks implements
+	BeforePageDisplayHook,
+	ResourceLoaderRegisterModulesHook
+{
 
 	/**
 	 * Handler for the BeforePageDisplay hook, injects special behaviour
 	 * for PropertySuggestions in the EntitySuggester (if page is in EntityNamespace)
 	 *
-	 * @param OutputPage &$out
-	 * @param Skin &$skin
+	 * @param OutputPage $out
+	 * @param Skin $skin
 	 */
-	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
+	public function onBeforePageDisplay( $out, $skin ): void {
 		if ( $out->getRequest()->getCheck( 'nosuggestions' ) ) {
 			return;
 		}
@@ -48,14 +52,7 @@ final class Hooks {
 		$out->addModules( 'propertySuggester.suggestions' );
 	}
 
-	public static function onCreateSchema( DatabaseUpdater $updater ) {
-		$updater->addExtensionTable(
-			'wbs_propertypairs',
-			dirname( __DIR__ ) . "/sql/{$updater->getDB()->getType()}/tables-generated.sql"
-		);
-	}
-
-	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
+	public function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ): void {
 		$module = [
 			'localBasePath' => dirname( __DIR__ ) . '/modules',
 			'remoteExtPath' => 'PropertySuggester/modules',
