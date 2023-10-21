@@ -133,7 +133,7 @@ class SimpleSuggester implements SuggesterEngine {
 			$tupleConditions[] = $this->buildTupleCondition( $tuple[0], $tuple[1] );
 		}
 
-		if ( empty( $tupleConditions ) ) {
+		if ( !$tupleConditions ) {
 			$condition = 'pid1 IN (' . $dbr->makeList( $propertyIds ) . ')';
 		} else {
 			$condition = $dbr->makeList( $tupleConditions, LIST_OR );

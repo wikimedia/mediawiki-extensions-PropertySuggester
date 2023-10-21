@@ -115,7 +115,7 @@ class ResultBuilder {
 		}
 
 		$aliases = $this->prefetchingTermLookup->getPrefetchedAliases( $id, $language );
-		if ( is_array( $aliases ) && !empty( $aliases ) ) {
+		if ( is_array( $aliases ) && $aliases ) {
 			$this->checkAndSetAlias( $entry, $aliases[0] );
 		}
 
