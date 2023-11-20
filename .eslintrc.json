@@ -10,6 +10,9 @@
 	},
 	"rules": {
 		"no-underscore-dangle": "off",
-		"no-jquery/variable-pattern": "off"
+		"no-jquery/variable-pattern": "off",
+		"jsdoc/no-undefined-types": [ "off", {
+			"definedTypes": [ "wikibase.Entity" ]
+		} ]
 	}
 }
