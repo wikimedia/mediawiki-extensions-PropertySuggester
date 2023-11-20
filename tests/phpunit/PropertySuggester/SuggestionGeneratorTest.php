@@ -83,9 +83,9 @@ class SuggestionGeneratorTest extends MediaWikiIntegrationTestCase {
 
 		$this->entitySearchHelper->expects( $this->any() )
 			->method( 'getRankedSearchResults' )
-			->will( $this->returnValue(
+			->willReturn(
 				$this->getTermSearchResultArrayWithIds( [ $p7, $p10, $p15, $p12 ] )
-			) );
+			);
 
 		$result = $this->suggestionGenerator->filterSuggestions(
 			$suggestions,
@@ -138,8 +138,8 @@ class SuggestionGeneratorTest extends MediaWikiIntegrationTestCase {
 
 		$this->suggester->expects( $this->any() )
 			->method( 'suggestByPropertyIds' )
-			->with( $this->equalTo( $properties ) )
-			->will( $this->returnValue( [ 'foo' ] ) );
+			->with( $properties )
+			->willReturn( [ 'foo' ] );
 
 		$result1 = $this->suggestionGenerator->generateSuggestionsByPropertyList(
 			[ 'P12', 'p13', 'P14' ],
@@ -162,13 +162,13 @@ class SuggestionGeneratorTest extends MediaWikiIntegrationTestCase {
 
 		$this->lookup->expects( $this->once() )
 			->method( 'getEntity' )
-			->with( $this->equalTo( $itemId ) )
-			->will( $this->returnValue( $item ) );
+			->with( $itemId )
+			->willReturn( $item );
 
 		$this->suggester->expects( $this->any() )
 			->method( 'suggestByItem' )
-			->with( $this->equalTo( $item ) )
-			->will( $this->returnValue( [ 'foo' ] ) );
+			->with( $item )
+			->willReturn( [ 'foo' ] );
 
 		$result3 = $this->suggestionGenerator->generateSuggestionsByItem(
 			'Q42',
@@ -187,8 +187,8 @@ class SuggestionGeneratorTest extends MediaWikiIntegrationTestCase {
 
 		$this->lookup->expects( $this->once() )
 			->method( 'getEntity' )
-			->with( $this->equalTo( $itemId ) )
-			->will( $this->returnValue( null ) );
+			->with( $itemId )
+			->willReturn( null );
 
 		$result = $this->suggestionGenerator->generateSuggestionsByItem(
 			'Q41',
@@ -211,18 +211,18 @@ class SuggestionGeneratorTest extends MediaWikiIntegrationTestCase {
 
 		$this->lookup->expects( $this->once() )
 			->method( 'getEntity' )
-			->with( $this->equalTo( $itemId ) )
-			->will( $this->returnValue( $item ) );
+			->with( $itemId )
+			->willReturn( $item );
 
 		$this->suggester->expects( $this->any() )
 			->method( 'suggestByItem' )
-			->with( $this->equalTo( $item ) )
-			->will( $this->returnValue( null ) );
+			->with( $item )
+			->willReturn( null );
 
 		$this->fallbackSuggester->expects( $this->any() )
 			->method( 'suggestByItem' )
-			->with( $this->equalTo( $item ) )
-			->will( $this->returnValue( [ 'foo' ] ) );
+			->with( $item )
+			->willReturn( [ 'foo' ] );
 
 		$result4 = $this->suggestionGenerator->generateSuggestionsByItem(
 			'Q42',
@@ -245,13 +245,13 @@ class SuggestionGeneratorTest extends MediaWikiIntegrationTestCase {
 
 		$this->suggester->expects( $this->any() )
 			->method( 'suggestByPropertyIds' )
-			->with( $this->equalTo( $properties ) )
-			->will( $this->returnValue( null ) );
+			->with( $properties )
+			->willReturn( null );
 
 		$this->fallbackSuggester->expects( $this->any() )
 			->method( 'suggestByPropertyIds' )
-			->with( $this->equalTo( $properties ) )
-			->will( $this->returnValue( [ 'foo' ] ) );
+			->with( $properties )
+			->willReturn( [ 'foo' ] );
 
 		$result5 = $this->suggestionGenerator->generateSuggestionsByPropertyList(
 			[ 'P12', 'p13', 'P14' ],
