@@ -31,9 +31,6 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 	/** @var EntityId[] */
 	private static $idMap;
 
-	/** @var bool */
-	private static $hasSetup;
-
 	/** @var GetSuggestions */
 	public $getSuggestions;
 
@@ -43,8 +40,6 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->simulateBackendFailure = false;
-
-		$this->tablesUsed[] = 'wbs_propertypairs';
 
 		$apiMain = $this->createMock( ApiMain::class );
 		$apiMain->method( 'getContext' )->willReturn( new \RequestContext() );
@@ -69,38 +64,36 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 		$this->getSuggestions = new GetSuggestions( $apiMain, 'wbgetsuggestion' );
 	}
 
+	public function addDBDataOnce() {
+		$store = WikibaseRepo::getEntityStore();
+
+		$item = new Item( new ItemId( "Q1" ) );
+		$item->setLabel( "en", "asdf" );
+
+		$item2 = new Item( new ItemId( "Q2" ) );
+		$item2->setLabel( "de", "asdf" );
+
+		$item3 = new Item( new ItemId( "Q3" ) );
+		$item3->setLabel( "sv", "asdf" );
+
+		$editor = $this->getTestUser()->getUser();
+
+		$redirect = new EntityRedirect( $item->getId(), $item2->getId() );
+		$store->saveRedirect( $redirect, "RedirectNewItem1->Item2", $editor, EDIT_NEW, false );
+
+		$redirect2 = new EntityRedirect( $item2->getId(), $item3->getId() );
+		$store->saveRedirect( $redirect2, "RedirectNewItem1->Item2", $editor, EDIT_NEW, false );
+
+		$prop = Property::newFromType( 'string' );
+		$store->saveEntity( $prop, 'EditEntityTestP56', $editor, EDIT_NEW );
+		self::$idMap['%P56%'] = $prop->getId()->getSerialization();
+
+		$prop = Property::newFromType( 'string' );
+		$store->saveEntity( $prop, 'EditEntityTestP72', $editor, EDIT_NEW );
+		self::$idMap['%P72%'] = $prop->getId()->getSerialization();
+	}
+
 	public function addDBData() {
-		if ( !self::$hasSetup ) {
-			$store = WikibaseRepo::getEntityStore();
-
-			$item = new Item( new ItemId( "Q1" ) );
-			$item->setLabel( "en", "asdf" );
-
-			$item2 = new Item( new ItemId( "Q2" ) );
-			$item2->setLabel( "de", "asdf" );
-
-			$item3 = new Item( new ItemId( "Q3" ) );
-			$item3->setLabel( "sv", "asdf" );
-
-			$editor = $this->getTestUser()->getUser();
-
-			$redirect = new EntityRedirect( $item->getId(), $item2->getId() );
-			$store->saveRedirect( $redirect, "RedirectNewItem1->Item2", $editor, EDIT_NEW, false );
-
-			$redirect2 = new EntityRedirect( $item2->getId(), $item3->getId() );
-			$store->saveRedirect( $redirect2, "RedirectNewItem1->Item2", $editor, EDIT_NEW, false );
-
-			$prop = Property::newFromType( 'string' );
-			$store->saveEntity( $prop, 'EditEntityTestP56', $editor, EDIT_NEW );
-			self::$idMap['%P56%'] = $prop->getId()->getSerialization();
-
-			$prop = Property::newFromType( 'string' );
-			$store->saveEntity( $prop, 'EditEntityTestP72', $editor, EDIT_NEW );
-			self::$idMap['%P72%'] = $prop->getId()->getSerialization();
-
-			self::$hasSetup = true;
-		}
-
 		$p56 = self::$idMap['%P56%'];
 		$p72 = self::$idMap['%P72%'];
 		$ip56 = (int)substr( $p56, 1 );
