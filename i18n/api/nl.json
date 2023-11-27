@@ -1,11 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mainframe98"
+			"Mainframe98",
+			"McDutchie"
 		]
 	},
+	"apihelp-wbsgetsuggestions-summary": "API-module voor het verkrijgen van suggesties voor aanvullende eigenschappen die u aan een Wikibase-entiteit kunt toevoegen. De API-module is voornamelijk bedoeld voor gebruik door de suggestiewidget wanneer gebruikers Wikibase-entiteiten bewerken.",
+	"apihelp-wbsgetsuggestions-example-1": "Ontvang suggesties voor entiteit Q4",
+	"apihelp-wbsgetsuggestions-example-2": "Ontvang suggesties voor entiteit Q4 van rang 10 tot 15",
+	"apihelp-wbsgetsuggestions-example-3": "Ontvang suggesties voor de eigenschappencombinatie P21 en P31",
+	"apihelp-wbsgetsuggestions-example-4": "Ontvang suggesties voor de kwalificaties die worden gebruikt met P21",
+	"apihelp-wbsgetsuggestions-example-5": "Ontvang suggesties voor de referenties die worden gebruikt met P21",
+	"apihelp-wbsgetsuggestions-param-context": "Item, referentie of kwalificatie.",
+	"apihelp-wbsgetsuggestions-param-continue": "Startpositie waarvandaan het zoeken te vervolgen.",
+	"apihelp-wbsgetsuggestions-param-entity": "Stel eigenschappen voor de gegeven entiteit voor, gebaseerd op de bestaande lijst met eigenschappen die de entiteit heeft.",
+	"apihelp-wbsgetsuggestions-param-include": "Welke suggesties moeten worden opgenomen: Standaard worden alleen eigenschappen voorgesteld die mogelijk worden toegevoegd (niet verouderd, nog niet aanwezig).",
 	"apihelp-wbsgetsuggestions-param-language": "Taal voor de resultaten.",
 	"apihelp-wbsgetsuggestions-param-limit": "Maximum aantal resultaten.",
-	"apihelp-wbsgetsuggestions-param-search": "Zoek op deze tekst.",
+	"apihelp-wbsgetsuggestions-param-properties": "Stel aanvullende eigenschappen voor voor de gegeven lijst met eigenschappen.",
+	"apihelp-wbsgetsuggestions-param-search": "Naar deze tekst zoeken.",
 	"apihelp-wbsgetsuggestions-param-size": "Geef het aantal suggesties op dat moet worden teruggegeven."
 }

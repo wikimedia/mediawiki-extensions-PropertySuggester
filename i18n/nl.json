@@ -1,11 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mainframe98"
+			"Mainframe98",
+			"McDutchie"
 		]
 	},
-	"apihelp-wbsgetsuggestions-param-language": "Taal voor de resultaten.",
-	"apihelp-wbsgetsuggestions-param-limit": "Maximum aantal resultaten.",
-	"apihelp-wbsgetsuggestions-param-search": "Zoek op deze tekst.",
-	"apihelp-wbsgetsuggestions-param-size": "Geef het aantal suggesties op dat moet worden teruggegeven."
+	"propertysuggester-desc": "Stelt eigenschappen voor bij het toevoegen van Wikibase-statements."
 }
