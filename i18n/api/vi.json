@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pisceskaze"
+		]
+	},
+	"apihelp-wbsgetsuggestions-summary": "Mô-đun API để nhận đề xuất về các thuộc tính bổ sung để thêm vào thực thể Wikibase. Mô-đun API chủ yếu được thiết kế để tiện ích gợi ý sử dụng khi người dùng đang chỉnh sửa các thực thể Wikibase.",
+	"apihelp-wbsgetsuggestions-example-1": "Nhận đề xuất cho thực thể Q4",
+	"apihelp-wbsgetsuggestions-example-2": "Nhận đề xuất cho thực thể Q4 từ hạng 10 đến 15",
+	"apihelp-wbsgetsuggestions-example-3": "Nhận gợi ý tổ hợp thuộc tính P21 và P31"
+}
