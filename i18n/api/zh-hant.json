@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kly"
+			"Kly",
+			"SunAfterRain"
 		]
 	},
 	"apihelp-wbsgetsuggestions-summary": "取得額外屬性建議來添加至 Wikibase 項目的 API。該 API 模組主要目的是讓當使用者編輯 Wikibase 項目時，讓建議用途小工具使用。",
@@ -18,5 +19,6 @@
 	"apihelp-wbsgetsuggestions-param-limit": "結果數量上限。",
 	"apihelp-wbsgetsuggestions-param-properties": "為提供的屬性清單建議額外屬性。",
 	"apihelp-wbsgetsuggestions-param-search": "搜尋此文字。",
-	"apihelp-wbsgetsuggestions-param-size": "指定要回傳的建議數量。"
+	"apihelp-wbsgetsuggestions-param-size": "指定要回傳的建議數量。",
+	"apihelp-wbsgetsuggestions-param-event": "用於匹配客戶端和伺服器端記錄的事件的事件 ID。"
 }
