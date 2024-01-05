@@ -2,7 +2,7 @@
 
 namespace PropertySuggester;
 
-use Status;
+use MediaWiki\Status\Status;
 
 /**
  * Parses the suggester parameters

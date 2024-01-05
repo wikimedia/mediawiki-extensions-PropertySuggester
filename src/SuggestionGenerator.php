@@ -3,10 +3,10 @@
 namespace PropertySuggester;
 
 use InvalidArgumentException;
+use MediaWiki\Status\Status;
 use Message;
 use PropertySuggester\Suggesters\SuggesterEngine;
 use PropertySuggester\Suggesters\Suggestion;
-use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;

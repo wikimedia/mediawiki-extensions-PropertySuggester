@@ -5,6 +5,7 @@ namespace PropertySuggester;
 use ApiMain;
 use ApiUsageException;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Status\Status;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -52,7 +53,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 					->willReturnCallback(
 						function ( ...$args ) use ( $entitySearchHelper ) {
 							if ( $this->simulateBackendFailure ) {
-								throw new EntitySearchException( \Status::newFatal( 'search-backend-error' ) );
+								throw new EntitySearchException( Status::newFatal( 'search-backend-error' ) );
 							} else {
 								return $entitySearchHelper->getRankedSearchResults( ...$args );
 							}
