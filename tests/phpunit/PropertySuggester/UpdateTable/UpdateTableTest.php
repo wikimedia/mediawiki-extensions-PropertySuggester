@@ -29,7 +29,6 @@ class UpdateTableTest extends MediaWikiIntegrationTestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->tablesUsed[] = 'wbs_propertypairs';
 		$this->testfilename = sys_get_temp_dir() . '/_temp_test_csv_file.csv';
 	}
 

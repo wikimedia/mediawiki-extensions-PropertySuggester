@@ -53,7 +53,6 @@ class SimpleSuggesterTest extends MediaWikiIntegrationTestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->tablesUsed[] = 'wbs_propertypairs';
 		$lb = new LoadBalancerSingle( [ 'connection' => $this->db ] );
 		$this->suggester = new SimpleSuggester( $lb );
 		$this->suggester->setEventLogger( $this->createMock( EventLogger::class ) );
