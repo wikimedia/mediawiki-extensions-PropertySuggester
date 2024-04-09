@@ -44,6 +44,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 		$this->simulateBackendFailure = false;
 
 		$this->tablesUsed[] = 'wbs_propertypairs';
+		$this->tablesUsed[] = 'redirect';
 
 		$apiMain = $this->createMock( ApiMain::class );
 		$apiMain->method( 'getContext' )->willReturn( new \RequestContext() );
