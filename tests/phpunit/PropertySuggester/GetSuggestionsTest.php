@@ -109,7 +109,11 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 			'context' => 'item',
 		];
 
-		$this->db->insert( 'wbs_propertypairs', [ $row ] );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbs_propertypairs' )
+			->row( $row )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	public function testDatabaseHasRows() {

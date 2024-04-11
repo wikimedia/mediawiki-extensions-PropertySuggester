@@ -7,6 +7,7 @@ use MediaWiki\MediaWikiServices;
 use PropertySuggester\UpdateTable\ImportContext;
 use PropertySuggester\UpdateTable\Importer\BasicImporter;
 use UnexpectedValueException;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILBFactory;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
@@ -109,7 +110,11 @@ class UpdateTable extends Maintenance {
 		}
 		$this->output( "Removing old entries\n" );
 		if ( $wgDBtype === 'sqlite' || $wgDBtype === 'postgres' ) {
-			$db->delete( $tableName, "*", __METHOD__ );
+			$db->newDeleteQueryBuilder()
+				->deleteFrom( $tableName )
+				->where( IDatabase::ALL_ROWS )
+				->caller( __METHOD__ )
+				->execute();
 		} else {
 			do {
 				$db->commit( __METHOD__, 'flush' );

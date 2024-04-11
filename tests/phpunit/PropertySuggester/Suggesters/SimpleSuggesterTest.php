@@ -47,7 +47,11 @@ class SimpleSuggesterTest extends MediaWikiIntegrationTestCase {
 			$this->row( 3, 0, 1, 100, 0.5, 'item' ),
 		];
 
-		$this->db->insert( 'wbs_propertypairs', $rows );
+		$this->db->newInsertQueryBuilder()
+			->insertInto( 'wbs_propertypairs' )
+			->rows( $rows )
+			->caller( __METHOD__ )
+			->execute();
 	}
 
 	public function setUp(): void {

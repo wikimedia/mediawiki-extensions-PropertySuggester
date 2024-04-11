@@ -70,7 +70,11 @@ class BasicImporter implements Importer {
 			if ( $data == false || ++$i % $batchSize == 0 ) {
 				$db->commit( __METHOD__, 'flush' );
 				$lbFactory->waitForReplication();
-				$db->insert( $importContext->getTargetTableName(), $accumulator, __METHOD__ );
+				$db->newInsertQueryBuilder()
+					->insertInto( $importContext->getTargetTableName() )
+					->rows( $accumulator )
+					->caller( __METHOD__ )
+					->execute();
 				if ( !$importContext->isQuiet() ) {
 					print "$i rows inserted\n";
 				}
