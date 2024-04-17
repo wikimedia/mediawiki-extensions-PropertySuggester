@@ -31,8 +31,6 @@ class BasicImporter implements Importer {
 		$lb = $lbFactory->getMainLB();
 		$db = $lb->getConnection( DB_PRIMARY );
 		$this->doImport( $fileHandle, $lbFactory, $db, $importContext );
-		$lb->reuseConnection( $db );
-
 		fclose( $fileHandle );
 
 		return true;

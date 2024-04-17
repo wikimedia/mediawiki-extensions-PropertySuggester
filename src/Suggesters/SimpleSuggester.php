@@ -159,7 +159,6 @@ class SimpleSuggester implements SuggesterEngine {
 				'HAVING'   => 'prob > ' . $minProbability
 			]
 		);
-		$this->lb->reuseConnection( $dbr );
 
 		$results = $this->buildResult( $res );
 		$this->eventLogger->setRequestDuration( (int)( ( microtime( true ) - $startTime ) * 1000 ) );

@@ -124,7 +124,6 @@ class UpdateTable extends Maintenance {
 				$db->query( "DELETE FROM $table LIMIT $this->mBatchSize", __METHOD__ );
 			} while ( $db->affectedRows() > 0 );
 		}
-		$lb->reuseConnection( $db );
 	}
 
 }
