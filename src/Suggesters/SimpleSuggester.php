@@ -12,6 +12,8 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
+use Wikimedia\Rdbms\OrExpressionGroup;
+use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
  * a Suggester implementation that creates suggestion via MySQL
@@ -129,36 +131,30 @@ class SimpleSuggester implements SuggesterEngine {
 		$dbr = $this->lb->getConnection( DB_REPLICA );
 
 		$tupleConditions = [];
-		foreach ( $idTuples as $tuple ) {
-			$tupleConditions[] = $this->buildTupleCondition( $tuple[0], $tuple[1] );
+		foreach ( $idTuples as [ $pid, $qid ] ) {
+			$tupleConditions[] = $dbr->expr( 'pid1', '=', (int)$pid )->and( 'qid1', '=', (int)$qid );
 		}
 
 		if ( !$tupleConditions ) {
-			$condition = 'pid1 IN (' . $dbr->makeList( $propertyIds ) . ')';
+			$condition = $dbr->expr( 'pid1', '=', $propertyIds );
 		} else {
-			$condition = $dbr->makeList( $tupleConditions, LIST_OR );
+			$condition = new OrExpressionGroup( ...$tupleConditions );
 		}
-		$res = $dbr->select(
-			'wbs_propertypairs',
-			[
+		$res = $dbr->newSelectQueryBuilder()
+			->select( [
 				'pid' => 'pid2',
 				'prob' => "sum(probability)/$count",
-			],
-			array_merge(
-				[
-					$condition,
-					'context' => $context,
-				],
-				$excludedIds ? [ 'pid2 NOT IN (' . $dbr->makeList( $excludedIds ) . ')' ] : []
-			),
-			__METHOD__,
-			[
-				'GROUP BY' => 'pid2',
-				'ORDER BY' => 'prob DESC',
-				'LIMIT'    => $limit,
-				'HAVING'   => 'prob > ' . $minProbability
-			]
-		);
+			] )
+			->from( 'wbs_propertypairs' )
+			->where( $condition )
+			->andWhere( [ 'context' => $context ] )
+			->andWhere( $excludedIds ? $dbr->expr( 'pid2', '!=', $excludedIds ) : [] )
+			->groupBy( 'pid2' )
+			->having( 'prob > ' . $minProbability )
+			->orderBy( 'prob', SelectQueryBuilder::SORT_DESC )
+			->limit( $limit )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 
 		$results = $this->buildResult( $res );
 		$this->eventLogger->setRequestDuration( (int)( ( microtime( true ) - $startTime ) * 1000 ) );
@@ -263,15 +259,6 @@ class SimpleSuggester implements SuggesterEngine {
 			$context,
 			$include
 		);
-	}
-
-	/**
-	 * @param int $pid
-	 * @param int $qid
-	 * @return string
-	 */
-	private function buildTupleCondition( $pid, $qid ) {
-		return '(pid1 = ' . (int)$pid . ' AND qid1 = ' . (int)$qid . ')';
 	}
 
 	/**

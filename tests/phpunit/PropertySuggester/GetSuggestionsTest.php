@@ -122,11 +122,12 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 		$ip56 = (int)substr( $p56, 1 );
 		$ip72 = (int)substr( $p72, 1 );
 
-		$res = $this->db->select(
-			'wbs_propertypairs',
-			[ 'pid1', 'pid2' ],
-			[ 'pid1' => $ip56, 'pid2' => $ip72 ]
-		);
+		$res = $this->db->newSelectQueryBuilder()
+			->select( [ 'pid1', 'pid2' ] )
+			->from( 'wbs_propertypairs' )
+			->where( [ 'pid1' => $ip56, 'pid2' => $ip72 ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 		$this->assertSame( 1, $res->numRows() );
 	}
 

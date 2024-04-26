@@ -63,7 +63,11 @@ class SimpleSuggesterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testDatabaseHasRows() {
-		$res = $this->db->select( 'wbs_propertypairs', [ 'pid1', 'pid2' ] );
+		$res = $this->db->newSelectQueryBuilder()
+			->select( [ 'pid1', 'pid2' ] )
+			->from( 'wbs_propertypairs' )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 		$this->assertEquals( 5, $res->numRows() );
 	}
 
