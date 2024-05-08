@@ -74,20 +74,16 @@ class UpdateTableTest extends MediaWikiIntegrationTestCase {
 		$maintenanceScript->loadParamsAndArgs( null, $args, null );
 		$maintenanceScript->execute();
 		if ( count( $rows ) < 100 ) {
-			$this->assertSelect(
-				'wbs_propertypairs',
-				[ 'pid1', 'qid1', 'pid2', 'count', 'probability', 'context' ],
-				[],
-				$rows
-			);
+			$this->newSelectQueryBuilder()
+				->select( [ 'pid1', 'qid1', 'pid2', 'count', 'probability', 'context' ] )
+				->from( 'wbs_propertypairs' )
+				->assertResultSet( $rows );
 		} else {
-			// assertSelect is too slow to compare 1100 rows... just check the size
-			$this->assertSelect(
-				'wbs_propertypairs',
-				[ 'count' => 'count(*)' ],
-				[],
-				[ [ count( $rows ) ] ]
-			);
+			// assertResultSet is too slow to compare 1100 rows... just check the size
+			$this->newSelectQueryBuilder()
+				->select( 'COUNT(*)' )
+				->from( 'wbs_propertypairs' )
+				->assertFieldValue( count( $rows ) );
 		}
 	}
 
