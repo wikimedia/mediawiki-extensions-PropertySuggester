@@ -3,8 +3,8 @@
 namespace PropertySuggester;
 
 use InvalidArgumentException;
+use MediaWiki\Message\Message;
 use MediaWiki\Status\Status;
-use Message;
 use PropertySuggester\Suggesters\SuggesterEngine;
 use PropertySuggester\Suggesters\Suggestion;
 use Wikibase\DataModel\Entity\Item;
