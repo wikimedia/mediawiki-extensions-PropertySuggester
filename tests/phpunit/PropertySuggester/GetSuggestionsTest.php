@@ -110,7 +110,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 			'context' => 'item',
 		];
 
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbs_propertypairs' )
 			->row( $row )
 			->caller( __METHOD__ )
@@ -123,7 +123,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 		$ip56 = (int)substr( $p56, 1 );
 		$ip72 = (int)substr( $p72, 1 );
 
-		$res = $this->db->newSelectQueryBuilder()
+		$res = $this->getDb()->newSelectQueryBuilder()
 			->select( [ 'pid1', 'pid2' ] )
 			->from( 'wbs_propertypairs' )
 			->where( [ 'pid1' => $ip56, 'pid2' => $ip72 ] )

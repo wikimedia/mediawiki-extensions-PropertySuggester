@@ -47,7 +47,7 @@ class SimpleSuggesterTest extends MediaWikiIntegrationTestCase {
 			$this->row( 3, 0, 1, 100, 0.5, 'item' ),
 		];
 
-		$this->db->newInsertQueryBuilder()
+		$this->getDb()->newInsertQueryBuilder()
 			->insertInto( 'wbs_propertypairs' )
 			->rows( $rows )
 			->caller( __METHOD__ )
@@ -63,7 +63,7 @@ class SimpleSuggesterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testDatabaseHasRows() {
-		$res = $this->db->newSelectQueryBuilder()
+		$res = $this->getDb()->newSelectQueryBuilder()
 			->select( [ 'pid1', 'pid2' ] )
 			->from( 'wbs_propertypairs' )
 			->caller( __METHOD__ )
