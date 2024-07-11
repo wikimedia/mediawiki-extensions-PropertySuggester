@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
-use Wikimedia\Rdbms\OrExpressionGroup;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
@@ -138,7 +137,7 @@ class SimpleSuggester implements SuggesterEngine {
 		if ( !$tupleConditions ) {
 			$condition = $dbr->expr( 'pid1', '=', $propertyIds );
 		} else {
-			$condition = new OrExpressionGroup( ...$tupleConditions );
+			$condition = $dbr->orExpr( $tupleConditions );
 		}
 		$res = $dbr->newSelectQueryBuilder()
 			->select( [
