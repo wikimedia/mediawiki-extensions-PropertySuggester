@@ -19,8 +19,11 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 	 */
 	private $paramsParser;
 
+	/** @var int */
 	private $defaultSuggesterResultSize = 100;
+	/** @var float */
 	private $defaultMinProbability = 0.01;
+	/** @var array */
 	private $defaultParams = [
 		'entity' => null,
 		'properties' => null,
