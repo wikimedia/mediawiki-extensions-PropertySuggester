@@ -21,5 +21,7 @@
 	"apihelp-wbsgetsuggestions-param-properties": "為提供的屬性清單建議額外屬性。",
 	"apihelp-wbsgetsuggestions-param-search": "搜尋此文字。",
 	"apihelp-wbsgetsuggestions-param-size": "指定要回傳的建議數量。",
+	"apihelp-wbsgetsuggestions-param-types": "為指定類型清單建議其他屬性（如果在 API 呼叫中提供了實體，這些值等同於透過 classifyingPropertyIds 收集的值）。與屬性參數結合使用。",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "提供實體 ID 參數「entity」或屬性「properties」清單",
 	"apihelp-wbsgetsuggestions-param-event": "用於匹配客戶端和伺服器端記錄的事件的事件 ID。"
 }
