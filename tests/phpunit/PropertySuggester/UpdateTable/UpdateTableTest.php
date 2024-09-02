@@ -17,20 +17,9 @@ use PropertySuggester\Maintenance\UpdateTable;
 class UpdateTableTest extends MediaWikiIntegrationTestCase {
 
 	/**
-	 * @var string
-	 */
-	private $testfilename;
-
-	/**
 	 * @var string[]
 	 */
 	private $rowHeader = [ 'pid1', 'qid1', 'pid2', 'count', 'probability', 'context' ];
-
-	public function setUp(): void {
-		parent::setUp();
-
-		$this->testfilename = sys_get_temp_dir() . '/_temp_test_csv_file.csv';
-	}
 
 	public static function provideRows() {
 		$rows1 = [
@@ -56,7 +45,7 @@ class UpdateTableTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideRows
 	 */
 	public function testRewriteNativeStrategy( array $rows ) {
-		$args = [ 'file' => $this->testfilename, 'quiet' => true, 'use-loaddata' => true ];
+		$args = [ 'file' => $this->getNewTempFile(), 'quiet' => true, 'use-loaddata' => true ];
 		$this->runScriptAndAssert( $args, $rows );
 	}
 
@@ -64,12 +53,12 @@ class UpdateTableTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideRows
 	 */
 	public function testRewriteWithSQLInserts( array $rows ) {
-		$args = [ 'file' => $this->testfilename, 'quiet' => true ];
+		$args = [ 'file' => $this->getNewTempFile(), 'quiet' => true ];
 		$this->runScriptAndAssert( $args, $rows );
 	}
 
 	private function runScriptAndAssert( array $args, array $rows ) {
-		$this->setupData( $rows );
+		$this->setupData( $args['file'], $rows );
 		$maintenanceScript = new UpdateTable();
 		$maintenanceScript->loadParamsAndArgs( null, $args, null );
 		$maintenanceScript->execute();
@@ -87,20 +76,13 @@ class UpdateTableTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	private function setupData( array $rows ) {
-		$fhandle = fopen( $this->testfilename, 'w' );
+	private function setupData( $testfilename, array $rows ) {
+		$fhandle = fopen( $testfilename, 'w' );
 		fputcsv( $fhandle, $this->rowHeader, ',' );
 		foreach ( $rows as $row ) {
 			fputcsv( $fhandle, $row, ',' );
 		}
 		fclose( $fhandle );
-	}
-
-	public function tearDown(): void {
-		if ( file_exists( $this->testfilename ) ) {
-			unlink( $this->testfilename );
-		}
-		parent::tearDown();
 	}
 
 }
