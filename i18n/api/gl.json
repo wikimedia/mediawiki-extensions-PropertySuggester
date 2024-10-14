@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Elisardojm",
-			"Iváns"
+			"Iváns",
+			"Toliño"
 		]
 	},
+	"apihelp-wbsgetsuggestions-summary": "Módulo API para obter suxestións de propiedades adicionais para engadir a unha entidade de Wikibase. O módulo API está destinado principalmente para o seu uso polo widget de suxestións cando os usuarios están modificando entidades de Wikibase.",
 	"apihelp-wbsgetsuggestions-example-1": "Obter suxestións para a entidade Q4",
 	"apihelp-wbsgetsuggestions-example-2": "Obter suxestión para a entidade Q4 do rango 10 ó 15",
 	"apihelp-wbsgetsuggestions-example-3": "Obter suxestións para a combinación das propiedades P21 e P31",
@@ -13,9 +15,13 @@
 	"apihelp-wbsgetsuggestions-param-context": "Calquera elemento, referencia ou cualificador.",
 	"apihelp-wbsgetsuggestions-param-continue": "Desprazamento dende onde continuar unha procura.",
 	"apihelp-wbsgetsuggestions-param-entity": "Suxerir propiedades para a entidade indicada, baseadas na lista de existende de propiedades que xa ten a entidade.",
+	"apihelp-wbsgetsuggestions-param-include": "Que suxestións incluír: Por defecto só se suxerirán as propiedades que se poidan engadir (non obsoletas, aínda non presentes).",
 	"apihelp-wbsgetsuggestions-param-language": "Idioma para o resultado.",
 	"apihelp-wbsgetsuggestions-param-limit": "Número máximo de resultados.",
 	"apihelp-wbsgetsuggestions-param-properties": "Suxerir propiedades adicionais para a lista dada de propiedades.",
 	"apihelp-wbsgetsuggestions-param-search": "Procurar este texto.",
-	"apihelp-wbsgetsuggestions-param-size": "Indicar o número de suxestión a devolver."
+	"apihelp-wbsgetsuggestions-param-size": "Indicar o número de suxestión a devolver.",
+	"apihelp-wbsgetsuggestions-param-types": "Suxire propiedades adicionais para a lista de tipos indicada (estes valores son iguais aos que se recollerían mediante classifyingPropertyIds se se indica unha entidade na chamada á API). Usado en combinación co parámetro de propiedades.",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Proporciona o parámetro de identificador da entidade \"entity\" ou unha lista de propiedades \"properties\"",
+	"apihelp-wbsgetsuggestions-param-event": "Identificador de evento usado para facer coincidir eventos rexistrados do lado do cliente e do servidor."
 }
