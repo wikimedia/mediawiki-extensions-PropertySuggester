@@ -2,7 +2,7 @@
 
 namespace PropertySuggester;
 
-use ExtensionRegistry;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWikiIntegrationTestCase;
 
 /**

@@ -2,7 +2,7 @@
 
 namespace PropertySuggester\Maintenance;
 
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MediaWikiServices;
 use PropertySuggester\UpdateTable\ImportContext;
 use PropertySuggester\UpdateTable\Importer\BasicImporter;

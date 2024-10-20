@@ -2,7 +2,7 @@
 
 namespace PropertySuggester;
 
-use ApiResult;
+use MediaWiki\Api\ApiResult;
 use PropertySuggester\Suggesters\Suggestion;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\LanguageFallbackChainFactory;

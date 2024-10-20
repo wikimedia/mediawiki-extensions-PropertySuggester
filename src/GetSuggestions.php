@@ -2,9 +2,9 @@
 
 namespace PropertySuggester;
 
-use ApiBase;
-use ApiMain;
-use ApiResult;
+use MediaWiki\Api\ApiBase;
+use MediaWiki\Api\ApiMain;
+use MediaWiki\Api\ApiResult;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\DerivativeRequest;
 use PropertySuggester\Suggesters\SchemaTreeSuggester;

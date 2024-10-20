@@ -2,7 +2,7 @@
 
 namespace PropertySuggester;
 
-use ApiResult;
+use MediaWiki\Api\ApiResult;
 use MediaWiki\Title\Title;
 use MediaWikiUnitTestCase;
 use PropertySuggester\Suggesters\Suggestion;
