@@ -89,13 +89,8 @@ class GetSuggestions extends ApiBase {
 	 */
 	private $testingRatio;
 
-	/**
-	 * @param ApiMain $main
-	 * @param string $name
-	 * @param string $prefix
-	 */
-	public function __construct( ApiMain $main, $name, $prefix = '' ) {
-		parent::__construct( $main, $name, $prefix );
+	public function __construct( ApiMain $main, string $name ) {
+		parent::__construct( $main, $name );
 		$config = $this->getConfig();
 
 		$mwServices = MediaWikiServices::getInstance();
