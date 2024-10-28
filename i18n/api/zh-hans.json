@@ -3,7 +3,8 @@
 		"authors": [
 			"GuoPC",
 			"Liuxinyu970226",
-			"Zhang8569"
+			"Zhang8569",
+			"沈澄心"
 		]
 	},
 	"apihelp-wbsgetsuggestions-summary": "用于获取添加至Wikibase实体的额外属性建议的API模块。API模块主要在用户编辑Wikibase实体时，由建议器小部件使用。",
@@ -15,11 +16,13 @@
 	"apihelp-wbsgetsuggestions-param-context": "项、参考文献或限定符之一。",
 	"apihelp-wbsgetsuggestions-param-continue": "继续搜索的偏移。",
 	"apihelp-wbsgetsuggestions-param-entity": "为指定实体建议属性，基于实体现有的属性列表。",
+	"apihelp-wbsgetsuggestions-param-include": "应包括的建议：默认情况下，仅建议可能添加的属性（非弃用、尚未提供）。",
 	"apihelp-wbsgetsuggestions-param-language": "用于结果的语言。",
 	"apihelp-wbsgetsuggestions-param-limit": "结果的最大值。",
 	"apihelp-wbsgetsuggestions-param-properties": "为提供的属性列表建议额外属性。",
 	"apihelp-wbsgetsuggestions-param-search": "搜索此文本。",
 	"apihelp-wbsgetsuggestions-param-size": "指定要返回的建议数量。",
+	"apihelp-wbsgetsuggestions-param-types": "为给定的类型列表建议其他属性（如果在API调用中提供了实体，则这些值等于通过classifyingPropertyIds收集的值）。与properties参数结合使用。",
 	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "提供实体ID参数“entity”或属性列表“properties”",
 	"apihelp-wbsgetsuggestions-param-event": "用于匹配客户端和服务器端记录的事件的事件 ID。"
 }
