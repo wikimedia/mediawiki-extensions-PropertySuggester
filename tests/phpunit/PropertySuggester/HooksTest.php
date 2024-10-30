@@ -33,7 +33,7 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider onBeforePageDisplay_resourceLoaderModuleNotAddedProvider
 	 */
-	public function testOnBeforePageDisplay_resourceLoaderModuleNotAdded( Title $title = null ) {
+	public function testOnBeforePageDisplay_resourceLoaderModuleNotAdded( ?Title $title = null ) {
 		$context = $this->getContext( $title );
 		$output = $context->getOutput();
 		$skin = $context->getSkin();
@@ -56,7 +56,7 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 		return $lookup->getTitleForId( $entityId );
 	}
 
-	private function getContext( Title $title = null ) {
+	private function getContext( ?Title $title = null ) {
 		$context = RequestContext::getMain();
 		$context->setTitle( $title );
 
