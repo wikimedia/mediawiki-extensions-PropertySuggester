@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Pisceskaze"
+			"Pisceskaze",
+			"SongNgu.xyz"
 		]
 	},
 	"apihelp-wbsgetsuggestions-summary": "Mô-đun API để nhận đề xuất về các thuộc tính bổ sung để thêm vào thực thể Wikibase. Mô-đun API chủ yếu được thiết kế để tiện ích gợi ý sử dụng khi người dùng đang chỉnh sửa các thực thể Wikibase.",
