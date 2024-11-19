@@ -18,6 +18,9 @@
 		"PropertySuggester\\": "src/",
 		"PropertySuggester\\Maintenance\\": "maintenance/"
 	},
+	"TestAutoloadNamespaces": {
+		"PropertySuggester\\Tests\\": "tests/phpunit/"
+	},
 	"APIModules": {
 		"wbsgetsuggestions": "PropertySuggester\\GetSuggestions"
 	},

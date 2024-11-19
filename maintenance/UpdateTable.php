@@ -33,6 +33,27 @@ class UpdateTable extends Maintenance {
 	}
 
 	/**
+	 * If passed a filename, find the absolute path and convert to unix format.
+	 *
+	 * @param string $uriOrFilePath
+	 * @return string
+	 * @throws \MediaWiki\Maintenance\MaintenanceFatalError
+	 */
+	private function normaliseStreamPath( string $uriOrFilePath ): string {
+		if ( str_contains( $uriOrFilePath, '://' ) ) {
+			// Path is a stream - not attempt to normalise / verify
+			return $uriOrFilePath;
+		}
+		$fullPath = realpath( $uriOrFilePath );
+		$fullPath = str_replace( '\\', '/', $fullPath );
+
+		if ( !file_exists( $fullPath ) ) {
+			$this->fatalError( "Cant find $uriOrFilePath \n" );
+		}
+		return $fullPath;
+	}
+
+	/**
 	 * loads property pair occurrence probability table from given csv file
 	 */
 	public function execute() {
@@ -40,12 +61,7 @@ class UpdateTable extends Maintenance {
 			$this->fatalError( "The --file option requires a file as an argument.\n" );
 		}
 		$path = $this->getOption( 'file' );
-		$fullPath = realpath( $path );
-		$fullPath = str_replace( '\\', '/', $fullPath );
-
-		if ( !file_exists( $fullPath ) ) {
-			$this->fatalError( "Cant find $path \n" );
-		}
+		$fullPath = $this->normaliseStreamPath( $path );
 
 		$tableName = 'wbs_propertypairs';
 
