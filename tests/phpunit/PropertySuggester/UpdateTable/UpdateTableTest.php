@@ -1,9 +1,10 @@
 <?php
 
-namespace PropertySuggester\UpdateTable;
+namespace PropertySuggester\Tests\PropertySuggester\UpdateTable;
 
 use MediaWikiIntegrationTestCase;
 use PropertySuggester\Maintenance\UpdateTable;
+use PropertySuggester\Tests\PropertySuggester\UpdateTable\Importer\FileWrappingImportStreamHandler;
 
 /**
  * @covers \PropertySuggester\maintenance\UpdateTable
@@ -41,11 +42,22 @@ class UpdateTableTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
+	public function setUp(): void {
+		parent::setUp();
+		stream_wrapper_register( 'testimport', FileWrappingImportStreamHandler::class );
+	}
+
+	private function getTempFileWithData( array $rows ): string {
+		$filename = $this->getNewTempFile();
+		$this->setupData( $filename, $rows );
+		return $filename;
+	}
+
 	/**
 	 * @dataProvider provideRows
 	 */
 	public function testRewriteNativeStrategy( array $rows ) {
-		$args = [ 'file' => $this->getNewTempFile(), 'quiet' => true, 'use-loaddata' => true ];
+		$args = [ 'file' => $this->getTempFileWithData( $rows ), 'quiet' => true, 'use-loaddata' => true ];
 		$this->runScriptAndAssert( $args, $rows );
 	}
 
@@ -53,12 +65,20 @@ class UpdateTableTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider provideRows
 	 */
 	public function testRewriteWithSQLInserts( array $rows ) {
-		$args = [ 'file' => $this->getNewTempFile(), 'quiet' => true ];
+		$args = [ 'file' => $this->getTempFileWithData( $rows ), 'quiet' => true ];
+		$this->runScriptAndAssert( $args, $rows );
+	}
+
+	/**
+	 * @dataProvider provideRows
+	 */
+	public function testReadFromStream( array $rows ) {
+		$tempfile = $this->getTempFileWithData( $rows );
+		$args = [ 'file' => "testimport://$tempfile", 'quiet' => true ];
 		$this->runScriptAndAssert( $args, $rows );
 	}
 
 	private function runScriptAndAssert( array $args, array $rows ) {
-		$this->setupData( $args['file'], $rows );
 		$maintenanceScript = new UpdateTable();
 		$maintenanceScript->loadParamsAndArgs( null, $args, null );
 		$maintenanceScript->execute();
@@ -76,7 +96,7 @@ class UpdateTableTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	private function setupData( $testfilename, array $rows ) {
+	private function setupData( string $testfilename, array $rows ) {
 		$fhandle = fopen( $testfilename, 'w' );
 		fputcsv( $fhandle, $this->rowHeader, ',' );
 		foreach ( $rows as $row ) {
@@ -85,4 +105,8 @@ class UpdateTableTest extends MediaWikiIntegrationTestCase {
 		fclose( $fhandle );
 	}
 
+	public function tearDown(): void {
+		parent::tearDown();
+		stream_wrapper_unregister( 'testimport' );
+	}
 }
