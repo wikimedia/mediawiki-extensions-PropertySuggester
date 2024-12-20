@@ -124,7 +124,8 @@ class ResultBuilderTest extends MediaWikiUnitTestCase {
 			) );
 
 		$result = $this->newResultBuilder(
-			'isPotat' // matching the alias to make it appear in the result
+			// matching the alias to make it appear in the result
+			'isPotat'
 		)->createResultArray(
 			[ new Suggestion( $propertyId, 1 ) ],
 			$language

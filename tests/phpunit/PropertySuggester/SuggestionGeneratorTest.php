@@ -73,10 +73,14 @@ class SuggestionGeneratorTest extends MediaWikiIntegrationTestCase {
 		$p23 = new NumericPropertyId( 'P23' );
 
 		$suggestions = [
-			new Suggestion( $p12, 0.9 ), // this will stay at pos 0
-			new Suggestion( $p23, 0.8 ), // this doesn't match
-			new Suggestion( $p7, 0.7 ), // this will go to pos 1
-			new Suggestion( $p15, 0.6 ) // this is outside of resultSize
+			// this will stay at pos 0
+			new Suggestion( $p12, 0.9 ),
+			// this doesn't match
+			new Suggestion( $p23, 0.8 ),
+			// this will go to pos 1
+			new Suggestion( $p7, 0.7 ),
+			// this is outside of resultSize
+			new Suggestion( $p15, 0.6 )
 		];
 
 		$resultSize = 2;

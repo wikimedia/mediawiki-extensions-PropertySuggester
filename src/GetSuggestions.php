@@ -167,7 +167,8 @@ class GetSuggestions extends ApiBase {
 			$this->entityLookup,
 			$this->entitySearchHelper,
 			$suggester,
-			$this->suggester // used in cases where schema tree recommender request fails
+			// used in cases where schema tree recommender request fails
+			$this->suggester
 		);
 
 		$suggest = SuggesterEngine::SUGGEST_NEW;
