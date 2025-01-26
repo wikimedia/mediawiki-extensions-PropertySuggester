@@ -7,7 +7,7 @@
 		"Felix Niemeyer",
 		"Virginia Weidhaas"
 	],
-	"url": "https://github.com/Wikidata-lib/PropertySuggester",
+	"url": "https://www.mediawiki.org/wiki/Extension:PropertySuggester",
 	"descriptionmsg": "propertysuggester-desc",
 	"license-name": "GPL-2.0-or-later",
 	"type": "wikibase",
