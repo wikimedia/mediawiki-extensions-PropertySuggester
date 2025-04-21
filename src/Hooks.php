@@ -8,7 +8,7 @@ use MediaWiki\Output\OutputPage;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\ResourceLoader\ResourceLoader;
-use Skin;
+use MediaWiki\Skin\Skin;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\WikibaseRepo;
 
