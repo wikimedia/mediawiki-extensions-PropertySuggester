@@ -1,7 +1,7 @@
 module.exports = ( function () {
 	'use strict';
 
-	var config = require( './config.json' ),
+	const config = require( './config.json' ),
 		schemas = require( './schemas.json' );
 
 	/**
@@ -13,9 +13,9 @@ module.exports = ( function () {
 	 * @param {string} id user ID (equal to wgUserId)
 	 * @return {string}
 	 */
-	var hashCode = function ( id ) {
-		var i, l;
-		var hval = 0x811c9dc5;
+	const hashCode = function ( id ) {
+		let i, l;
+		let hval = 0x811c9dc5;
 
 		/* eslint-disable no-bitwise */
 		for ( i = 0, l = id.length; i < l; i++ ) {
@@ -44,7 +44,7 @@ module.exports = ( function () {
 	 * @return {boolean}
 	 */
 	SELF.prototype.useSuggester = function ( type ) {
-		var entity = this._getEntity();
+		const entity = this._getEntity();
 
 		return type === 'property' &&
 			entity && entity.getType() === 'item' &&
@@ -58,7 +58,7 @@ module.exports = ( function () {
 	 * @return {wikibase.Entity|null}
 	 */
 	SELF.prototype._getEntity = function () {
-		var $entityView;
+		let $entityView;
 
 		try {
 			$entityView = this._$element.closest( ':wikibase-entityview' );
@@ -81,7 +81,7 @@ module.exports = ( function () {
 	 * @return {string|null}
 	 */
 	SELF.prototype._getPropertyId = function () {
-		var $statementview,
+		let $statementview,
 			statement;
 
 		try {
@@ -127,7 +127,7 @@ module.exports = ( function () {
 	 * @return {boolean}
 	 */
 	SELF.prototype._isQualifier = function () {
-		var $statementview = this._$element.closest( ':wikibase-statementview' ),
+		const $statementview = this._$element.closest( ':wikibase-statementview' ),
 			statementview = $statementview.data( 'statementview' );
 
 		if ( !statementview ) {
@@ -142,7 +142,7 @@ module.exports = ( function () {
 	 * @return {boolean}
 	 */
 	SELF.prototype._isReference = function () {
-		var $referenceview = this._$element.closest( ':wikibase-referenceview' );
+		const $referenceview = this._$element.closest( ':wikibase-referenceview' );
 
 		return $referenceview.length > 0;
 	};
@@ -154,7 +154,7 @@ module.exports = ( function () {
 	 * @return {boolean}
 	 */
 	SELF.prototype._isInNewStatementView = function () {
-		var $statementview = this._$element.closest( ':wikibase-statementview' );
+		const $statementview = this._$element.closest( ':wikibase-statementview' );
 
 		if ( $statementview.length > 0 ) {
 			return !$statementview.data( 'statementview' ).option( 'value' );
@@ -173,7 +173,7 @@ module.exports = ( function () {
 	 * @return {jQuery.Promise}
 	 */
 	SELF.prototype.getSuggestions = function ( url, language, term ) {
-		var $deferred = $.Deferred(),
+		const $deferred = $.Deferred(),
 			data = {
 				action: 'wbsgetsuggestions',
 				search: term,
@@ -185,10 +185,10 @@ module.exports = ( function () {
 		if ( data.context === 'item' ) {
 			data.entity = this._getEntity().getId();
 
-			var userID = mw.config.get( 'wgUserId' ) === null ?
+			const userID = mw.config.get( 'wgUserId' ) === null ?
 				'not logged in' : hashCode( mw.config.get( 'wgUserId' ).toString() );
 
-			var uniqueKey = ( userID === 'not logged in' ) ?
+			const uniqueKey = ( userID === 'not logged in' ) ?
 				'not' + Date.now().toString() + hashCode( data.entity ) : Date.now().toString() + userID;
 			data.event = uniqueKey;
 
@@ -213,7 +213,7 @@ module.exports = ( function () {
 			data.properties = this._getPropertyId();
 		}
 
-		return $.getJSON( url, data ).then( function ( d ) {
+		return $.getJSON( url, data ).then( ( d ) => {
 			if ( !d.search ) {
 				return $deferred.resolve().promise();
 			}
