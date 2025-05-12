@@ -4,7 +4,8 @@
 			"Eduardo Addad de Oliveira",
 			"Eduardoaddad",
 			"TheEduGobi",
-			"Trigonometria87"
+			"Trigonometria87",
+			"EGobi"
 		]
 	},
 	"apihelp-wbsgetsuggestions-description": "Módulo API para obter sugestões de propriedades adicionais para adicionar a uma entidade Wikibase. O módulo API está principalmente destinado a uso do widget de sugestões quando usuários estão editando entidades Wikibase.",
