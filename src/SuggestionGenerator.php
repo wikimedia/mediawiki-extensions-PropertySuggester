@@ -72,13 +72,13 @@ class SuggestionGenerator {
 	): Status {
 		try {
 			$itemId = new ItemId( $itemIdString );
-		} catch ( InvalidArgumentException $e ) {
+		} catch ( InvalidArgumentException ) {
 			return Status::newFatal( 'wikibase-api-invalid-entity-id' );
 		}
 		/** @var Item $item */
 		try {
 			$item = $this->entityLookup->getEntity( $itemId );
-		} catch ( UnresolvedEntityRedirectException $e ) {
+		} catch ( UnresolvedEntityRedirectException ) {
 			return Status::newFatal( 'wikibase-api-unresolved-redirect' );
 		}
 
@@ -132,7 +132,7 @@ class SuggestionGenerator {
 		foreach ( $propertyIdList as $stringId ) {
 			try {
 				$propertyIds[] = new NumericPropertyId( $stringId );
-			} catch ( InvalidArgumentException $e ) {
+			} catch ( InvalidArgumentException ) {
 				return Status::newFatal( 'wikibase-api-invalid-property-id' );
 			}
 		}
@@ -141,7 +141,7 @@ class SuggestionGenerator {
 		foreach ( $typesIdList as $stringId ) {
 			try {
 				$typesIds[] = new ItemId( $stringId );
-			} catch ( InvalidArgumentException $e ) {
+			} catch ( InvalidArgumentException ) {
 				return Status::newFatal( 'wikibase-api-invalid-entity-id' );
 			}
 		}
