@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Умар"
+		]
+	},
+	"apihelp-wbsgetsuggestions-param-language": "ЖамӀан мотт.",
+	"apihelp-wbsgetsuggestions-param-limit": "ЖамӀийн максималан дукхалла.",
+	"apihelp-wbsgetsuggestions-param-search": "ХӀара текст леха."
+}
