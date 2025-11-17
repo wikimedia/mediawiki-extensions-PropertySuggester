@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"JeffreyKim"
+		]
+	},
+	"apihelp-wbsgetsuggestions-param-limit": "結果數目上限。",
+	"apihelp-wbsgetsuggestions-param-size": "指定要返還嘅建議數量。"
+}
