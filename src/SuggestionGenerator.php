@@ -23,36 +23,12 @@ use Wikibase\Repo\Api\EntitySearchHelper;
  */
 class SuggestionGenerator {
 
-	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup;
-
-	/**
-	 * @var EntitySearchHelper
-	 */
-	private $entityTermSearchHelper;
-
-	/**
-	 * @var SuggesterEngine
-	 */
-	private $suggester;
-
-	/**
-	 * @var SuggesterEngine|null
-	 */
-	private $fallbackSuggester;
-
 	public function __construct(
-		EntityLookup $entityLookup,
-		EntitySearchHelper $entityTermSearchHelper,
-		SuggesterEngine $suggester,
-		?SuggesterEngine $fallbackSuggester = null
+		private readonly EntityLookup $entityLookup,
+		private readonly EntitySearchHelper $entityTermSearchHelper,
+		private readonly SuggesterEngine $suggester,
+		private readonly ?SuggesterEngine $fallbackSuggester = null,
 	) {
-		$this->entityLookup = $entityLookup;
-		$this->entityTermSearchHelper = $entityTermSearchHelper;
-		$this->suggester = $suggester;
-		$this->fallbackSuggester = $fallbackSuggester;
 	}
 
 	/**

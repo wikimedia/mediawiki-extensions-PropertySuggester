@@ -39,17 +39,13 @@ class SimpleSuggester implements SuggesterEngine {
 	private $initialSuggestions = [];
 
 	/**
-	 * @var ILoadBalancer
-	 */
-	private $lb;
-
-	/**
 	 * @var EventLogger|null
 	 */
 	private $eventLogger;
 
-	public function __construct( ILoadBalancer $lb ) {
-		$this->lb = $lb;
+	public function __construct(
+		private readonly ILoadBalancer $lb,
+	) {
 	}
 
 	/**

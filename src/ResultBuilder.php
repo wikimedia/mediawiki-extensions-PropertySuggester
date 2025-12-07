@@ -18,29 +18,9 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 class ResultBuilder {
 
 	/**
-	 * @var EntityTitleLookup
-	 */
-	private $entityTitleLookup;
-
-	/**
-	 * @var ApiResult
-	 */
-	private $result;
-
-	/**
 	 * @var string
 	 */
 	private $searchPattern;
-
-	/**
-	 * @var PrefetchingTermLookup
-	 */
-	private $prefetchingTermLookup;
-
-	/**
-	 * @var LanguageFallbackChainFactory
-	 */
-	private $languageFallbackChainFactory;
 
 	/**
 	 * @param ApiResult $result
@@ -50,16 +30,12 @@ class ResultBuilder {
 	 * @param string $search
 	 */
 	public function __construct(
-		ApiResult $result,
-		PrefetchingTermLookup $prefetchingTermLookup,
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		EntityTitleLookup $entityTitleLookup,
+		private readonly ApiResult $result,
+		private readonly PrefetchingTermLookup $prefetchingTermLookup,
+		private readonly LanguageFallbackChainFactory $languageFallbackChainFactory,
+		private readonly EntityTitleLookup $entityTitleLookup,
 		$search
 	) {
-		$this->entityTitleLookup = $entityTitleLookup;
-		$this->prefetchingTermLookup = $prefetchingTermLookup;
-		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
-		$this->result = $result;
 		$this->searchPattern = '/^' . preg_quote( $search, '/' ) . '/i';
 	}
 

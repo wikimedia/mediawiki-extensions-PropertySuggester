@@ -64,19 +64,15 @@ class SchemaTreeSuggester implements SuggesterEngine {
 	}
 
 	/**
-	 * @var HttpRequestFactory
-	 */
-	private $httpFactory;
-
-	/**
 	 * @param EventLogger $eventLogger
 	 */
 	public function setEventLogger( EventLogger $eventLogger ) {
 		$this->eventLogger = $eventLogger;
 	}
 
-	public function __construct( HttpRequestFactory $httpFactory ) {
-		$this->httpFactory = $httpFactory;
+	public function __construct(
+		private readonly HttpRequestFactory $httpFactory,
+	) {
 	}
 
 	/**
