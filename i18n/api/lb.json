@@ -1,9 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Volvox"
 		]
 	},
+	"apihelp-wbsgetsuggestions-summary": "API-Modul fir Virschléi ze kréie fir zousätzlech Eegenschafte bei Wikibase-Entitéiten derbäizesetzen. D'API-Modul ass haaptsächlech geduecht fir mam Virschlags-Widget benotzt ze gi, wa Benotzer Wikibase-Entitéiten änneren.",
+	"apihelp-wbsgetsuggestions-example-1": "Virschléi fir d'Entitéit Q4 kréien",
+	"apihelp-wbsgetsuggestions-example-2": "Virschléi fir d'Entitéit Q4 kréie vum Rang 10 bis 15",
+	"apihelp-wbsgetsuggestions-example-3": "Virschléi kréie fir d'Kombinatioun vun Eegenschafte P21 a P31",
+	"apihelp-wbsgetsuggestions-example-4": "Virschléi fir d'Qualifikatore kréien, déi mat P21 benotzt ginn",
+	"apihelp-wbsgetsuggestions-example-5": "Virschléi fir d'Referenze kréien, déi mat P21 benotzt ginn",
+	"apihelp-wbsgetsuggestions-param-context": "Entweeder Element, Referenz oder Qualifikator.",
 	"apihelp-wbsgetsuggestions-param-language": "Sprooch fir d'Resultat.",
 	"apihelp-wbsgetsuggestions-param-limit": "Maximal Zuel vu Resultater.",
 	"apihelp-wbsgetsuggestions-param-search": "No dësem Text sichen."
