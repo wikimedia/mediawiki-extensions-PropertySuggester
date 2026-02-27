@@ -49,7 +49,7 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 		$paramsStatus = $this->paramsParser->parseAndValidate(
 			array_merge( $this->defaultParams, [ 'entity' => 'Q1', 'search' => '*' ] )
 		);
-		$this->assertTrue( $paramsStatus->isGood() );
+		$this->assertStatusGood( $paramsStatus );
 		$params = $paramsStatus->getValue();
 
 		$this->assertEquals( 'Q1', $params->entity );
@@ -69,7 +69,7 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 		$paramsStatus = $this->paramsParser->parseAndValidate(
 			array_merge( $this->defaultParams, [ 'properties' => [ 'P31' ], 'search' => 'asd' ] )
 		);
-		$this->assertTrue( $paramsStatus->isGood() );
+		$this->assertStatusGood( $paramsStatus );
 		$params = $paramsStatus->getValue();
 
 		$this->assertNull( $params->entity );
@@ -88,18 +88,14 @@ class SuggesterParamsParserTest extends MediaWikiUnitTestCase {
 		$paramsStatus = $this->paramsParser->parseAndValidate(
 			[ 'entity' => null, 'properties' => null ]
 		);
-		$this->assertFalse( $paramsStatus->isGood() );
-		$this->assertSame( 'propertysuggester-wbsgetsuggestions-either-entity-or-properties',
-			$paramsStatus->getErrors()[0]['message'] );
+		$this->assertStatusError( 'propertysuggester-wbsgetsuggestions-either-entity-or-properties', $paramsStatus );
 	}
 
 	public function testSuggestionWithEntityAndProperties() {
 		$paramsStatus = $this->paramsParser->parseAndValidate(
 			[ 'entity' => 'Q1', 'properties' => [ 'P31' ] ]
 		);
-		$this->assertFalse( $paramsStatus->isGood() );
-		$this->assertSame( 'propertysuggester-wbsgetsuggestions-either-entity-or-properties',
-			$paramsStatus->getErrors()[0]['message'] );
+		$this->assertStatusError( 'propertysuggester-wbsgetsuggestions-either-entity-or-properties', $paramsStatus );
 	}
 
 }
