@@ -78,9 +78,9 @@ class UpdateTableTest extends MediaWikiIntegrationTestCase {
 
 	private function setupData( $testfilename, array $rows ) {
 		$fhandle = fopen( $testfilename, 'w' );
-		fputcsv( $fhandle, $this->rowHeader, ',' );
+		fputcsv( $fhandle, $this->rowHeader, ',', "\"", "\\" );
 		foreach ( $rows as $row ) {
-			fputcsv( $fhandle, $row, ',' );
+			fputcsv( $fhandle, $row, ',', "\"", "\\" );
 		}
 		fclose( $fhandle );
 	}
