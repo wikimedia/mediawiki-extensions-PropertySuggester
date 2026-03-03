@@ -35,9 +35,9 @@ class ImportContextTest extends MediaWikiIntegrationTestCase {
 		$testfilename = $this->getNewTempFile();
 		$fhandle = fopen( $testfilename, 'w' );
 		$rowHeader = [ "pid1", "qid1", "pid2", "count", "probability", "context" ];
-		fputcsv( $fhandle, $rowHeader, ',' );
+		fputcsv( $fhandle, $rowHeader, ',', "\"", "\\" );
 		foreach ( $this->rows as $row ) {
-			fputcsv( $fhandle, $row, ',' );
+			fputcsv( $fhandle, $row, ',', "\"", "\\" );
 		}
 		fclose( $fhandle );
 		return $testfilename;
