@@ -53,7 +53,7 @@ class BasicImporter implements Importer {
 		$accumulator = [];
 		$batchSize = $importContext->getBatchSize();
 		$i = 0;
-		$header = fgetcsv( $fileHandle, 0, $importContext->getCsvDelimiter() );
+		$header = fgetcsv( $fileHandle, 0, $importContext->getCsvDelimiter(), '"', '\\' );
 		$expectedHeader = [ 'pid1', 'qid1', 'pid2', 'count', 'probability', 'context' ];
 		if ( $header != $expectedHeader ) {
 			throw new UnexpectedValueException(
@@ -63,7 +63,7 @@ class BasicImporter implements Importer {
 		}
 
 		while ( true ) {
-			$data = fgetcsv( $fileHandle, 0, $importContext->getCsvDelimiter() );
+			$data = fgetcsv( $fileHandle, 0, $importContext->getCsvDelimiter(), '"', '\\' );
 
 			if ( $data == false || ++$i % $batchSize == 0 ) {
 				$db->commit( __METHOD__, 'flush' );
