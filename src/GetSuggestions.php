@@ -45,12 +45,12 @@ class GetSuggestions extends ApiBase {
 	private $languageCodes;
 
 	/**
-	 * @var SuggesterEngine
+	 * @var SimpleSuggester
 	 */
 	private $suggester;
 
 	/**
-	 * @var SuggesterEngine
+	 * @var SchemaTreeSuggester
 	 */
 	private $schemaTreeSuggester;
 
@@ -80,12 +80,12 @@ class GetSuggestions extends ApiBase {
 	private $abTestingState;
 
 	/**
-	 * @var SuggesterEngine
+	 * @var SimpleSuggester|SchemaTreeSuggester
 	 */
 	private $defaultSuggester;
 
 	/**
-	 * @var float
+	 * @var int
 	 */
 	private $testingRatio;
 
