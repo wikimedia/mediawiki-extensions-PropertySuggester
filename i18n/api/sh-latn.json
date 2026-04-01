@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Winston Sung"
+			"Winston Sung",
+			"Aca"
 		]
 	},
-	"apihelp-wbsgetsuggestions-summary": "Priložnički modul za dobivanje prijedloga dodatnih svojstava za dodavanje entitetu Wikibase. Primarno je namijenjen za upotrebu spravice za predlaganje kada korisnici uređuju entitete Wikibase."
+	"apihelp-wbsgetsuggestions-summary": "API modul za dobivanje prijedloga dodatnih svojstava za dodavanje entitetu Wikibase. Primarno je namijenjen za upotrebu spravice za predlaganje kada korisnici uređuju entitete Wikibase."
 }
