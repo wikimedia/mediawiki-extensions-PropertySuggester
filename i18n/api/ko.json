@@ -5,8 +5,22 @@
 			"Tensama0415"
 		]
 	},
+	"apihelp-wbsgetsuggestions-summary": "위키베이스 개체에 추가할 속성에 대한 제안을 받는 API 모듈입니다. 이 API 모듈은 주로 사용자가 위키베이스 개체를 편집할 때 제안 위젯에서 사용하도록 설계되었습니다.",
 	"apihelp-wbsgetsuggestions-example-1": "개체 Q4에 대한 제안을 가져옵니다",
+	"apihelp-wbsgetsuggestions-example-2": "Q4 개체에 대한 제안을 순위 10부터 15까지 가져옵니다",
+	"apihelp-wbsgetsuggestions-example-3": "P21과 P31 속성 조합에 대한 제안을 가져옵니다",
+	"apihelp-wbsgetsuggestions-example-4": "P21과 같이 쓰이는 한정어에 대한 제안을 가져옵니다",
+	"apihelp-wbsgetsuggestions-example-5": "P21과 같이 쓰이는 각주에 대한 제안을 가져옵니다",
+	"apihelp-wbsgetsuggestions-param-context": "항목, 각주 또는 한정어 중 하나입니다.",
+	"apihelp-wbsgetsuggestions-param-continue": "검색을 계속할 위치의 오프셋입니다.",
+	"apihelp-wbsgetsuggestions-param-entity": "주어진 개체가 보유한 기존 속성 목록을 기반으로 해당 개체에 적합한 속성을 제안합니다.",
+	"apihelp-wbsgetsuggestions-param-include": "포함될 제안: 기본적으로 추가될 가능성이 있는 속성 (구식이거나 아직 없는 속성 제외) 만 제안됩니다.",
 	"apihelp-wbsgetsuggestions-param-language": "결과를 위한 언어입니다.",
 	"apihelp-wbsgetsuggestions-param-limit": "최대 결과 수입니다.",
-	"apihelp-wbsgetsuggestions-param-search": "이 텍스트를 찾습니다."
+	"apihelp-wbsgetsuggestions-param-properties": "제시된 속성 목록에 추가적인 속성을 제안합니다.",
+	"apihelp-wbsgetsuggestions-param-search": "이 텍스트를 찾습니다.",
+	"apihelp-wbsgetsuggestions-param-size": "반환할 지정된 제안 개수입니다.",
+	"apihelp-wbsgetsuggestions-param-types": "주어진 유형 목록에 대한 추가젇인 속성을 제안합니다 (이 값들은 API 호출 시 개체가 제공될 경우 classifyingPropertyIds를 통해 수집되는 값들과 동일함). properties 매개변수와 함께 사용됩니다.",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "엔티티 ID 매개변수인 'entity' 또는 'properties' 속성 목록을 제공하세요",
+	"apihelp-wbsgetsuggestions-param-event": "클라이언트 측과 서버 측에 기록된 이벤트를 일치시키는 데 사용되는 이벤트 ID입니다."
 }
