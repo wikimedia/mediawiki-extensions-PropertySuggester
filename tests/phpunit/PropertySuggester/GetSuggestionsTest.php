@@ -47,7 +47,7 @@ class GetSuggestionsTest extends WikibaseApiTestCase {
 		$apiMain->method( 'getContext' )->willReturn( new RequestContext() );
 		$apiMain->method( 'getRequest' )->willReturn( new FauxRequest() );
 
-		$this->getServiceContainer()->addServiceManipulator( 'WikibaseRepo.EntitySearchHelper',
+		$this->getServiceContainer()->addServiceManipulator( 'WbSearch.PropertySearchHelper',
 			function ( EntitySearchHelper $entitySearchHelper ) {
 				$entitySearchHelperMock = $this->createMock( EntitySearchHelper::class );
 				$entitySearchHelperMock->method( 'getRankedSearchResults' )

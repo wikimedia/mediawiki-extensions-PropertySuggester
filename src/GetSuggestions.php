@@ -17,6 +17,7 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntitySearchHelper;
+use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\ParamValidator\TypeDef\IntegerDef;
@@ -99,7 +100,7 @@ class GetSuggestions extends ApiBase {
 
 		$this->prefetchingTermLookup = WikibaseRepo::getPrefetchingTermLookup( $mwServices );
 		$this->languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory( $mwServices );
-		$this->entitySearchHelper = WikibaseRepo::getEntitySearchHelper( $mwServices );
+		$this->entitySearchHelper = WbSearch::getPropertySearchHelper( $mwServices );
 		$this->entityLookup = WikibaseRepo::getEntityLookup( $mwServices );
 		$this->entityTitleLookup = WikibaseRepo::getEntityTitleLookup( $mwServices );
 		$this->languageCodes = WikibaseRepo::getTermsLanguages( $mwServices )->getLanguages();
