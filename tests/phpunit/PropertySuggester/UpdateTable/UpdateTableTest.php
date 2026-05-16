@@ -7,7 +7,7 @@ use PropertySuggester\Maintenance\UpdateTable;
 use PropertySuggester\Tests\PropertySuggester\UpdateTable\Importer\FileWrappingImportStreamHandler;
 
 /**
- * @covers \PropertySuggester\maintenance\UpdateTable
+ * @covers \PropertySuggester\Maintenance\UpdateTable
  * @covers \PropertySuggester\UpdateTable\Importer\BasicImporter
  * @covers \PropertySuggester\UpdateTable\ImportContext
  *
