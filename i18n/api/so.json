@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"AhmedG612"
+		]
+	},
+	"apihelp-wbsgetsuggestions-summary": "Module-ka API-ka ee lagu helayo talooyinka sifooyin dheeraad ah oo lagu daro walaxda Wikibase. Module-kan API-ka waxaa inta badan loogu talagalay inuu isticmaalo widget-ka soo-jeediyaha marka ay isticmaalayaashu wax ka beddelayaan walxaha Wikibase.",
+	"apihelp-wbsgetsuggestions-example-1": "Hel talooyinka walaxda Q4",
+	"apihelp-wbsgetsuggestions-example-2": "Hel talooyinka walaxda Q4 ee u dhaxeeya darajooyinka 10 illaa 15",
+	"apihelp-wbsgetsuggestions-example-3": "Hel talooyinka isku darka sifooyinka P21 iyo P31",
+	"apihelp-wbsgetsuggestions-example-4": "Hel talooyinka sifooyinka reebban ee loo isticmaalo P21",
+	"apihelp-wbsgetsuggestions-example-5": "Hel talooyinka tixraacyada loo isticmaalo P21",
+	"apihelp-wbsgetsuggestions-param-context": "Hadday ahaan lahayd walax, tixraac ama sifo reebban.",
+	"apihelp-wbsgetsuggestions-param-continue": "Barta dhumucda halka laga sii wadi karo raadinta.",
+	"apihelp-wbsgetsuggestions-param-entity": "U soo jeedi sifooyin walaxda la siiyay, iyadoo la raacayo liiska sifooyinka hadda u yaalla walaxdaas.",
+	"apihelp-wbsgetsuggestions-param-include": "Talooyinka lagu darayo: Sida caadiga ah waxaa la soo jeedin doonaa oo keliya sifooyinka la raadin karo (kuwa aan duugoobin, ee aan weli jirin).",
+	"apihelp-wbsgetsuggestions-param-language": "Luuqadda natiijada.",
+	"apihelp-wbsgetsuggestions-param-limit": "Tirada ugu sarreysa ee natiijooyinka.",
+	"apihelp-wbsgetsuggestions-param-properties": "U soo jeedi sifooyin dheeraad ah liiska sifooyinka la siiyay.",
+	"apihelp-wbsgetsuggestions-param-search": "Raadi qoraalkan.",
+	"apihelp-wbsgetsuggestions-param-size": "Caddee tirada talooyinka la rabo in lagu soo celiyo.",
+	"apihelp-wbsgetsuggestions-param-types": "U soo jeedi sifooyin dheeraad ah liiska noocyada la siiyay (qiimayaashani waxay la mid yihiin kuwa lagu ururin lahaa classifyingPropertyIds haddii walax lagu daro wicidda API-ga). Waxaa loo isticmaalaa iyadoo lala kaashanayo halbeegga sifooyinka.",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "Sii halbeegga aqoonsiga walaxda 'entity' ama liiska sifooyinka 'properties'",
+	"apihelp-wbsgetsuggestions-param-event": "Aqoonsiga Dhacdada ee loo isticmaalo in lagu midooyo dhacdooyinka laga diiwangeliyay dhanka macmiilka iyo dhanka adeega."
+}
