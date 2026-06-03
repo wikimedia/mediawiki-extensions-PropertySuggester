@@ -37,7 +37,6 @@ class UpdateTable extends Maintenance {
 	 *
 	 * @param string $uriOrFilePath
 	 * @return string
-	 * @throws \MediaWiki\Maintenance\MaintenanceFatalError
 	 */
 	private function normaliseStreamPath( string $uriOrFilePath ): string {
 		if ( str_contains( $uriOrFilePath, '://' ) ) {
