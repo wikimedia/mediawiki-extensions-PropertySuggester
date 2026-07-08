@@ -21,6 +21,6 @@
 	"apihelp-wbsgetsuggestions-param-search": "이 텍스트를 찾습니다.",
 	"apihelp-wbsgetsuggestions-param-size": "반환할 지정된 제안 개수입니다.",
 	"apihelp-wbsgetsuggestions-param-types": "주어진 유형 목록에 대한 추가젇인 속성을 제안합니다 (이 값들은 API 호출 시 개체가 제공될 경우 classifyingPropertyIds를 통해 수집되는 값들과 동일함). properties 매개변수와 함께 사용됩니다.",
-	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "엔티티 ID 매개변수인 'entity' 또는 'properties' 속성 목록을 제공하세요",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "개체 ID 매개변수인 'entity' 또는 'properties' 속성 목록을 제공하세요",
 	"apihelp-wbsgetsuggestions-param-event": "클라이언트 측과 서버 측에 기록된 이벤트를 일치시키는 데 사용되는 이벤트 ID입니다."
 }
