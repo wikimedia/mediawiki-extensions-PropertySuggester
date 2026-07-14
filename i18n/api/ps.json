@@ -1,8 +1,26 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ahmed-Najib-Biabani-Ibrahimkhel"
+			"Ahmed-Najib-Biabani-Ibrahimkhel",
+			"شاه زمان پټان"
 		]
 	},
-	"apihelp-wbsgetsuggestions-param-language": "د پايلې ژبه."
+	"apihelp-wbsgetsuggestions-summary": "د ويکي‌اډانې شتونتيا ته د ورگډولو لپاره د زياتي ځانتياوو د وړانديزونو ترلاسه‌کولو لپاره ای‌پي‌آی چلنوال.د ای‌پي‌آی چلنوال په بنسټيز ډول د وړانديزوونکي ويجيټ له‌خوا د کارولو لپاره دی، کله چې کارنان د ويکي‌اډانې شتونتياوې سموي.",
+	"apihelp-wbsgetsuggestions-example-1": "د Q4 شتونتيا لپاره وړانديزونه ترلاسه کول",
+	"apihelp-wbsgetsuggestions-example-2": "د Q4 شتونتيا لپاره له ۱۰ تر ۱۵ پورې وړانديزونه ترلاسه‌کول",
+	"apihelp-wbsgetsuggestions-example-3": "د ځانتيا گډوالي P21 او P31 لپاره وړانديزونه ترلاسه‌کول",
+	"apihelp-wbsgetsuggestions-example-4": "د هغه وړتياوو لپاره وړانديزونه ترلاسه‌کول چې P21 سره کارول کېږي",
+	"apihelp-wbsgetsuggestions-example-5": "د هغه سرچينو لپاره وړانديزونه ترلاسه کول چې P21 سره کارول کېږي",
+	"apihelp-wbsgetsuggestions-param-context": "همدارنگه توکی، سرچينه يا وړتيا.",
+	"apihelp-wbsgetsuggestions-param-continue": "هغه ځای ته ورشه، چېرته چې بايد پلټنه دوام وکړي.",
+	"apihelp-wbsgetsuggestions-param-entity": "د شته ځانتياوو لړليک پربنسټ چې شتونتيا يې لري، د ورکړل شوې شتونتيا لپاره د ځانتياوو وړانديز وکړئ.",
+	"apihelp-wbsgetsuggestions-param-include": "کوم وړانديزونه بايد راونغاړل شي: په تلواله ډول يوازې هغه ځانتياوې چې ښايي ورگډې شي (ناړنگ شوي، تراوسه چې شتون نه‌لري) به وړانديز شي.",
+	"apihelp-wbsgetsuggestions-param-language": "د پايلې ژبه.",
+	"apihelp-wbsgetsuggestions-param-limit": "د پايلو ډېر شمېر.",
+	"apihelp-wbsgetsuggestions-param-properties": "د ورکړل شوي ځانتياوو لړليک لپاره زياتي ځانتياوې وړانديز کړئ.",
+	"apihelp-wbsgetsuggestions-param-search": "دا ليک پلټل.",
+	"apihelp-wbsgetsuggestions-param-size": "د هغو وړانديزونو شمېر مشخص کړئ چې بايد بېرته راوگرځول شي.",
+	"apihelp-wbsgetsuggestions-param-types": "د ډولونو د ورکړل شوي لړليک لپاره زياتي ځانتياوې وړانديز کړئ(دا ارزښتونه  د هغو ارزښتونو سره مساوي دي چې د ځانتياووپېژندډلبندۍ له لارې راټول شوي، که چېرې په ای‌پي‌آی زنگ کې يو شتونتيا چمتو شي). د ځانتياوو ارزښت سره يوځای کارېږي.",
+	"propertysuggester-wbsgetsuggestions-either-entity-or-properties": "د شتونتيا پېژند ارزښت 'شتونتيا' يا د ځانتياوو لړلیک 'ځانتياوې' چمتو کړئ",
+	"apihelp-wbsgetsuggestions-param-event": "د پېښې پېژند د ثبت شويو پېښو د غوښتندويو او پالنگر اړخ سره د سمون لپاره کارول کېږي."
 }
