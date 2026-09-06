@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace PropertySuggester\Tests\PropertySuggester\UpdateTable\Importer;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use PropertySuggester\UpdateTable\ImportContext;
 use PropertySuggester\UpdateTable\Importer\BasicImporter;
@@ -45,7 +44,7 @@ class ImportContextTest extends MediaWikiIntegrationTestCase {
 
 	private function getImportContext(): ImportContext {
 		$context = new ImportContext();
-		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$lbFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
 		$lbFactory->waitForReplication();
 		$context->setLbFactory( $lbFactory );
 		$tableName = 'wbs_propertypairs';
