@@ -3,7 +3,6 @@
 namespace PropertySuggester\Maintenance;
 
 use MediaWiki\Maintenance\Maintenance;
-use MediaWiki\MediaWikiServices;
 use PropertySuggester\UpdateTable\ImportContext;
 use PropertySuggester\UpdateTable\Importer\BasicImporter;
 use UnexpectedValueException;
@@ -64,7 +63,7 @@ class UpdateTable extends Maintenance {
 
 		$tableName = 'wbs_propertypairs';
 
-		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$lbFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
 		$lbFactory->waitForReplication();
 
 		$this->clearTable( $lbFactory, $tableName );
