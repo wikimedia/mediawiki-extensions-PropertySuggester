@@ -43,6 +43,14 @@ generate this data from a wikidata dump.
 * $wgPropertySuggesterDefaultSuggester - a string representing the default suggester used (either SchemaTreeSuggester or PropertySuggester)
 * $wgPropertySuggesterTestingRatio - an int that represents the ratio of suggesters used when A/B testing is enabled. Value of 2 will result in an approximate 50/50 split, values greater than 2 will result in the PropertySuggester being used more often
 
+## Chore: Dependency Updates
+
+### JS (npm) dependencies
+
+You can see which dependencies have new releases by first making sure your local dependencies are up-to-date by executing `npm ci` and then running `npm outdated`.
+The following dependencies are special cases that should potentially be ignored:
+- [grunt-eslint](https://github.com/sindresorhus/grunt-eslint) no longer supports "flat" eslint config files (i.e. `.eslintrc.json`) since version 25.0.0 because of changes since eslint 9 (see issue [#176](https://github.com/sindresorhus/grunt-eslint/issues/176)). See [T364065](https://phabricator.wikimedia.org/T364065) for progress with our eslint 9 migration.
+
 ## Release notes
 
 ### 3.2.1 (2018-11-14)
