@@ -23,14 +23,12 @@ class ResultBuilder {
 	private $searchPattern;
 
 	/**
-	 * @param ApiResult $result
 	 * @param PrefetchingTermLookup $prefetchingTermLookup
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param string $search
 	 */
 	public function __construct(
-		private readonly ApiResult $result,
 		private readonly PrefetchingTermLookup $prefetchingTermLookup,
 		private readonly LanguageFallbackChainFactory $languageFallbackChainFactory,
 		private readonly EntityTitleLookup $entityTitleLookup,

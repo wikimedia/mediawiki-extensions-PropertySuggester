@@ -2,7 +2,6 @@
 
 namespace PropertySuggester;
 
-use MediaWiki\Api\ApiResult;
 use MediaWiki\Title\Title;
 use MediaWikiUnitTestCase;
 use PropertySuggester\Suggesters\Suggestion;
@@ -51,7 +50,6 @@ class ResultBuilderTest extends MediaWikiUnitTestCase {
 
 	private function newResultBuilder( $search ) {
 		return new ResultBuilder(
-			new ApiResult( false ),
 			$this->prefetchingTermLookup,
 			$this->languageFallbackChainFactory,
 			$this->titleLookup,

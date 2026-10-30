@@ -222,7 +222,6 @@ class GetSuggestions extends ApiBase {
 
 		// Build result array
 		$resultBuilder = new ResultBuilder(
-			$this->getResult(),
 			$this->prefetchingTermLookup,
 			$this->languageFallbackChainFactory,
 			$this->entityTitleLookup,
