@@ -37,6 +37,11 @@ class ResultBuilder {
 		$this->searchPattern = '/^' . preg_quote( $search, '/' ) . '/i';
 	}
 
+	/**
+	 * @param Suggestion[] $suggestions
+	 * @param string $language
+	 * @return array[]
+	 */
 	public function createResultArray( array $suggestions, string $language ): array {
 		$ids = [];
 		foreach ( $suggestions as $suggestion ) {
